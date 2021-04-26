@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape"
+    android:orientation="vertical"
+    android:padding="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1
+"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvMyInfoDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/shape2"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="주     량"
+            android:textColor="@color/White"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/cb_MyInfo_Drink"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="음주 하지 않음" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp">
+
+
+        <Spinner
+            android:id="@+id/spinner_MyInfo_Drink_day"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape3"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            android:padding="10dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_MyInfo_Drink_Hit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape3"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            android:padding="10dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_MyInfo_Drink_kind"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape3"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            android:padding="10dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_MyInfo_Drink_Bottle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape3"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            android:padding="10dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/customDialogDrink_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape4"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:text="취소" />
+
+        <Button
+            android:id="@+id/customDialogDrink_Ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape4"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:text="확인" />
+    </LinearLayout>
+
+</LinearLayout>

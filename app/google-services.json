@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "347124276734",
+    "project_id": "mana-a92ae",
+    "storage_bucket": "mana-a92ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347124276734:android:2cbf829886e95e666734af",
+        "android_client_info": {
+          "package_name": "com.example.mana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347124276734-v3kb647362v1abh9ra0f6a9ucf9k2iik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMegNH6GV_lJoDadWpiLzU9Ow08A6NUpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347124276734-v3kb647362v1abh9ra0f6a9ucf9k2iik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

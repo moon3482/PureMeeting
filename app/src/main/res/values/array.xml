@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender">
+        <item>성별</item>
+        <item>남</item>
+        <item>여</item>
+    </string-array>
+    <string-array name="area">
+        <item>지역</item>
+        <item>서울</item>
+        <item>경기</item>
+        <item>인천</item>
+        <item>강원</item>
+        <item>충북</item>
+        <item>충남</item>
+        <item>대전</item>
+        <item>광주</item>
+        <item>전북</item>
+        <item>전남</item>
+        <item>경북</item>
+        <item>대구</item>
+        <item>경남</item>
+        <item>울산</item>
+        <item>부산</item>
+        <item>제주</item>
+    </string-array>
+
+    <string-array name="jabs">
+        <item>직업군</item>
+        <item>경영/사무</item>
+        <item>영업/고객상담</item>
+        <item>IT/인터넷</item>
+        <item>디자인</item>
+        <item>서비스</item>
+        <item>전문직</item>
+        <item>의료</item>
+        <item>생산/제조</item>
+        <item>건설</item>
+        <item>유통/무역</item>
+        <item>미디어</item>
+        <item>교육</item>
+        <item>특수계층/공공</item>
+    </string-array>
+
+    <string-array name="drink_day">
+
+        <item>월</item>
+        <item>주</item>
+        <item>매일</item>
+
+    </string-array>
+
+    <string-array name="drink_num">
+
+        <item>1~3회</item>
+        <item>4~7회</item>
+        <item>10회 이상</item>
+
+    </string-array>
+
+    <string-array name="drink_kind">
+
+
+        <item>소주</item>
+        <item>맥주</item>
+        <item>소맥</item>
+        <item>막걸리</item>
+        <item>칵테일</item>
+        <item>보드카</item>
+        <item>브랜디</item>
+        <item>데킬라</item>
+        <item>위스키</item>
+
+    </string-array>
+
+    <string-array name="drink_bottle">
+        <item>1~3잔</item>
+        <item>반병</item>
+        <item>1~2병</item>
+        <item>3~5병</item>
+        <item>6병이상</item>
+
+    </string-array>
+
+</resources>
