@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView kakaoLogin = (ImageView) findViewById(R.id.kakaologin);
         session = Session.getCurrentSession();
         session.addCallback(sessionCallback);
-
+        getHashKey();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int permissionResult = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
