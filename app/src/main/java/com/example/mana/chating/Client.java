@@ -1031,7 +1031,7 @@ public class Client extends AppCompatActivity {
     }
 
     public void profileimgload() {
-        String url = "http:/3.36.21.126/Android/main.php";
+        String url = new ServerIP().http+"/Android/main.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
