@@ -47,8 +47,8 @@ public class onFaceTalkSend extends AppCompatActivity {
                 .context(onFaceTalkSend.this)
                 .localView(surfRendererLocal)        //나의 Video Renderer
                 .remoteView(surfRendererRemote)      //상대방 video Renderer
-                .serviceId("c148fb6b-6cf5-439e-89e1-b010f750fdf0")    // RemoteMonster 사이트에서 등록했던 당신의 id를 입력하세요.
-                .key("c898eb2d41c434f92dccf8103d4b4c3bd203ef9d6da01d79923d558a7951f34e")    // RemoteMonster로부터 받은 당신의 key를 입력하세요.
+                .serviceId(this.getString(R.string.monster_app_key))    // RemoteMonster 사이트에서 등록했던 당신의 id를 입력하세요.
+                .key(this.getString(R.string.monster_app_sckey))    // RemoteMonster로부터 받은 당신의 key를 입력하세요.
                 .build();
 
         surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_BALANCED);

@@ -1,7 +1,7 @@
 package com.example.mana;
 
 public class Utils {
-    public static final String EMAIL = "m34821@gmail.com";
-    public static final String PASSWORD = "macbkd5145!";
+    public static final String EMAIL = "mail";
+    public static final String PASSWORD = "pw";
 
 }
