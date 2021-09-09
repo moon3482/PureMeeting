@@ -126,10 +126,10 @@ public class MyPage extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(MyPage.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 Toast.makeText(MyPage.this, "로그아웃이 되었습니다.", Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
+                                finish();
 
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -177,6 +177,7 @@ public class MyPage extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -186,6 +187,7 @@ public class MyPage extends AppCompatActivity {
                 Intent intent = new Intent(MyPage.this, chatPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -196,6 +198,7 @@ public class MyPage extends AppCompatActivity {
                 Intent intent = new Intent(MyPage.this, mapPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -215,6 +218,7 @@ public class MyPage extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     @Override

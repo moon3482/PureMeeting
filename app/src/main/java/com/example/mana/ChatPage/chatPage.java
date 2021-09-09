@@ -61,6 +61,7 @@ public class chatPage extends AppCompatActivity {
                 intent1.putExtra("room", intent.getStringExtra("room"));
                 intent1.putExtra("youid", intent.getStringExtra("youid"));
                 startActivity(intent1);
+
             }
         }
         /********선언부*********/
@@ -90,6 +91,7 @@ public class chatPage extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
         /*******맵 버튼************/
@@ -99,6 +101,7 @@ public class chatPage extends AppCompatActivity {
                 Intent intent = new Intent(chatPage.this, mapPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
         /**********마이페이지 버튼***********/
@@ -108,6 +111,7 @@ public class chatPage extends AppCompatActivity {
                 Intent intent = new Intent(chatPage.this, MyPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -160,6 +164,7 @@ public class chatPage extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     @Override

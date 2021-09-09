@@ -95,6 +95,7 @@ public class mainPage extends AppCompatActivity {
                 Intent intent = new Intent(mainPage.this, chatPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -105,6 +106,7 @@ public class mainPage extends AppCompatActivity {
                 Intent intent = new Intent(mainPage.this, mapPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
         /**********마이페이지 버튼***********/
@@ -114,6 +116,7 @@ public class mainPage extends AppCompatActivity {
                 Intent intent = new Intent(mainPage.this, MyPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
         ibtnNewSubscription.setOnClickListener(new View.OnClickListener() {

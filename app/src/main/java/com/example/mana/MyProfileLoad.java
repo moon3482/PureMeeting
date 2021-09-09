@@ -727,6 +727,7 @@ public class MyProfileLoad extends AppCompatActivity {
                     if (success) {
                         Toast.makeText(MyProfileLoad.this, "탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MyProfileLoad.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                     }

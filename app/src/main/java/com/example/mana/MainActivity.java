@@ -148,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(MainActivity.this, "로그인이 되었습니다.", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(MainActivity.this, mainPage.class);
-//                                Intent intent = new Intent(MainActivity.this, Login.class);
 
                                     startActivity(intent);
                                 }
@@ -328,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
                                                     } else {
                                                         Toast.makeText(MainActivity.this, "로그인이 되었습니다.", Toast.LENGTH_SHORT).show();
                                                         Intent intent1 = new Intent(MainActivity.this, mainPage.class);
-//                                Intent intent = new Intent(MainActivity.this, Login.class);
+
 
                                                         startActivity(intent1);
                                                     }
@@ -435,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity();
+       moveTaskToBack(true);
         System.exit(0);
 
 

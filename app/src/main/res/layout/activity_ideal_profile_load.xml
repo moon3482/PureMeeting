@@ -17,16 +17,18 @@
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="13dp" />
 
+    \
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -51,35 +53,41 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvProfileImage2"
-                android:layout_width="75dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
                 android:src="@drawable/basicprofile" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvProfileImage3"
-                android:layout_width="75dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
                 android:src="@drawable/basicprofile" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvProfileImage4"
-                android:layout_width="75dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
                 android:src="@drawable/basicprofile" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvProfileImage5"
-                android:layout_width="75dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+
                 android:src="@drawable/basicprofile" />
         </LinearLayout>
 
     </LinearLayout>
-    \
 
     <Button
         android:id="@+id/btnChatSubScription"

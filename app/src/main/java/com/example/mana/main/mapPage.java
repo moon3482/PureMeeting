@@ -90,6 +90,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
         /*****메세지박스버튼********/
@@ -99,6 +100,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                 Intent intent = new Intent(mapPage.this, chatPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -109,6 +111,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                 Intent intent = new Intent(mapPage.this, MyPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
             }
         });
         /**********지도 부분********************/
@@ -146,6 +149,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     @Override

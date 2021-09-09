@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <uses-feature android:name="android.hardware.camera2" />
     <uses-feature android:name="android.hardware.camera" />
@@ -52,7 +53,8 @@
         <activity
             android:name=".ReciveFaceTalk"
             android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
+            android:showOnLockScreen="true"
             android:taskAffinity="com.example.mana.ReciveFaceTalk" />
         <activity android:name=".SendFaceTalk" />
         <activity android:name=".PlacePickInfo" />
@@ -89,8 +91,15 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <receiver
+            android:name=".MyFirebaseMessagingService$RcBroad"
+            android:enabled="true" >
+            <intent-filter android:priority="10">
+                <action android:name="face" >
+                </action>
+            </intent-filter>
+        </receiver>
 
-        <activity android:name=".Login" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
