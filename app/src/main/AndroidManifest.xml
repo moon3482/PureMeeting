@@ -70,7 +70,7 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="s6wnojelkx" />
+            android:value="@string/naver_id" />
 
         <activity android:name=".main.mapPage" />
         <activity android:name=".main.MyPage" />
