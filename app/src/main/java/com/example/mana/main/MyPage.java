@@ -39,6 +39,7 @@ import com.example.mana.MainPage.mainPage;
 import com.example.mana.MyIdealTypeSetting;
 import com.example.mana.MyProfileLoad;
 import com.example.mana.R;
+import com.example.mana.ServerIP;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -298,7 +299,7 @@ public class MyPage extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "http://3.36.21.126/Android/myinfo.php";
+                String url = new ServerIP().http+"Android/myinfo.php";
                 SimpleMultiPartRequest myInfomation = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

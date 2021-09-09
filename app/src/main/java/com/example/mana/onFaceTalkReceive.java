@@ -162,7 +162,7 @@ public class onFaceTalkReceive extends AppCompatActivity {
     }
 
     public void hitupdate() {
-        String url = "http://3.36.21.126/Android/hitupdate.php";
+        String url = new ServerIP().http+"Android/hitupdate.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

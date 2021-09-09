@@ -185,7 +185,7 @@ public class MyIdealTypeSetting extends AppCompatActivity {
     }
 
     public void MyldealLoad() {
-        String url = "http://3.36.21.126/Android/MyIdealLoad.php";
+        String url = new ServerIP().http+"Android/MyIdealLoad.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -248,7 +248,7 @@ radioButtonIdealHeightMore.setChecked(true);
     }
 
     public void MyIdealUpdate() {
-        String url = "http://3.36.21.126/Android/idealprofile.php";
+        String url = new ServerIP().http+"Android/idealprofile.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.example.mana.MainActivity;
 import com.example.mana.R;
 import com.example.mana.SendFaceTalk;
+import com.example.mana.ServerIP;
 import com.example.mana.ShopInfomation.ShopInfomation;
 
 import org.json.JSONException;
@@ -169,7 +170,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    }
                     try {
                         JSONObject jsonObject1 = new JSONObject(chatdata.msg);
-                        String url = "http://3.36.21.126/Android/mediahit.php";
+                        String url = new ServerIP().http+"Android/mediahit.php";
                         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -293,7 +294,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                     try {
                         JSONObject jsonObject1 = new JSONObject(chatdata.msg);
-                        String url = "http://3.36.21.126/Android/mediahit.php";
+                        String url = new ServerIP().http+"Android/mediahit.php";
                         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -444,7 +445,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                holder.serverChat.setVisibility(View.GONE);
 //
 //                Glide.with(holder.itemView.getContext())
-//                        .load("http://3.36.21.126/Android/" + chatdata.getImg())
+//                        .load(new ServerIP().http+"Android/" + chatdata.getImg())
 //                        .override(Target.SIZE_ORIGINAL)
 //                        .into(holder.img);
 //
@@ -485,7 +486,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                holder.serverChat.setVisibility(View.GONE);
 //
 //                Glide.with(holder.itemView.getContext())
-//                        .load("http://3.36.21.126/Android/" + chatdata.getImg())
+//                        .load(new ServerIP().http+"Android/" + chatdata.getImg())
 //                        .override(Target.SIZE_ORIGINAL)
 //                        .into(holder.img);
 //                Glide.with(holder.itemView.getContext())
@@ -660,7 +661,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void mediahit(String index) {
-        String url = "http://3.36.21.126/Android/mediahit.php";
+        String url = new ServerIP().http+"Android/mediahit.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -688,7 +689,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void loadshop(String index) {
-        String url = "http://3.36.21.126/Android/Shoploadinfo.php";
+        String url = new ServerIP().http+"Android/Shoploadinfo.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

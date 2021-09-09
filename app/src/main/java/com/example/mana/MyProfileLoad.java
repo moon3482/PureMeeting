@@ -398,7 +398,7 @@ public class MyProfileLoad extends AppCompatActivity {
     }
 
     public void upimage(Intent data, CircleImageView view, String imageNumber) {
-        String url = "http://3.36.21.126/Android/myProFileImageUpdate.php";
+        String url = new ServerIP().http+"Android/myProFileImageUpdate.php";
         Uri uri = data.getData();
 //        String path = getRealPathFromUri(uri);
         String path;
@@ -480,7 +480,7 @@ public class MyProfileLoad extends AppCompatActivity {
     }
 
     public void StartingImageLoad() {
-        String url = "http://3.36.21.126/Android/myprofileload.php";
+        String url = new ServerIP().http+"Android/myprofileload.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -652,7 +652,7 @@ public class MyProfileLoad extends AppCompatActivity {
             super.onStop();
         } else {
 
-            String url = "http://3.36.21.126/Android/updatemyInfo.php";
+            String url = new ServerIP().http+"Android/updatemyInfo.php";
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -717,7 +717,7 @@ public class MyProfileLoad extends AppCompatActivity {
     }
 
     public void userSecession() {
-        String url = "http://3.36.21.126/Android/secession.php";
+        String url = new ServerIP().http+"Android/secession.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

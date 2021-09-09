@@ -480,7 +480,7 @@ public class Client extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
 
-                String url = "http://3.36.21.126/Android/chatImg.php";
+                String url = new ServerIP().http+"Android/chatImg.php";
                 Uri uri = data.getData();
 
 
@@ -745,7 +745,7 @@ public class Client extends AppCompatActivity {
     }
 
     public void LoadMsg(String roomnum) {
-        String url = "http://3.36.21.126/Android/LoadMsg.php";
+        String url = new ServerIP().http+"Android/LoadMsg.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -787,7 +787,7 @@ public class Client extends AppCompatActivity {
 
     public void sendFCM(String msg) {
         Log.e("아이디는?", youid);
-        String url = "http://3.36.21.126/Android/GetMsgToken.php";
+        String url = new ServerIP().http+"Android/GetMsgToken.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -869,7 +869,7 @@ public class Client extends AppCompatActivity {
     }
 
     public void cancel(String id, String index, String name, String imgurl, String rnum, String youid) {
-        String url = "http://3.36.21.126/Android/finalzone.php";
+        String url = new ServerIP().http+"Android/finalzone.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -931,7 +931,7 @@ public class Client extends AppCompatActivity {
     }
 
     public void finalzone(String sign, AlertDialog dialog) {
-        String url = "http://3.36.21.126/Android/finalzone.php";
+        String url = new ServerIP().http+"Android/finalzone.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1062,7 +1062,7 @@ public class Client extends AppCompatActivity {
 
 
     public void CheckCredit(String id) {
-        String url = "http://3.36.21.126/Android/CheckCredit.php";
+        String url = new ServerIP().http+"Android/CheckCredit.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1114,7 +1114,7 @@ public class Client extends AppCompatActivity {
     }
 
     //    public void LoadCredit(String id) {
-//        String url = "http://3.36.21.126/Android/LoadCredit.php";
+//        String url = new ServerIP().http+"Android/LoadCredit.php";
 //        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
 //            @Override
 //            public void onResponse(String response) {
@@ -1144,7 +1144,7 @@ public class Client extends AppCompatActivity {
 //        requestQueue.add(simpleMultiPartRequest);
 //    }
     public void finalcheck(String index, String pay, String id, String name, String imgurl, String rnum, String youid) {
-        String url = "http://3.36.21.126/Android/finalcheck.php";
+        String url = new ServerIP().http+"Android/finalcheck.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

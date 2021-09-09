@@ -138,7 +138,7 @@ public class CustomDialog3 {
     }
 
     public void LoadCredit(String id) {
-        String url = "http://3.36.21.126/Android/LoadCredit.php";
+        String url = new ServerIP().http+"Android/LoadCredit.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -169,7 +169,7 @@ public class CustomDialog3 {
     }
 
     public void ok(String id, String index, String name, String imgurl, String rnum, String youid) {
-        String url = "http://3.36.21.126/Android/finalzone.php";
+        String url = new ServerIP().http+"Android/finalzone.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -232,7 +232,7 @@ public class CustomDialog3 {
     }
 
     public void cancel(String id, String index, String name, String imgurl, String rnum, String youid) {
-        String url = "http://3.36.21.126/Android/finalzone.php";
+        String url = new ServerIP().http+"Android/finalzone.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -300,7 +300,7 @@ public class CustomDialog3 {
     }
 
     public void finalcheck(String index, String pay, String id, String name, String imgurl, String rnum, String youid) {
-        String url = "http://3.36.21.126/Android/finalcheck.php";
+        String url = new ServerIP().http+"Android/finalcheck.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

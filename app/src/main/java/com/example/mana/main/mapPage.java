@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.mana.ChatPage.chatPage;
 import com.example.mana.MainPage.mainPage;
 import com.example.mana.R;
+import com.example.mana.ServerIP;
 import com.example.mana.ShopInfomation.ShopInfomation;
 import com.example.mana.ZoneAdd;
 import com.naver.maps.geometry.LatLng;
@@ -221,7 +222,7 @@ public class mapPage extends AppCompatActivity implements OnMapReadyCallback {
                 requestCode, permissions, grantResults);
     }
     public void LoadShopMap(NaverMap naverMap){
-        String url = "http://3.36.21.126/Android/LoadShopMap.php";
+        String url = new ServerIP().http+"Android/LoadShopMap.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

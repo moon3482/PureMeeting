@@ -94,7 +94,7 @@ public class MainPageAdaptor extends RecyclerView.Adapter<MainPageAdaptor.MainPa
 //                dialog = builder.setTitle("대화신청").setMessage(mainLoadDataClass.getName() + "님에게 대화신청을 하시겠습니까?").setPositiveButton("확인", new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
-//                        String url = "http://3.36.21.126/Android/GetToken.php";
+//                        String url = new ServerIP().http+"Android/GetToken.php";
 //                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
 //                            @Override
 //                            public void onResponse(String response) {
@@ -123,7 +123,7 @@ public class MainPageAdaptor extends RecyclerView.Adapter<MainPageAdaptor.MainPa
 //                    }
 //                }).show();
 /**채팅방 넘어가는 로직(실험 로직)**/
-//                String GetRommUrl = "http://3.36.21.126/Android/GetRoomNumber.php";
+//                String GetRommUrl = new ServerIP().http+"Android/GetRoomNumber.php";
 //                SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, GetRommUrl, new Response.Listener<String>() {
 //                    @Override
 //                    public void onResponse(String response) {

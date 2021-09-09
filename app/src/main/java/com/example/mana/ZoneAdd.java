@@ -108,7 +108,7 @@ public class ZoneAdd extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public void LoadShopMap(NaverMap naverMap) {
-        String url = "http://3.36.21.126/Android/LoadShopMap.php";
+        String url = new ServerIP().http+"Android/LoadShopMap.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

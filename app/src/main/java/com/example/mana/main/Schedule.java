@@ -25,6 +25,7 @@ import com.example.mana.ChatPage.chatPage;
 import com.example.mana.NewSubscriptionAdapter;
 import com.example.mana.NewSubscriptionBox;
 import com.example.mana.R;
+import com.example.mana.ServerIP;
 import com.example.mana.ZoneAdd;
 import com.example.mana.chating.Client;
 
@@ -97,7 +98,7 @@ public class Schedule extends AppCompatActivity {
     }
 
     public void loadSchedule(String id) {
-        String url = "http://3.36.21.126/Android/loadSchedule.php";
+        String url = new ServerIP().http+"Android/loadSchedule.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

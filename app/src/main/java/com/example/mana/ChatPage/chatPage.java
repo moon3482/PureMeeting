@@ -29,6 +29,7 @@ import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mana.MainPage.mainPage;
 import com.example.mana.R;
+import com.example.mana.ServerIP;
 import com.example.mana.chating.Client;
 import com.example.mana.main.MyPage;
 import com.example.mana.main.mapPage;
@@ -179,7 +180,7 @@ public class chatPage extends AppCompatActivity {
     public void LoadChatList() {
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
-        String url = "http://3.36.21.126/Android/LoadChatList.php";
+        String url = new ServerIP().http+"Android/LoadChatList.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

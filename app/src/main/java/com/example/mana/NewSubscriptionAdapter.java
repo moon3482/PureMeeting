@@ -143,7 +143,7 @@ public class NewSubscriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("loginId", context.MODE_PRIVATE);
         String myid = sharedPreferences.getString("loginId", "");
-        String url = "http://3.36.21.126/Android/DeleteNewSubscription.php";
+        String url = new ServerIP().http+"Android/DeleteNewSubscription.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -166,7 +166,7 @@ public class NewSubscriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("loginId", context.MODE_PRIVATE);
         String myid = sharedPreferences.getString("loginId", "");
-        String url = "http://3.36.21.126/Android/OkNewSubscription.php";
+        String url = new ServerIP().http+"Android/OkNewSubscription.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -209,7 +209,7 @@ public class NewSubscriptionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void NewMessageLookup(String youid) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("loginId", context.MODE_PRIVATE);
         String myid = sharedPreferences.getString("loginId", "");
-        String url = "http://3.36.21.126/Android/NewMessageLookup.php";
+        String url = new ServerIP().http+"Android/NewMessageLookup.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

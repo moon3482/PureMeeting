@@ -100,7 +100,7 @@ public class Pay_Activity extends AppCompatActivity {
                 .onDone(new DoneListener() { // 결제완료시 호출, 아이템 지급 등 데이터 동기화 로직을 수행합니다
                     @Override
                     public void onDone(@Nullable String message) {
-                        String url = "http://3.36.21.126/Android/paydone.php";
+                        String url = new ServerIP().http+"Android/paydone.php";
                         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

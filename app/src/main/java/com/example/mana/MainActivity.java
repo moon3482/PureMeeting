@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         login_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String serverUrl = "http://3.36.21.126/Android/login.php";
+                String serverUrl = new ServerIP().http+"Android/login.php";
                 EditTextGetId = login_input_id.getText().toString();
                 EditTextGetPassword = login_input_password.getText().toString();
 
@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
                                     Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
                                     Log.d("KAKAO_API", "생일: " + a + f + g);
-                                    String URL = "http://3.36.21.126/Android/kakaologin.php";
+                                    String URL = new ServerIP().http+"Android/kakaologin.php";
                                     SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {

@@ -29,6 +29,7 @@ import com.android.volley.request.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.mana.R;
+import com.example.mana.ServerIP;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -114,7 +115,7 @@ public class IdealProfileLoad extends AppCompatActivity {
     }
 
     public void LoadRecommendProfile(String id) {
-        String url = "http://3.36.21.126/Android/LoadRecommend.php";
+        String url = new ServerIP().http+"Android/LoadRecommend.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -299,7 +300,7 @@ public class IdealProfileLoad extends AppCompatActivity {
         dialog = builder.setTitle("대화신청").setMessage(RecommendName + "님에게 대화신청을 하시겠습니까?").setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String url = "http://3.36.21.126/Android/GetToken.php";
+                String url = new ServerIP().http+"Android/GetToken.php";
                 SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -346,7 +347,7 @@ public class IdealProfileLoad extends AppCompatActivity {
         dialog = builder.setTitle("지난추천 대화신청").setMessage("지난추천 대상에게 대화신청하시려면 1000Credit이 소모됩니다.\n" + RecommendName + "님에게 대화신청을 하시겠습니까?").setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String url = "http://3.36.21.126/Android/afterGetToken.php";
+                String url = new ServerIP().http+"Android/afterGetToken.php";
                 SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

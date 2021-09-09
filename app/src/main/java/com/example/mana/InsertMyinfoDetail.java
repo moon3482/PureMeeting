@@ -68,7 +68,7 @@ public class InsertMyinfoDetail extends AppCompatActivity {
         spinnerArea = findViewById(R.id.spinner_InsertMyInfoDetail_Area);
         sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
-        String url = "http://3.36.21.126/Android/InsertMyProfileDetail.php";
+        String url = new ServerIP().http+"Android/InsertMyProfileDetail.php";
         simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ValidateRequest extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static  private String URL="http://3.36.21.126/Android/Id_Duplicate_Check.php";
+    final static  private String URL=new ServerIP().http+"Android/Id_Duplicate_Check.php";
     private Map<String,String> map;
 
     public ValidateRequest(String userID, Response.Listener<String>listener){

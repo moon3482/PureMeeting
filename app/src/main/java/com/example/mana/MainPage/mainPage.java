@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.mana.MainActivity;
 import com.example.mana.NewSubscriptionBox;
 import com.example.mana.R;
+import com.example.mana.ServerIP;
 import com.example.mana.main.MyPage;
 import com.example.mana.ChatPage.chatPage;
 import com.example.mana.main.mapPage;
@@ -188,7 +189,7 @@ public class mainPage extends AppCompatActivity {
     private void loadmain() {
 
 
-        String url = "http://3.36.21.126/Android/lllo.php";
+        String url = new ServerIP().http+"Android/lllo.php";
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
         System.out.println(id);
@@ -284,7 +285,7 @@ public class mainPage extends AppCompatActivity {
 
     public void LoadNewSub() {
 
-        String url = "http://3.36.21.126/Android/loadNewMessageNumRow.php";
+        String url = new ServerIP().http+"Android/loadNewMessageNumRow.php";
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -280,7 +280,7 @@ public class ShopInfomation extends AppCompatActivity {
     }
 
     public void LoadShopInfo(String ShopCode) {
-        String url = "http://3.36.21.126/Android/LoadShopInfo.php";
+        String url = new ServerIP().http+"Android/LoadShopInfo.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -335,7 +335,7 @@ public class ShopInfomation extends AppCompatActivity {
     }
 
     public void scheduleCheck(String id, String time, String type, String index) {
-        String url = "http://3.36.21.126/Android/scheduleCheck.php";
+        String url = new ServerIP().http+"Android/scheduleCheck.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -370,7 +370,7 @@ public class ShopInfomation extends AppCompatActivity {
     }
 
     public void RecommendYesOrNo(String type, String index) {
-        String url = "http://3.36.21.126/Android/RecommendYesOrNo.php";
+        String url = new ServerIP().http+"Android/RecommendYesOrNo.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -452,7 +452,7 @@ public class ShopInfomation extends AppCompatActivity {
     }
 
     public void RecommendStatus(String index) {
-        String url = "http://3.36.21.126/Android/RecommendStatus.php";
+        String url = new ServerIP().http+"Android/RecommendStatus.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -490,7 +490,7 @@ public class ShopInfomation extends AppCompatActivity {
 
     public void sendFCM(String msg) {
 
-        String url = "http://3.36.21.126/Android/GetMsgToken.php";
+        String url = new ServerIP().http+"Android/GetMsgToken.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

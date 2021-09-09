@@ -15,7 +15,7 @@ public class id_check extends StringRequest {
 
 
     //서버 URL 설정(php 파일 연동)
-    final static private String URL = "http://3.36.21.126/Id_Duplicate_Check.php";
+    final static private String URL = new ServerIP().http+"Id_Duplicate_Check.php";
     private Map<String, String> map;
     //private Map<String, String>parameters;
 

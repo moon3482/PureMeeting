@@ -13,7 +13,7 @@ public class Sign_insert extends StringRequest {
 
 
     //서버 URL 설정(php 파일 연동)
-    final static private String URL = "http://3.36.21.126/insert.php";
+    final static private String URL = new ServerIP().http+"insert.php";
     private Map<String, String> map;
     //private Map<String, String>parameters;
 

@@ -165,7 +165,7 @@ public class SendFaceTalk extends AppCompatActivity {
 
     public void sendFCM(String msg) {
 
-        String url = "http://3.36.21.126/Android/GetMsgToken.php";
+        String url = new ServerIP().http+"Android/GetMsgToken.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

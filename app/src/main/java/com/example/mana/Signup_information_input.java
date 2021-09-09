@@ -569,7 +569,7 @@ public class Signup_information_input extends AppCompatActivity {
                         alertDialog.setPositiveButton("확인", null);
                         alertDialog.show();
                     } else {//안드로이드에서 보낼 데이터를 받을 php 서버 주소
-                        String serverUrl = "http://3.36.21.126/Android/insertDB.php";
+                        String serverUrl = new ServerIP().http+"Android/insertDB.php";
 
                         //Volley plus Library를 이용해서
                         //파일 전송하도록..

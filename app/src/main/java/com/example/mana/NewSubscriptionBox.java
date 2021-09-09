@@ -63,7 +63,7 @@ public class NewSubscriptionBox extends AppCompatActivity {
     public void LoadNewSubscription() {
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String ID = sharedPreferences.getString("loginId", "");
-        String url = "http://3.36.21.126/Android/LoadNewMessage.php";
+        String url = new ServerIP().http+"Android/LoadNewMessage.php";
         SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
