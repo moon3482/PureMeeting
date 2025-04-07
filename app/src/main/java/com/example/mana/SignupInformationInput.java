@@ -46,14 +46,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
-import com.example.mana.Camera.Camera1;
+import com.example.mana.camera.Camera1;
 
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Signup_information_input extends AppCompatActivity {
+public class SignupInformationInput extends AppCompatActivity {
     ImageView iv_image;
     Calendar calendar;
     int Year, Month, Day;
@@ -271,7 +271,7 @@ public class Signup_information_input extends AppCompatActivity {
                 Day = calendar.get(Calendar.DAY_OF_MONTH);
 
                 //다이얼로그 생성
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Signup_information_input.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(SignupInformationInput.this,
                         AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datepicker, int year, int month, int day) {
@@ -308,13 +308,13 @@ public class Signup_information_input extends AppCompatActivity {
 //                            Log.d(TAG, "권한 설정 완료");
                         } else {
 //                            Log.d(TAG, "권한 설정 요청");
-                            ActivityCompat.requestPermissions(Signup_information_input.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                            ActivityCompat.requestPermissions(SignupInformationInput.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                         }
                     } else {
 
                     }
                 }
-                Intent intent1 = new Intent(Signup_information_input.this, Camera1.class);
+                Intent intent1 = new Intent(SignupInformationInput.this, Camera1.class);
                 startActivityForResult(intent1, CAMERA_RESULT_CODE);
 
             }
@@ -365,7 +365,7 @@ public class Signup_information_input extends AppCompatActivity {
                     return;
                 }
                 if (userID.equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupInformationInput.this);
                     dialog = builder.setMessage("아이디는 빈 칸일 수 없습니다")
                             .setPositiveButton("확인", null)
                             .create();
@@ -373,7 +373,7 @@ public class Signup_information_input extends AppCompatActivity {
                     return;
                 }
                 if (!isValidEmail(userID)) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupInformationInput.this);
                     dialog = builder.setMessage("이메일 형식이 아닙니다.")
                             .setPositiveButton("확인", null)
                             .create();
@@ -621,7 +621,7 @@ public class Signup_information_input extends AppCompatActivity {
 //                        requestQueue.add(smpr);
                     }
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignupInformationInput.this);
                     dialog = builder.setMessage("이메일 인증을 받아주세요").setNegativeButton("확인", null).create();
                     dialog.show();
                 }
@@ -652,7 +652,7 @@ public class Signup_information_input extends AppCompatActivity {
                     if (uri != null) {
 
 
-                        Glide.with(Signup_information_input.this)
+                        Glide.with(SignupInformationInput.this)
                                 .load(uri)
 
                                 .into(iv_image);

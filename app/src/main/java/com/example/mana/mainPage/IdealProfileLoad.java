@@ -1,4 +1,4 @@
-package com.example.mana.MainPage;
+package com.example.mana.mainPage;
 
 import static com.example.mana.R.color.appThemeColor;
 

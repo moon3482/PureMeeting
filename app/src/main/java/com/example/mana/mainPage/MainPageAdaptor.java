@@ -1,8 +1,10 @@
-package com.example.mana.MainPage;
+package com.example.mana.mainPage;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,18 +27,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainPageAdaptor2 extends RecyclerView.Adapter<MainPageAdaptor2.MainPageViewHolder> {
+public class MainPageAdaptor extends RecyclerView.Adapter<MainPageAdaptor.MainPageViewHolder> {
     private ArrayList<MainLoadDataClass> arrayList = null;
     private Context context;
     MainLoadDataClass mainLoadDataClass;
-    MainPageAdaptor2.MainPageViewHolder holder;
+    MainPageAdaptor.MainPageViewHolder holder;
 
 
-    public MainPageAdaptor2(ArrayList<MainLoadDataClass> arrayList) {
+    public MainPageAdaptor(ArrayList<MainLoadDataClass> arrayList) {
         this.arrayList = arrayList;
     }
 
-    public MainPageAdaptor2(Context context) {
+    public MainPageAdaptor(Context context) {
         this.context = context;
 
 
@@ -46,7 +48,7 @@ public class MainPageAdaptor2 extends RecyclerView.Adapter<MainPageAdaptor2.Main
     @Override
     public MainPageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_page_item, parent, false);
-        holder = new MainPageAdaptor2.MainPageViewHolder(view);
+        holder = new MainPageAdaptor.MainPageViewHolder(view);
         return holder;
     }
 
@@ -55,6 +57,7 @@ public class MainPageAdaptor2 extends RecyclerView.Adapter<MainPageAdaptor2.Main
 
         mainLoadDataClass = arrayList.get(position);
         holder.userid = mainLoadDataClass.getUserid();
+
         String[] realage = mainLoadDataClass.getAge().split("-");
         holder.tvMainPageItemName.setText(mainLoadDataClass.name);
         holder.tvMainPageItemAge.setText(String.valueOf(getAge(Integer.parseInt(realage[0]), Integer.parseInt(realage[1]), Integer.parseInt(realage[2])))+"세");
@@ -62,11 +65,14 @@ public class MainPageAdaptor2 extends RecyclerView.Adapter<MainPageAdaptor2.Main
         Glide.with(holder.itemView.getContext())
                 .load( mainLoadDataClass.profileImg)
                 .into(holder.ivMainPageItemProfileImg);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            holder.LilyMainItem.setOutlineAmbientShadowColor(Color.parseColor("#E91E63"));
+            holder.LilyMainItem.setOutlineSpotShadowColor(Color.parseColor("#E91E63"));
+        }
         holder.LilyMainItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), IdealProfileLoad.class);
-                intent.putExtra("after", "after");
                 intent.putExtra("id", holder.userid);
                 ((Activity) v.getContext()).startActivity(intent);
                 /**대화신청  다이얼로그(실험 로직) **/

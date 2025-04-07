@@ -1,15 +1,12 @@
 package com.example.mana;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mana.chating.Client;
@@ -96,7 +92,7 @@ public class ReciveFaceTalk extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         vibrator.cancel();
-                        Intent intent1 = new Intent(ReciveFaceTalk.this, onFaceTalkReceive.class);
+                        Intent intent1 = new Intent(ReciveFaceTalk.this, OnFaceTalkReceive.class);
                         intent1.putExtra("room", RoomNum);
                         intent1.putExtra("index", index);
                         intent1.putExtra("youid", YouID);

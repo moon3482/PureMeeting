@@ -23,13 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -81,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         sign_Up_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Signup_Terms_Activity.class);
+                Intent intent = new Intent(MainActivity.this, signupTermsActivity.class);
                 startActivity(intent);
 
             }

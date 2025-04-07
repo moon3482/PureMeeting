@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mana.MainPage.IdealProfileLoad;
+import com.example.mana.mainPage.IdealProfileLoad;
 import com.example.mana.R;
-import com.example.mana.ShopInfomation.ShopInfomation;
+import com.example.mana.shopInfomation.ShopInfomation;
 
 import java.util.ArrayList;
 

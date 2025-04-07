@@ -1,4 +1,4 @@
-package com.example.mana.ShopInfomation;
+package com.example.mana.shopInfomation;
 
 import android.content.Context;
 import android.view.LayoutInflater;

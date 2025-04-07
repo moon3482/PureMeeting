@@ -1,4 +1,4 @@
-package com.example.mana.ChatPage;
+package com.example.mana.chatPage;
 
 import android.content.Context;
 import android.content.Intent;

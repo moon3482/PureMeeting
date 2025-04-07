@@ -1,4 +1,4 @@
-package com.example.mana.Camera;
+package com.example.mana.camera;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -29,7 +29,7 @@ public class LaunchActivity extends AppCompatActivity {
                 //퍼미션 허가 안되어있다면 사용자에게 요청
                 requestPermissions(PERMISSIONS, PERMISSIONS_REQUEST_CODE);
             }else{
-                Intent mainIntent = new Intent(com.example.mana.Camera.LaunchActivity.this, Camera1.class);
+                Intent mainIntent = new Intent(com.example.mana.camera.LaunchActivity.this, Camera1.class);
                 startActivity(mainIntent);
                 finish();
             }
@@ -80,7 +80,7 @@ public class LaunchActivity extends AppCompatActivity {
                         showDialogForPermission("앱을 실행하려면 퍼미션을 허가하셔야합니다.");
                     else
                     {
-                        Intent mainIntent = new Intent(com.example.mana.Camera.LaunchActivity.this, Camera1.class);
+                        Intent mainIntent = new Intent(com.example.mana.camera.LaunchActivity.this, Camera1.class);
                         startActivity(mainIntent);
                         finish();
                     }
@@ -93,7 +93,7 @@ public class LaunchActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.M)
     private void showDialogForPermission(String msg) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder( com.example.mana.Camera.LaunchActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder( com.example.mana.camera.LaunchActivity.this);
         builder.setTitle("알림");
         builder.setMessage(msg);
         builder.setCancelable(false);

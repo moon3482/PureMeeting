@@ -1,42 +1,31 @@
 package com.example.mana;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
-import android.view.WindowManager;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.example.mana.ChatPage.ChatListData;
-import com.example.mana.ChatPage.ChatPageAdapter;
-import com.example.mana.ChatPage.chatPage;
-import com.example.mana.MainPage.mainPage;
+import com.example.mana.chatPage.ChatPage;
+import com.example.mana.mainPage.MainPage;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -139,7 +128,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         } else if (remoteMessage.getData().size() > 0 && !remoteMessage.getData().get("room").equals(nowroom) && remoteMessage.getData().get("type").equals("msg")) {
             sendNotification(remoteMessage.getData().get("message"), remoteMessage.getData().get("title"));
             if(ActivityName.equals("ChatPage.chatPage")){
-            ((chatPage) chatPage.chatcontext).LoadChatList();}
+            ((ChatPage) ChatPage.chatcontext).LoadChatList();}
             /**
              * 대화신청이나  추천목록 갱신 수신부
              */
@@ -168,7 +157,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void sendNotification(String messageBody, String title) {
 
 
-        Intent intent = new Intent(this, chatPage.class);
+        Intent intent = new Intent(this, ChatPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("notifi", "gomsg");
         intent.putExtra("youid", fromid);
@@ -207,7 +196,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void sendNotificationServer(String messageBody, String title) {
 
 
-        Intent intent = new Intent(this, mainPage.class);
+        Intent intent = new Intent(this, MainPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

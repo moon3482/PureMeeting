@@ -1,4 +1,4 @@
-package com.example.mana.Camera;
+package com.example.mana.camera;
 
 import android.Manifest;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.mana.R;
-import com.example.mana.Signup_information_input;
 import com.google.android.material.snackbar.Snackbar;
 
 import static android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT;
@@ -32,7 +31,7 @@ public class Camera1 extends AppCompatActivity
     private static final int CAMERA_FACING = android.hardware.Camera.CameraInfo.CAMERA_FACING_BACK; // Camera.CameraInfo.CAMERA_FACING_FRONT
 
     private SurfaceView surfaceView;
-    private com.example.mana.Camera.CameraPreview mCameraPreview;
+    private com.example.mana.camera.CameraPreview mCameraPreview;
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
     int CAMERA_RESULT_CODE = 335;
@@ -90,7 +89,7 @@ public class Camera1 extends AppCompatActivity
                         @Override
                         public void onClick(View view) {
 
-                            ActivityCompat.requestPermissions(com.example.mana.Camera.Camera1.this, REQUIRED_PERMISSIONS,
+                            ActivityCompat.requestPermissions(com.example.mana.camera.Camera1.this, REQUIRED_PERMISSIONS,
                                     PERMISSIONS_REQUEST_CODE);
                         }
                     }).show();
@@ -125,7 +124,7 @@ public class Camera1 extends AppCompatActivity
     void startCamera() {
 
         // Create the Preview view and set it as the content of this Activity.
-        mCameraPreview = new com.example.mana.Camera.CameraPreview(this, this, CAMERA_FACING_FRONT, surfaceView);
+        mCameraPreview = new com.example.mana.camera.CameraPreview(this, this, CAMERA_FACING_FRONT, surfaceView);
 
     }
 

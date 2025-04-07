@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,9 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.mana.Terms_Text;
-
-public class Signup_Terms_Activity extends AppCompatActivity {
+public class signupTermsActivity extends AppCompatActivity {
     CheckBox service, info;
     String email, img, gender, kakaoid;
 
@@ -113,7 +109,7 @@ public class Signup_Terms_Activity extends AppCompatActivity {
                 } else if (!terms2[0]) {
                     dialog("개인정보 이용약관");
                 } else {
-                    Intent intent = new Intent(Signup_Terms_Activity.this, Signup_information_input.class);
+                    Intent intent = new Intent(signupTermsActivity.this, SignupInformationInput.class);
                     if (email != null) {
                         intent.putExtra("email", email);
                     }

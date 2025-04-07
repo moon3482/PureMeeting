@@ -1,4 +1,4 @@
-package com.example.mana.MainPage;
+package com.example.mana.mainPage;
 
 public class MainLoadDataClass {
     String name;

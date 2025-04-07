@@ -1,4 +1,4 @@
-package com.example.mana.MainPage;
+package com.example.mana.mainPage;
 
 import static com.example.mana.R.color.appThemeColor;
 
@@ -23,17 +23,17 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mana.ChatPage.chatPage;
+import com.example.mana.chatPage.ChatPage;
 import com.example.mana.MainActivity;
 import com.example.mana.NewSubscriptionBox;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
 import com.example.mana.main.MyPage;
-import com.example.mana.main.mapPage;
+import com.example.mana.main.MapPage;
 
 import java.util.ArrayList;
 
-public class mainPage extends AppCompatActivity {
+public class MainPage extends AppCompatActivity {
     private ArrayList<MainLoadDataClass> arrayList;
     private MainPageAdaptor mainPageAdaptor;
     private RecyclerView recyclerView;
@@ -60,11 +60,11 @@ public class mainPage extends AppCompatActivity {
         ivMessageBoxButton.setImageResource(R.drawable.ic_baseline_mode_comment_24);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
         ivMyPageButton.setImageResource(R.drawable.ic_baseline_person_24);
-        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
-        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
-        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
         /********선택 이미지뷰 디자인 변경******/
-        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(mainPage.this, R.color.White));
+        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(MainPage.this, R.color.White));
         ivHomeButton.setBackgroundColor(Color.parseColor("#E91E63"));
         /************툴바 선언부*********/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMainPage);
@@ -81,7 +81,7 @@ public class mainPage extends AppCompatActivity {
         ivMessageBoxButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mainPage.this, chatPage.class);
+                Intent intent = new Intent(MainPage.this, ChatPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -92,7 +92,7 @@ public class mainPage extends AppCompatActivity {
         ivMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mainPage.this, mapPage.class);
+                Intent intent = new Intent(MainPage.this, MapPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -102,7 +102,7 @@ public class mainPage extends AppCompatActivity {
         ivMyPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mainPage.this, MyPage.class);
+                Intent intent = new Intent(MainPage.this, MyPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -111,7 +111,7 @@ public class mainPage extends AppCompatActivity {
         ibtnNewSubscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mainPage.this, NewSubscriptionBox.class);
+                Intent intent = new Intent(MainPage.this, NewSubscriptionBox.class);
                 startActivity(intent);
             }
         });
@@ -138,14 +138,14 @@ public class mainPage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog dialog;
-        AlertDialog.Builder builder = new AlertDialog.Builder(mainPage.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainPage.this);
         dialog = builder.setTitle("로그아웃")
                 .setMessage("정말 로그아웃 하시겠습니까?")
                 .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(mainPage.this, MainActivity.class);
-                        Toast.makeText(mainPage.this, "로그아웃이 되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainPage.this, MainActivity.class);
+                        Toast.makeText(MainPage.this, "로그아웃이 되었습니다.", Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                         finish();
 
@@ -170,7 +170,7 @@ public class mainPage extends AppCompatActivity {
         ivMessageBoxButton.setImageResource(R.drawable.ic_baseline_mode_comment_24);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
         ivMyPageButton.setImageResource(R.drawable.ic_baseline_person_24);
-        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
     }
 
     private void loadmain() {
@@ -248,11 +248,11 @@ public class mainPage extends AppCompatActivity {
         ivMessageBoxButton.setImageResource(R.drawable.ic_baseline_mode_comment_24);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
         ivMyPageButton.setImageResource(R.drawable.ic_baseline_person_24);
-        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
-        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
-        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(mainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(MainPage.this, appThemeColor));
         /********선택 이미지뷰 디자인 변경******/
-        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(mainPage.this, R.color.White));
+        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(MainPage.this, R.color.White));
         ivHomeButton.setBackgroundColor(Color.parseColor("#E91E63"));
         /*********오늘의 리사이클러뷰 선언부*********/
 

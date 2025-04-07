@@ -1,4 +1,4 @@
-package com.example.mana.Camera;
+package com.example.mana.camera;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,8 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.mana.Signup_information_input;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

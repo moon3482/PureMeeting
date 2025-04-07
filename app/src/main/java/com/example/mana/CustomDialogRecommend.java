@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.mana.ShopInfomation.ShopInfomation;
+import com.example.mana.shopInfomation.ShopInfomation;
 
 import org.json.JSONArray;
 import org.json.JSONException;

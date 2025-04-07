@@ -1,4 +1,4 @@
-package com.example.mana.ChatPage;
+package com.example.mana.chatPage;
 
 import static com.example.mana.R.color.appThemeColor;
 
@@ -21,16 +21,16 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mana.MainPage.mainPage;
+import com.example.mana.mainPage.MainPage;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
 import com.example.mana.chating.Client;
 import com.example.mana.main.MyPage;
-import com.example.mana.main.mapPage;
+import com.example.mana.main.MapPage;
 
 import java.util.ArrayList;
 
-public class chatPage extends AppCompatActivity {
+public class ChatPage extends AppCompatActivity {
     public ArrayList<ChatListData> arrayList;
     LinearLayout LilNullMassage, LilMassageRcv;
     RecyclerView recyclerView;
@@ -46,7 +46,7 @@ public class chatPage extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("notifi")) {
             if (intent.getStringExtra("notifi").equals("gomsg")) {
-                Intent intent1 = new Intent(chatPage.this, Client.class);
+                Intent intent1 = new Intent(ChatPage.this, Client.class);
                 intent1.putExtra("room", intent.getStringExtra("room"));
                 intent1.putExtra("youid", intent.getStringExtra("youid"));
                 startActivity(intent1);
@@ -71,12 +71,12 @@ public class chatPage extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         recyclerView = findViewById(R.id.rcvMassegePage);
-        recyclerView.setLayoutManager(new LinearLayoutManager(chatPage.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(ChatPage.this));
         /****메인페이지버튼********/
         ivHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(chatPage.this, mainPage.class);
+                Intent intent = new Intent(ChatPage.this, MainPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -87,7 +87,7 @@ public class chatPage extends AppCompatActivity {
         ivMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(chatPage.this, mapPage.class);
+                Intent intent = new Intent(ChatPage.this, MapPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -97,7 +97,7 @@ public class chatPage extends AppCompatActivity {
         ivMyPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(chatPage.this, MyPage.class);
+                Intent intent = new Intent(ChatPage.this, MyPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -115,11 +115,11 @@ public class chatPage extends AppCompatActivity {
         ivMessageBoxButton.setImageResource(R.drawable.ic_baseline_mode_comment_24);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
         ivMyPageButton.setImageResource(R.drawable.ic_baseline_person_24);
-        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(chatPage.this, appThemeColor));
-        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(chatPage.this, appThemeColor));
-        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(chatPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(ChatPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(ChatPage.this, appThemeColor));
+        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(ChatPage.this, appThemeColor));
         /********선택 이미지뷰 디자인 변경******/
-        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(chatPage.this, R.color.White));
+        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(ChatPage.this, R.color.White));
         ivMessageBoxButton.setBackgroundColor(Color.parseColor("#E91E63"));
 
     }
@@ -136,7 +136,7 @@ public class chatPage extends AppCompatActivity {
         ImageView ivHomeButton, ivMessageBoxButton, ivMapButton, ivMyPageButton;
         ivMessageBoxButton = findViewById(R.id.MbnMessageBoxButton);
         ivMessageBoxButton.setImageResource(R.drawable.ic_baseline_mode_comment_24);
-        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(chatPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(ChatPage.this, appThemeColor));
     }
 
     @Override
@@ -149,7 +149,7 @@ public class chatPage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(chatPage.this, mainPage.class);
+        Intent intent = new Intent(ChatPage.this, MainPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

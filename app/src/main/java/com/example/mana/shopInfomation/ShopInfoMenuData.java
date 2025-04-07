@@ -1,4 +1,4 @@
-package com.example.mana.ShopInfomation;
+package com.example.mana.shopInfomation;
 
 public class ShopInfoMenuData {
 

@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
-import com.example.mana.ShopInfomation.ShopInfomation;
+import com.example.mana.shopInfomation.ShopInfomation;
 
 import org.json.JSONException;
 import org.json.JSONObject;

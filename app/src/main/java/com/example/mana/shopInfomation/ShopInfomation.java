@@ -1,4 +1,4 @@
-package com.example.mana.ShopInfomation;
+package com.example.mana.shopInfomation;
 
 import static com.example.mana.R.color.appThemeColor;
 

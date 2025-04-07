@@ -1,4 +1,4 @@
-package com.example.mana.ChatPage;
+package com.example.mana.chatPage;
 
 public class ChatListData {
     String roomnum;

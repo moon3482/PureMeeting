@@ -109,7 +109,7 @@ public class SendFaceTalk extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
                             String action = jsonObject.getString("action");
                             if (action.equals("OK")) {
-                                Intent intent = new Intent(SendFaceTalk.this, onFaceTalkReceive.class);
+                                Intent intent = new Intent(SendFaceTalk.this, OnFaceTalkReceive.class);
                                 intent.putExtra("room", roomnum);
                                 intent.putExtra("index", index);
                                 intent.putExtra("youid", youid);

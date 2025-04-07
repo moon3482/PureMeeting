@@ -31,7 +31,7 @@ import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mana.ChatPage.chatPage;
+import com.example.mana.chatPage.ChatPage;
 import com.example.mana.CustomDialog3;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
@@ -701,7 +701,7 @@ public class Client extends AppCompatActivity {
             return true;
         } else if (android.R.id.home == item.getItemId()) {
             //toolbar의 back키 눌렀을 때 동작
-            Intent intent1 = new Intent(Client.this, chatPage.class);
+            Intent intent1 = new Intent(Client.this, ChatPage.class);
             intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent1);
             return true;
@@ -831,7 +831,7 @@ public class Client extends AppCompatActivity {
         editor.putString("ClickRoom", "null");
         editor.putString("youid", "null");
         editor.apply();
-        Intent intent1 = new Intent(Client.this, chatPage.class);
+        Intent intent1 = new Intent(Client.this, ChatPage.class);
         intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent1);
     }

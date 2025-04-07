@@ -1,4 +1,4 @@
-package com.example.mana.Camera;
+package com.example.mana.camera;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;

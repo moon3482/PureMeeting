@@ -26,9 +26,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.example.mana.ChargeCredit;
-import com.example.mana.ChatPage.chatPage;
+import com.example.mana.chatPage.ChatPage;
 import com.example.mana.MainActivity;
-import com.example.mana.MainPage.mainPage;
+import com.example.mana.mainPage.MainPage;
 import com.example.mana.MyIdealTypeSetting;
 import com.example.mana.MyProfileLoad;
 import com.example.mana.R;
@@ -159,7 +159,7 @@ public class MyPage extends AppCompatActivity {
         ivHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPage.this, mainPage.class);
+                Intent intent = new Intent(MyPage.this, MainPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -170,7 +170,7 @@ public class MyPage extends AppCompatActivity {
         ivMessageBoxButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPage.this, chatPage.class);
+                Intent intent = new Intent(MyPage.this, ChatPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -181,7 +181,7 @@ public class MyPage extends AppCompatActivity {
         ivMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPage.this, mapPage.class);
+                Intent intent = new Intent(MyPage.this, MapPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -200,7 +200,7 @@ public class MyPage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(MyPage.this, mainPage.class);
+        Intent intent = new Intent(MyPage.this, MainPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

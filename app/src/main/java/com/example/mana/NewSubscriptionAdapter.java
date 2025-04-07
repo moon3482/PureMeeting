@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mana.MainPage.IdealProfileLoad;
+import com.example.mana.mainPage.IdealProfileLoad;
 
 import java.util.ArrayList;
 

@@ -16,11 +16,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import com.example.mana.ChatPage.chatPage;
-import com.example.mana.MainPage.mainPage;
+import com.example.mana.chatPage.ChatPage;
+import com.example.mana.mainPage.MainPage;
 import com.example.mana.R;
 
-public class mapPage extends AppCompatActivity {
+public class MapPage extends AppCompatActivity {
 //    private MapView mapView;
 //    private NaverMap naverMap;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
@@ -43,9 +43,9 @@ public class mapPage extends AppCompatActivity {
         ivMessageBoxButton.setImageResource(R.drawable.ic_baseline_mode_comment_24);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
         ivMyPageButton.setImageResource(R.drawable.ic_baseline_person_24);
-        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(mapPage.this, appThemeColor));
-        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(mapPage.this, appThemeColor));
-        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(mapPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMessageBoxButton.getDrawable(), ContextCompat.getColor(MapPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMyPageButton.getDrawable(), ContextCompat.getColor(MapPage.this, appThemeColor));
+        DrawableCompat.setTint(ivHomeButton.getDrawable(), ContextCompat.getColor(MapPage.this, appThemeColor));
         /************툴바 선언부***************************/
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMapPage);
         setSupportActionBar(toolbar);
@@ -60,7 +60,7 @@ public class mapPage extends AppCompatActivity {
         ivHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mapPage.this, mainPage.class);
+                Intent intent = new Intent(MapPage.this, MainPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -71,7 +71,7 @@ public class mapPage extends AppCompatActivity {
         ivMessageBoxButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mapPage.this, chatPage.class);
+                Intent intent = new Intent(MapPage.this, ChatPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -82,7 +82,7 @@ public class mapPage extends AppCompatActivity {
         ivMyPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mapPage.this, MyPage.class);
+                Intent intent = new Intent(MapPage.this, MyPage.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
@@ -107,7 +107,7 @@ public class mapPage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(mapPage.this, mainPage.class);
+        Intent intent = new Intent(MapPage.this, MainPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -130,7 +130,7 @@ public class mapPage extends AppCompatActivity {
         /************선택 이미지뷰 디자인 변경***************/
         ImageView ivMapButton = findViewById(R.id.MapbnMapButton);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
-        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(mapPage.this, R.color.White));
+        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(MapPage.this, R.color.White));
         ivMapButton.setBackgroundColor(Color.parseColor("#E91E63"));
     }
 
@@ -153,7 +153,7 @@ public class mapPage extends AppCompatActivity {
         ImageView ivHomeButton, ivMessageBoxButton, ivMapButton, ivMyPageButton;
         ivMapButton = findViewById(R.id.MapbnMapButton);
         ivMapButton.setImageResource(R.drawable.ic_baseline_location_on_24);
-        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(mapPage.this, appThemeColor));
+        DrawableCompat.setTint(ivMapButton.getDrawable(), ContextCompat.getColor(MapPage.this, appThemeColor));
 //        mapView.onStop();
     }
 

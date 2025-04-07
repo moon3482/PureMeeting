@@ -6,50 +6,39 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_OWNER_DATA" />
-    <uses-permission android:name="com.google.android.setupwizard.SETUP_COMPAT_SERVICE" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="com.google.android.setupwizard.SETUP_COMPAT_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <uses-feature android:name="android.hardware.camera2" />
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.camera.autofocus"
+        android:required="false" />
     <uses-feature android:glEsVersion="0x00020000" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".GlobalApplication"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".main.Schedule"></activity>
-        <activity android:name=".onFaceTalkSend" />
-        <activity android:name=".onFaceTalkReceive" />
+        <activity android:name=".main.Schedule"/>
+        <activity android:name=".OnFaceTalkSend" />
+        <activity android:name=".OnFaceTalkReceive" />
         <activity
             android:name=".ReciveFaceTalk"
             android:excludeFromRecents="true"
@@ -60,23 +49,23 @@
         <activity android:name=".PlacePickInfo" />
         <activity android:name=".ZoneAdd" />
         <activity android:name=".NewSubscriptionBox" />
-        <activity android:name=".MainPage.IdealProfileLoad" />
+        <activity android:name=".mainPage.IdealProfileLoad" />
         <activity android:name=".Pay_Activity" />
         <activity android:name=".ChargeCredit" />
         <activity android:name=".InsertMyinfoDetail" />
         <activity android:name=".MyIdealTypeSetting" />
-        <activity android:name=".ShopInfomation.ShopInfomation" />
+        <activity android:name=".shopInfomation.ShopInfomation" />
         <activity android:name=".MyProfileLoad" />
 
 <!--        <meta-data-->
 <!--            android:name="com.naver.maps.map.CLIENT_ID"-->
 <!--            android:value="@string/naver_id" />-->
 
-        <activity android:name=".main.mapPage" />
+        <activity android:name=".main.MapPage" />
         <activity android:name=".main.MyPage" />
-        <activity android:name=".ChatPage.chatPage" />
-        <activity android:name=".MainPage.mainPage" />
-        <activity android:name=".Camera.Camera1" />
+        <activity android:name=".chatPage.ChatPage" />
+        <activity android:name=".mainPage.MainPage" />
+        <activity android:name=".camera.Camera1" />
 
         <service
             android:name=".MyFirebaseInstanceIDService"
@@ -96,7 +85,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".Signup_information_input" />
+        <activity android:name=".SignupInformationInput" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleInstance">
@@ -120,9 +109,9 @@
                     android:scheme="@string/kakao_app_key" />
             </intent-filter>
         </activity>
-        <activity android:name=".Signup_Terms_Activity" />
+        <activity android:name=".signupTermsActivity" />
         <activity
-            android:name=".Signup_information_input"
+            android:name=".SignupInformationInput"
             tools:ignore="all" />
         <activity
             android:name=".chating.Client"
@@ -136,10 +125,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".chating.Image" />
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
     </application>
 
 </manifest>

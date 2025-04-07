@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class onFaceTalkSend extends AppCompatActivity {
+public class OnFaceTalkSend extends AppCompatActivity {
 //    SurfaceViewRenderer surfRendererLocal, surfRendererRemote;
 //    RemonCall remonCall;
     String room;
