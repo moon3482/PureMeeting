@@ -1,8 +1,5 @@
 package com.example.mana;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,13 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.firebase.iid.FirebaseInstanceId;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import kr.co.bootpay.Bootpay;
 import kr.co.bootpay.BootpayAnalytics;
@@ -101,29 +93,29 @@ public class Pay_Activity extends AppCompatActivity {
                     @Override
                     public void onDone(@Nullable String message) {
                         String url = new ServerIP().http+"Android/paydone.php";
-                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-//                                if (intent.hasExtra("charge")) {
-//                                    Intent intent = new Intent();
-//                                    setResult(RESULT_OK, intent);
-//                                    finish();
-//                                } else {
-//                                    finish();
-//                                }
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
+//                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+////                                if (intent.hasExtra("charge")) {
+////                                    Intent intent = new Intent();
+////                                    setResult(RESULT_OK, intent);
+////                                    finish();
+////                                } else {
+////                                    finish();
+////                                }
+//                            }
+//                        }, new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//
+//                            }
+//                        });
+//                        simpleMultiPartRequest.addStringParam("id", loginId);
+//                        simpleMultiPartRequest.addStringParam("getCredit", String.valueOf(getCredit));
+//                        RequestQueue requestQueue = Volley.newRequestQueue(Pay_Activity.this);
+//                        requestQueue.add(simpleMultiPartRequest);
 
-                            }
-                        });
-                        simpleMultiPartRequest.addStringParam("id", loginId);
-                        simpleMultiPartRequest.addStringParam("getCredit", String.valueOf(getCredit));
-                        RequestQueue requestQueue = Volley.newRequestQueue(Pay_Activity.this);
-                        requestQueue.add(simpleMultiPartRequest);
-
-                        Log.d("done", message);
+//                        Log.d("done", message);
                     }
                 })
                 .onReady(new ReadyListener() { // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.

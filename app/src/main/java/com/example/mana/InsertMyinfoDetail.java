@@ -1,13 +1,7 @@
 package com.example.mana;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,23 +10,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.AuthFailureError;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.mana.MainPage.mainPage;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class InsertMyinfoDetail extends AppCompatActivity {
     Spinner spinnerHeight, spinnerWeight, spinnerJabGroup, spinnerDrinkDay, spinnerDrinkHit, spinnerDrinkBottle, spinnerDrinkKind, spinnerArea;
@@ -41,7 +23,7 @@ public class InsertMyinfoDetail extends AppCompatActivity {
     Button btnInsert;
     String str, spinnerGetStrHeight, spinnerGetStrWeight, spinnerGetStrJabGroup, spinnerGetStrArea, spinnerGetStrDrinkDay, spinnerGetStrDrinkHit, spinnerGetStrDrinkKind, spinnerGetStrDrinkBottle;
     SharedPreferences sharedPreferences;
-    SimpleMultiPartRequest simpleMultiPartRequest;
+//    SimpleMultiPartRequest simpleMultiPartRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,33 +51,33 @@ public class InsertMyinfoDetail extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
         String url = new ServerIP().http+"Android/InsertMyProfileDetail.php";
-        simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-
-                                Toast.makeText(InsertMyinfoDetail.this, id + "님 환영합니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(InsertMyinfoDetail.this, mainPage.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-
-
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//
+//                                Toast.makeText(InsertMyinfoDetail.this, id + "님 환영합니다.", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(InsertMyinfoDetail.this, mainPage.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                startActivity(intent);
+//
+//
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
 
         ArrayList<String> heightArrayList = new ArrayList<>();
         for (int i = 100; i < 240; i++) {
@@ -279,11 +261,9 @@ public class InsertMyinfoDetail extends AppCompatActivity {
 
 
     public void InsertRequest() {
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(simpleMultiPartRequest);
-
-
+            //TODO("정보 전송")
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public boolean insetValidation() {
@@ -326,9 +306,7 @@ public class InsertMyinfoDetail extends AppCompatActivity {
             return false;
 
         } else {
-            simpleMultiPartRequest.addStringParam("jab", etJab.getText().toString().trim());
-
-
+//            simpleMultiPartRequest.addStringParam("jab", etJab.getText().toString().trim());
         }
         if (hobby1.length() == 0 || hobby2.length() == 0) {
 
@@ -340,9 +318,8 @@ public class InsertMyinfoDetail extends AppCompatActivity {
             return false;
 
         } else {
-            simpleMultiPartRequest.addStringParam("hobby1", etHobby1.getText().toString().trim());
-            simpleMultiPartRequest.addStringParam("hobby2", etHobby2.getText().toString().trim());
-
+//            simpleMultiPartRequest.addStringParam("hobby1", etHobby1.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("hobby2", etHobby2.getText().toString().trim());
         }
 
 
@@ -356,8 +333,8 @@ public class InsertMyinfoDetail extends AppCompatActivity {
 
             return false;
         } else {
-            simpleMultiPartRequest.addStringParam("forte1", etforte1.getText().toString().trim());
-            simpleMultiPartRequest.addStringParam("forte2", etforte2.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("forte1", etforte1.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("forte2", etforte2.getText().toString().trim());
 
         }
 
@@ -371,8 +348,8 @@ public class InsertMyinfoDetail extends AppCompatActivity {
 
             return false;
         } else {
-            simpleMultiPartRequest.addStringParam("favorite1", etfavorite1.getText().toString().trim());
-            simpleMultiPartRequest.addStringParam("favorite2", etfavorite2.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("favorite1", etfavorite1.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("favorite2", etfavorite2.getText().toString().trim());
         }
 
         if (dislike1.length() == 0 || dislike2.length() == 0) {
@@ -385,25 +362,21 @@ public class InsertMyinfoDetail extends AppCompatActivity {
 
             return false;
         } else {
-            simpleMultiPartRequest.addStringParam("dislike1", etdislike1.getText().toString().trim());
-            simpleMultiPartRequest.addStringParam("dislike2", etdislike2.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("dislike1", etdislike1.getText().toString().trim());
+//            simpleMultiPartRequest.addStringParam("dislike2", etdislike2.getText().toString().trim());
         }
 
-        simpleMultiPartRequest.addStringParam("height", spinnerGetStrHeight);
-        simpleMultiPartRequest.addStringParam("weight", spinnerGetStrWeight);
-        simpleMultiPartRequest.addStringParam("jabGroup", spinnerGetStrJabGroup);
-        simpleMultiPartRequest.addStringParam("jab", jab);
-        simpleMultiPartRequest.addStringParam("area", spinnerGetStrArea);
-        simpleMultiPartRequest.addStringParam("drink", drink);
-        simpleMultiPartRequest.addStringParam("id", ID);
-
-
+//        simpleMultiPartRequest.addStringParam("height", spinnerGetStrHeight);
+//        simpleMultiPartRequest.addStringParam("weight", spinnerGetStrWeight);
+//        simpleMultiPartRequest.addStringParam("jabGroup", spinnerGetStrJabGroup);
+//        simpleMultiPartRequest.addStringParam("jab", jab);
+//        simpleMultiPartRequest.addStringParam("area", spinnerGetStrArea);
+//        simpleMultiPartRequest.addStringParam("drink", drink);
+//        simpleMultiPartRequest.addStringParam("id", ID);
         return true;
     }
 
     public String drinkSpinner() {
-
-
         String drinkStyle = null;
         if (cbDrink.isChecked()) {
             drinkStyle = "none@";

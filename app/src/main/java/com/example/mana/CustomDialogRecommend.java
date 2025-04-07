@@ -1,12 +1,8 @@
 package com.example.mana;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,18 +11,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.activity.OnBackPressedDispatcher;
-import androidx.activity.OnBackPressedDispatcherOwner;
-import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.mana.ShopInfomation.ShopInfomation;
 
 import org.json.JSONArray;
@@ -88,17 +72,17 @@ public class CustomDialogRecommend {
         sdfhor.setTimeZone(tz);
         sdfminute.setTimeZone(tz);
         int year = Integer.parseInt(sdfyear.format(date1));
-        int month = Integer.parseInt(sdfmonth.format(date1))-1;
+        int month = Integer.parseInt(sdfmonth.format(date1)) - 1;
         int day = Integer.parseInt(sdfday.format(date1));
         Calendar mindate = Calendar.getInstance();
-        mindate.set(year , month, day );
-        String mo=""+month;
-        String dd =""+day;
-        if(month<10){
-            mo = "0"+(month+1);
+        mindate.set(year, month, day);
+        String mo = "" + month;
+        String dd = "" + day;
+        if (month < 10) {
+            mo = "0" + (month + 1);
         }
-        if(day<10){
-            dd = "0"+day;
+        if (day < 10) {
+            dd = "0" + day;
         }
         date.setText(year + "-" + mo + "-" + dd);
         time.setText(sdfhor.format(date1) + ":" + sdfminute.format(date1));
@@ -197,10 +181,10 @@ public class CustomDialogRecommend {
         datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String mm = "" + (monthOfYear+1);
-                String dd = ""+dayOfMonth;
+                String mm = "" + (monthOfYear + 1);
+                String dd = "" + dayOfMonth;
                 if (monthOfYear < 9) {
-                    mm = "0" + (monthOfYear+1);
+                    mm = "0" + (monthOfYear + 1);
                 }
                 if (dayOfMonth < 10) {
                     dd = "0" + dayOfMonth;
@@ -238,31 +222,31 @@ public class CustomDialogRecommend {
     }
 
     public void sendFCM(String msg, String userid, String youid, String roomnum) {
-
-        String url = new ServerIP().http+"Android/GetMsgToken.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.e("FCM보내기", "" + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        FCMsend(jsonObject.getString("token"), msg, userid, roomnum);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("youid", youid);
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(simpleMultiPartRequest);
+        //TODO("FCM 전송 처리")
+//        String url = new ServerIP().http+"Android/GetMsgToken.php";
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    Log.e("FCM보내기", "" + response);
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        FCMsend(jsonObject.getString("token"), msg, userid, roomnum);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("youid", youid);
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void FCMsend(String token, String msg, String userid, String roomnum) {

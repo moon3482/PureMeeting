@@ -1,5 +1,19 @@
 package com.example.mana.MainPage;
 
+import static com.example.mana.R.color.appThemeColor;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,41 +23,15 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.mana.ChatPage.chatPage;
 import com.example.mana.MainActivity;
 import com.example.mana.NewSubscriptionBox;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
 import com.example.mana.main.MyPage;
-import com.example.mana.ChatPage.chatPage;
 import com.example.mana.main.mapPage;
-import com.google.android.gms.security.ProviderInstaller;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import static com.example.mana.R.color.appThemeColor;
 
 public class mainPage extends AppCompatActivity {
     private ArrayList<MainLoadDataClass> arrayList;
@@ -129,7 +117,6 @@ public class mainPage extends AppCompatActivity {
         });
 
 
-
     }
 
 
@@ -189,65 +176,65 @@ public class mainPage extends AppCompatActivity {
     private void loadmain() {
 
 
-        String url = new ServerIP().http+"Android/lllo.php";
+        String url = new ServerIP().http + "Android/lllo.php";
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
         System.out.println(id);
 
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-                try {
-                    JSONObject jsonObject2 = new JSONObject(response);
-                    JSONArray jsonArray = new JSONArray(jsonObject2.getString("user"));
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String name = jsonObject.getString("name");
-                        String age = jsonObject.getString("birthday");
-                        String area = jsonObject.getString("area");
-                        String img = jsonObject.getString("proFileImg");
-                        String userid = jsonObject.getString("userid");
-                        MainLoadDataClass mainLoadDataClass = new MainLoadDataClass(name, img, age, area, userid);
-                        arrayList.add(mainLoadDataClass);
-                    }
-                    mainPageAdaptor.notifyDataSetChanged();
-                    JSONArray jsonArray1 = new JSONArray(jsonObject2.getString("after"));
-                    for (int j = 0; j < jsonArray1.length(); j++) {
-                        JSONObject jsonObject = jsonArray1.getJSONObject(j);
-                        String name = jsonObject.getString("name");
-                        String age = jsonObject.getString("birthday");
-                        String area = jsonObject.getString("area");
-                        String img = jsonObject.getString("proFileImg");
-                        String userid = jsonObject.getString("userid");
-                        MainLoadDataClass mainLoadDataClass = new MainLoadDataClass(name, img, age, area, userid);
-                        arrayList2.add(mainLoadDataClass);
-                    }
-                    mainPageAdaptor2.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                TextView tv = (TextView)findViewById(R.id.tvMainPageItemName);
-//                                tv.setText(response);
-//                            }
-//                        });
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("userID", id);
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                System.out.println(response);
+//                try {
+//                    JSONObject jsonObject2 = new JSONObject(response);
+//                    JSONArray jsonArray = new JSONArray(jsonObject2.getString("user"));
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                        String name = jsonObject.getString("name");
+//                        String age = jsonObject.getString("birthday");
+//                        String area = jsonObject.getString("area");
+//                        String img = jsonObject.getString("proFileImg");
+//                        String userid = jsonObject.getString("userid");
+//                        MainLoadDataClass mainLoadDataClass = new MainLoadDataClass(name, img, age, area, userid);
+//                        arrayList.add(mainLoadDataClass);
+//                    }
+//                    mainPageAdaptor.notifyDataSetChanged();
+//                    JSONArray jsonArray1 = new JSONArray(jsonObject2.getString("after"));
+//                    for (int j = 0; j < jsonArray1.length(); j++) {
+//                        JSONObject jsonObject = jsonArray1.getJSONObject(j);
+//                        String name = jsonObject.getString("name");
+//                        String age = jsonObject.getString("birthday");
+//                        String area = jsonObject.getString("area");
+//                        String img = jsonObject.getString("proFileImg");
+//                        String userid = jsonObject.getString("userid");
+//                        MainLoadDataClass mainLoadDataClass = new MainLoadDataClass(name, img, age, area, userid);
+//                        arrayList2.add(mainLoadDataClass);
+//                    }
+//                    mainPageAdaptor2.notifyDataSetChanged();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+////                        runOnUiThread(new Runnable() {
+////                            @Override
+////                            public void run() {
+////                                TextView tv = (TextView)findViewById(R.id.tvMainPageItemName);
+////                                tv.setText(response);
+////                            }
+////                        });
+//
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("userID", id);
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
 
@@ -285,35 +272,35 @@ public class mainPage extends AppCompatActivity {
 
     public void LoadNewSub() {
 
-        String url = new ServerIP().http+"Android/loadNewMessageNumRow.php";
+        String url = new ServerIP().http + "Android/loadNewMessageNumRow.php";
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        if (jsonObject.getInt("num") > 0) {
-                            ivNewMessage.setVisibility(View.VISIBLE);
-                        } else {
-                            ivNewMessage.setVisibility(View.GONE);
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("id", id);
-        RequestQueue requestQueue = Volley.newRequestQueue(mainPage.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        if (jsonObject.getInt("num") > 0) {
+//                            ivNewMessage.setVisibility(View.VISIBLE);
+//                        } else {
+//                            ivNewMessage.setVisibility(View.GONE);
+//                        }
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        RequestQueue requestQueue = Volley.newRequestQueue(mainPage.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 }

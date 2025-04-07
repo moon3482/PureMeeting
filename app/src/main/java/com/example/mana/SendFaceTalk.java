@@ -1,32 +1,20 @@
 package com.example.mana;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import com.example.mana.ShopInfomation.ShopInfomation;
 import com.example.mana.chating.Client;
-import com.example.mana.chating.chatdata;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -166,30 +154,30 @@ public class SendFaceTalk extends AppCompatActivity {
     public void sendFCM(String msg) {
 
         String url = new ServerIP().http+"Android/GetMsgToken.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.e("FCM보내기", "" + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        FCMsend(jsonObject.getString("token"), msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("youid", youid);
-        RequestQueue requestQueue = Volley.newRequestQueue(SendFaceTalk.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    Log.e("FCM보내기", "" + response);
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        FCMsend(jsonObject.getString("token"), msg);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("youid", youid);
+//        RequestQueue requestQueue = Volley.newRequestQueue(SendFaceTalk.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void FCMsend(String token, String msg) {

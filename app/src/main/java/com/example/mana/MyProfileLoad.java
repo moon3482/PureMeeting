@@ -1,17 +1,11 @@
 package com.example.mana;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.loader.content.CursorLoader;
+import static com.example.mana.R.color.appThemeColor;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,24 +26,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.AuthFailureError;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.request.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
-import com.example.mana.MainPage.IdealProfileLoad;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.loader.content.CursorLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,14 +48,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.mana.R.color.appThemeColor;
 
 public class MyProfileLoad extends AppCompatActivity {
-    CircleImageView profileImage1, profileImage2, profileImage3, profileImage4, profileImage5;
+    ImageView profileImage1, profileImage2, profileImage3, profileImage4, profileImage5;
     int PROFILEIMAGE2 = 201, PROFILEIMAGE3 = 301, PROFILEIMAGE4 = 401, PROFILEIMAGE5 = 501;
     String loginId, spinnerGetStrHeight, spinnerGetStrWeight, spinnerGetStrArea, spinnerGetStrJabGroup, spinnerGetStrDrinkDay, spinnerGetStrDrinkHit, spinnerGetStrDrinkKind, spinnerGetStrDrinkBottle;
     String getDrinkDya, getDrinkHit, getDrinkKind, getDrinkBottle;
@@ -397,8 +380,8 @@ public class MyProfileLoad extends AppCompatActivity {
 
     }
 
-    public void upimage(Intent data, CircleImageView view, String imageNumber) {
-        String url = new ServerIP().http+"Android/myProFileImageUpdate.php";
+    public void upimage(Intent data, ImageView view, String imageNumber) {
+        String url = new ServerIP().http + "Android/myProFileImageUpdate.php";
         Uri uri = data.getData();
 //        String path = getRealPathFromUri(uri);
         String path;
@@ -411,46 +394,46 @@ public class MyProfileLoad extends AppCompatActivity {
         } else {
             path = imagebase64(data);
         }
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jsonObject1 = new JSONObject(response);
-                    boolean success = jsonObject1.getBoolean("success");
-                    if (success) {
-                        Log.e("로그", jsonObject1.getString("imagepath"));
-                        Log.e("exif", jsonObject1.getString("exif"));
-//                        Bitmap bit = getBitmapFromURL();
-
-                        String path = jsonObject1.getString("imagepath");
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Glide.with(MyProfileLoad.this).load(path).into(view);
-//                            }
-//                        });
-                        StartingImageLoad();
-
-                    }
-                } catch (Exception e) {
-
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-//        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", loginId);
-        simpleMultiPartRequest.addStringParam("profileImage", imageNumber);
-        simpleMultiPartRequest.addStringParam("image", path);
-        simpleMultiPartRequest.addStringParam("rotate", String.valueOf(orientarionInt));
-        RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//
+//                try {
+//                    JSONObject jsonObject1 = new JSONObject(response);
+//                    boolean success = jsonObject1.getBoolean("success");
+//                    if (success) {
+//                        Log.e("로그", jsonObject1.getString("imagepath"));
+//                        Log.e("exif", jsonObject1.getString("exif"));
+////                        Bitmap bit = getBitmapFromURL();
+//
+//                        String path = jsonObject1.getString("imagepath");
+////                        runOnUiThread(new Runnable() {
+////                            @Override
+////                            public void run() {
+////                                Glide.with(MyProfileLoad.this).load(path).into(view);
+////                            }
+////                        });
+//                        StartingImageLoad();
+//
+//                    }
+//                } catch (Exception e) {
+//
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+////        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", loginId);
+//        simpleMultiPartRequest.addStringParam("profileImage", imageNumber);
+//        simpleMultiPartRequest.addStringParam("image", path);
+//        simpleMultiPartRequest.addStringParam("rotate", String.valueOf(orientarionInt));
+//        RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     String getRealPathFromUri(Uri uri) {
@@ -480,92 +463,92 @@ public class MyProfileLoad extends AppCompatActivity {
     }
 
     public void StartingImageLoad() {
-        String url = new ServerIP().http+"Android/myprofileload.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("마이페이지", response);
-                try {
-                    JSONObject jsonObject2 = new JSONObject(response);
-                    spinnerHeight.setSelection(Integer.parseInt(jsonObject2.getString("height")));
-                    spinnerWeight.setSelection(Integer.parseInt(jsonObject2.getString("weight")));
-                    spinnerArea.setSelection(Integer.parseInt(jsonObject2.getString("area")));
-                    spinnerJabGroup.setSelection(Integer.parseInt(jsonObject2.getString("jabGroup")));
-                    tvAge.setText(String.valueOf(getAge(jsonObject2.getString("birthday"))));
-                    etjab.setText(jsonObject2.getString("job"));
-                    tvHobby.setText(jsonObject2.getString("hobby"));
-                    tvForte.setText(jsonObject2.getString("forte"));
-                    tvFavorite.setText(jsonObject2.getString("favorite"));
-                    tvdislike.setText(jsonObject2.getString("dislike"));
-                    String[] drinksplit = jsonObject2.getString("drink").split("@");
-                    ArrayList<String> arrayList = new ArrayList<>();
-                    if (drinksplit.length > 1) {
-                        for (int i = 0; i < drinksplit.length; i++) {
-                            String[] str = drinksplit[i].split(",");
-                            arrayList.add(str[1]);
-                        }
-                    }
-                    if (drinksplit.length == 3) {
-                        tvDrink.setText(new String(Character.toChars(0x1F4C6)) + arrayList.get(0) + " " + new String(Character.toChars(0x1F37A)) + arrayList.get(1) + " " + new String(Character.toChars(0x1F377)) + arrayList.get(2));
-                        spinnerGetStrDrinkDay = drinksplit[0];
-                        spinnerGetStrDrinkHit = "0,1~3회";
-                        spinnerGetStrDrinkKind = drinksplit[1];
-                        spinnerGetStrDrinkBottle = drinksplit[2];
-                        check = false;
-                    } else if (drinksplit.length == 4) {
-                        tvDrink.setText(new String(Character.toChars(0x1F4C6)) + arrayList.get(0) + " " + new String(Character.toChars(0x23F3)) + arrayList.get(1) + " " + new String(Character.toChars(0x1F37A)) + arrayList.get(2) + " " + new String(Character.toChars(0x1F377)) + arrayList.get(3));
-                        spinnerGetStrDrinkDay = drinksplit[0];
-                        spinnerGetStrDrinkHit = drinksplit[1];
-                        spinnerGetStrDrinkKind = drinksplit[2];
-                        spinnerGetStrDrinkBottle = drinksplit[3];
-                        check = false;
-                    } else {
-                        tvDrink.setText("음주 안함");
-
-                        spinnerGetStrDrinkDay = "0,음주 안함";
-                        spinnerGetStrDrinkHit = "0,음주 안함";
-                        spinnerGetStrDrinkKind = "0,음주 안함";
-                        spinnerGetStrDrinkBottle = "0,음주 안함";
-                    }
-
-                    if (!jsonObject2.getString("profileImage2").equals("null")) {
-                        Glide.with(MyProfileLoad.this)
-                                .load(jsonObject2.getString("profileImage2"))
-                                .placeholder(R.drawable.ic_baseline_add_circle_24)
-                                .error(R.drawable.ic_baseline_add_circle_24)
-                                .into(profileImage2);
-                    } else {
-                    }
-                    if (!jsonObject2.getString("profileImage3").equals("null")) {
-                        Glide.with(MyProfileLoad.this).load(jsonObject2.getString("profileImage3")).error(R.drawable.ic_baseline_add_circle_24).into(profileImage3);
-                    } else {
-                    }
-                    if (!jsonObject2.getString("profileImage4").equals("null")) {
-                        Glide.with(MyProfileLoad.this).load(jsonObject2.getString("profileImage4")).error(R.drawable.ic_baseline_add_circle_24).into(profileImage4);
-                    } else {
-                    }
-                    if (!jsonObject2.getString("profileImage5").equals("null")) {
-                        Glide.with(MyProfileLoad.this).load(jsonObject2.getString("profileImage5")).error(R.drawable.ic_baseline_add_circle_24).into(profileImage5);
-                    } else {
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("id", loginId);
-        RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/myprofileload.php";
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.e("마이페이지", response);
+//                try {
+//                    JSONObject jsonObject2 = new JSONObject(response);
+//                    spinnerHeight.setSelection(Integer.parseInt(jsonObject2.getString("height")));
+//                    spinnerWeight.setSelection(Integer.parseInt(jsonObject2.getString("weight")));
+//                    spinnerArea.setSelection(Integer.parseInt(jsonObject2.getString("area")));
+//                    spinnerJabGroup.setSelection(Integer.parseInt(jsonObject2.getString("jabGroup")));
+//                    tvAge.setText(String.valueOf(getAge(jsonObject2.getString("birthday"))));
+//                    etjab.setText(jsonObject2.getString("job"));
+//                    tvHobby.setText(jsonObject2.getString("hobby"));
+//                    tvForte.setText(jsonObject2.getString("forte"));
+//                    tvFavorite.setText(jsonObject2.getString("favorite"));
+//                    tvdislike.setText(jsonObject2.getString("dislike"));
+//                    String[] drinksplit = jsonObject2.getString("drink").split("@");
+//                    ArrayList<String> arrayList = new ArrayList<>();
+//                    if (drinksplit.length > 1) {
+//                        for (int i = 0; i < drinksplit.length; i++) {
+//                            String[] str = drinksplit[i].split(",");
+//                            arrayList.add(str[1]);
+//                        }
+//                    }
+//                    if (drinksplit.length == 3) {
+//                        tvDrink.setText(new String(Character.toChars(0x1F4C6)) + arrayList.get(0) + " " + new String(Character.toChars(0x1F37A)) + arrayList.get(1) + " " + new String(Character.toChars(0x1F377)) + arrayList.get(2));
+//                        spinnerGetStrDrinkDay = drinksplit[0];
+//                        spinnerGetStrDrinkHit = "0,1~3회";
+//                        spinnerGetStrDrinkKind = drinksplit[1];
+//                        spinnerGetStrDrinkBottle = drinksplit[2];
+//                        check = false;
+//                    } else if (drinksplit.length == 4) {
+//                        tvDrink.setText(new String(Character.toChars(0x1F4C6)) + arrayList.get(0) + " " + new String(Character.toChars(0x23F3)) + arrayList.get(1) + " " + new String(Character.toChars(0x1F37A)) + arrayList.get(2) + " " + new String(Character.toChars(0x1F377)) + arrayList.get(3));
+//                        spinnerGetStrDrinkDay = drinksplit[0];
+//                        spinnerGetStrDrinkHit = drinksplit[1];
+//                        spinnerGetStrDrinkKind = drinksplit[2];
+//                        spinnerGetStrDrinkBottle = drinksplit[3];
+//                        check = false;
+//                    } else {
+//                        tvDrink.setText("음주 안함");
+//
+//                        spinnerGetStrDrinkDay = "0,음주 안함";
+//                        spinnerGetStrDrinkHit = "0,음주 안함";
+//                        spinnerGetStrDrinkKind = "0,음주 안함";
+//                        spinnerGetStrDrinkBottle = "0,음주 안함";
+//                    }
+//
+//                    if (!jsonObject2.getString("profileImage2").equals("null")) {
+//                        Glide.with(MyProfileLoad.this)
+//                                .load(jsonObject2.getString("profileImage2"))
+//                                .placeholder(R.drawable.ic_baseline_add_circle_24)
+//                                .error(R.drawable.ic_baseline_add_circle_24)
+//                                .into(profileImage2);
+//                    } else {
+//                    }
+//                    if (!jsonObject2.getString("profileImage3").equals("null")) {
+//                        Glide.with(MyProfileLoad.this).load(jsonObject2.getString("profileImage3")).error(R.drawable.ic_baseline_add_circle_24).into(profileImage3);
+//                    } else {
+//                    }
+//                    if (!jsonObject2.getString("profileImage4").equals("null")) {
+//                        Glide.with(MyProfileLoad.this).load(jsonObject2.getString("profileImage4")).error(R.drawable.ic_baseline_add_circle_24).into(profileImage4);
+//                    } else {
+//                    }
+//                    if (!jsonObject2.getString("profileImage5").equals("null")) {
+//                        Glide.with(MyProfileLoad.this).load(jsonObject2.getString("profileImage5")).error(R.drawable.ic_baseline_add_circle_24).into(profileImage5);
+//                    } else {
+//                    }
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("id", loginId);
+//        RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
-    public CircleImageView Gliderolling(int a) {
+    public ImageView Gliderolling(int a) {
         if (a == 0) {
             return profileImage2;
         } else if (a == 1) {
@@ -652,51 +635,51 @@ public class MyProfileLoad extends AppCompatActivity {
             super.onStop();
         } else {
 
-            String url = new ServerIP().http+"Android/updatemyInfo.php";
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject1 = new JSONObject(response);
-                        System.out.println(jsonObject1.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    String[] hospl = tvHobby.getText().toString().split(",");
-                    String[] fospl = tvForte.getText().toString().split(",");
-                    String[] forspl = tvFavorite.getText().toString().split(",");
-                    String[] disspl = tvdislike.getText().toString().split(",");
-                    updateHashData.put("id", loginId);
-                    updateHashData.put("jab", etjab.getText().toString().trim());
-                    updateHashData.put("hobby", hospl[0] + "#" + hospl[1]);
-                    updateHashData.put("forte", fospl[0] + "#" + fospl[1]);
-                    updateHashData.put("favorite", forspl[0] + "#" + forspl[1]);
-                    updateHashData.put("dislike", disspl[0] + "#" + disspl[1]);
-                    if (check) {
-                        updateHashData.put("drink", "none@");
-                    } else if (spinnerGetStrDrinkDay.equals("2,매일")) {
-                        updateHashData.put("drink", spinnerGetStrDrinkDay + "@" + spinnerGetStrDrinkKind + "@" + spinnerGetStrDrinkBottle);
-                    } else {
-                        updateHashData.put("drink", spinnerGetStrDrinkDay + "@" + spinnerGetStrDrinkHit + "@" + spinnerGetStrDrinkKind + "@" + spinnerGetStrDrinkBottle);
-                    }
-
-                    return updateHashData;
-                }
-
-            };
-            stringRequest.setShouldCache(false);
-            RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
-            requestQueue.add(stringRequest);
+            String url = new ServerIP().http + "Android/updatemyInfo.php";
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String response) {
+//                    try {
+//                        JSONObject jsonObject1 = new JSONObject(response);
+//                        System.out.println(jsonObject1.toString());
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//
+//                }
+//            }) {
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    String[] hospl = tvHobby.getText().toString().split(",");
+//                    String[] fospl = tvForte.getText().toString().split(",");
+//                    String[] forspl = tvFavorite.getText().toString().split(",");
+//                    String[] disspl = tvdislike.getText().toString().split(",");
+//                    updateHashData.put("id", loginId);
+//                    updateHashData.put("jab", etjab.getText().toString().trim());
+//                    updateHashData.put("hobby", hospl[0] + "#" + hospl[1]);
+//                    updateHashData.put("forte", fospl[0] + "#" + fospl[1]);
+//                    updateHashData.put("favorite", forspl[0] + "#" + forspl[1]);
+//                    updateHashData.put("dislike", disspl[0] + "#" + disspl[1]);
+//                    if (check) {
+//                        updateHashData.put("drink", "none@");
+//                    } else if (spinnerGetStrDrinkDay.equals("2,매일")) {
+//                        updateHashData.put("drink", spinnerGetStrDrinkDay + "@" + spinnerGetStrDrinkKind + "@" + spinnerGetStrDrinkBottle);
+//                    } else {
+//                        updateHashData.put("drink", spinnerGetStrDrinkDay + "@" + spinnerGetStrDrinkHit + "@" + spinnerGetStrDrinkKind + "@" + spinnerGetStrDrinkBottle);
+//                    }
+//
+//                    return updateHashData;
+//                }
+//
+//            };
+//            stringRequest.setShouldCache(false);
+//            RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
+//            requestQueue.add(stringRequest);
             super.onStop();
         }
 
@@ -717,34 +700,34 @@ public class MyProfileLoad extends AppCompatActivity {
     }
 
     public void userSecession() {
-        String url = new ServerIP().http+"Android/secession.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        Toast.makeText(MyProfileLoad.this, "탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(MyProfileLoad.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", loginId);
-        RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/secession.php";
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        Toast.makeText(MyProfileLoad.this, "탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show();
+//                        Intent intent = new Intent(MyProfileLoad.this, MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", loginId);
+//        RequestQueue requestQueue = Volley.newRequestQueue(MyProfileLoad.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     @Override

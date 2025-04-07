@@ -1,13 +1,9 @@
 package com.example.mana.chating;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
-import android.net.SocketKeepalive;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,31 +15,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-
-
-import com.example.mana.MainActivity;
 import com.example.mana.R;
-import com.example.mana.SendFaceTalk;
 import com.example.mana.ServerIP;
 import com.example.mana.ShopInfomation.ShopInfomation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -168,75 +148,75 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                    } catch (JSONException e) {
 //                        e.printStackTrace();
 //                    }
-                    try {
-                        JSONObject jsonObject1 = new JSONObject(chatdata.msg);
-                        String url = new ServerIP().http+"Android/mediahit.php";
-                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    boolean success = jsonObject.getBoolean("success");
-                                    if (success) {
-                                        if (Integer.parseInt(jsonObject.getString("hit")) == 99) {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setTitle("선택완료");
-                                            builder.setMessage("이미 선택이 완료되었습니다.");
-                                            builder.setPositiveButton("확인", null);
-                                            builder.show();
-
-                                        } else if (Integer.parseInt(jsonObject.getString("hit")) >= 6) {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setTitle("횟수초과");
-                                            builder.setMessage("해당 추천의 허용가능한 페이스톡 횟수를 초과하였습니다.");
-                                            builder.setPositiveButton("확인", null);
-                                            builder.show();
-                                        } else {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setTitle("가능횟수");
-                                            String hit = jsonObject.getString("hit");
-                                            builder.setMessage("페이스톡 가능횟수" + String.valueOf((Integer.parseInt(hit) / 2)) + "/3\n\n페이스톡을 진행하시겠습니까?");
-                                            builder.setPositiveButton("진행", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-
-                                                    try {
-                                                        Intent intent = new Intent(context, SendFaceTalk.class);
-                                                        intent.putExtra("room", chatdata.room);
-                                                        intent.putExtra("youid", chatdata.youid);
-                                                        intent.putExtra("name", chatdata.name);
-                                                        intent.putExtra("index", jsonObject1.getString("index"));
-                                                        context.startActivity(intent);
-                                                        ((Activity) context).finish();
-
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-
-                                                }
-                                            });
-                                            builder.setNeutralButton("취소", null);
-                                            builder.show();
-                                        }
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        });
-                        simpleMultiPartRequest.setShouldCache(false);
-                        simpleMultiPartRequest.addStringParam("index", jsonObject1.getString("index"));
-                        RequestQueue requestQueue = Volley.newRequestQueue(context);
-                        requestQueue.add(simpleMultiPartRequest);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        JSONObject jsonObject1 = new JSONObject(chatdata.msg);
+//                        String url = new ServerIP().http + "Android/mediahit.php";
+//                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//                                try {
+//                                    JSONObject jsonObject = new JSONObject(response);
+//                                    boolean success = jsonObject.getBoolean("success");
+//                                    if (success) {
+//                                        if (Integer.parseInt(jsonObject.getString("hit")) == 99) {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                            builder.setTitle("선택완료");
+//                                            builder.setMessage("이미 선택이 완료되었습니다.");
+//                                            builder.setPositiveButton("확인", null);
+//                                            builder.show();
+//
+//                                        } else if (Integer.parseInt(jsonObject.getString("hit")) >= 6) {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                            builder.setTitle("횟수초과");
+//                                            builder.setMessage("해당 추천의 허용가능한 페이스톡 횟수를 초과하였습니다.");
+//                                            builder.setPositiveButton("확인", null);
+//                                            builder.show();
+//                                        } else {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                            builder.setTitle("가능횟수");
+//                                            String hit = jsonObject.getString("hit");
+//                                            builder.setMessage("페이스톡 가능횟수" + String.valueOf((Integer.parseInt(hit) / 2)) + "/3\n\n페이스톡을 진행하시겠습니까?");
+//                                            builder.setPositiveButton("진행", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialog, int which) {
+//
+//                                                    try {
+//                                                        Intent intent = new Intent(context, SendFaceTalk.class);
+//                                                        intent.putExtra("room", chatdata.room);
+//                                                        intent.putExtra("youid", chatdata.youid);
+//                                                        intent.putExtra("name", chatdata.name);
+//                                                        intent.putExtra("index", jsonObject1.getString("index"));
+//                                                        context.startActivity(intent);
+//                                                        ((Activity) context).finish();
+//
+//                                                    } catch (JSONException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//
+//                                                }
+//                                            });
+//                                            builder.setNeutralButton("취소", null);
+//                                            builder.show();
+//                                        }
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                            }
+//                        }, new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//
+//                            }
+//                        });
+//                        simpleMultiPartRequest.setShouldCache(false);
+//                        simpleMultiPartRequest.addStringParam("index", jsonObject1.getString("index"));
+//                        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//                        requestQueue.add(simpleMultiPartRequest);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
 
                 }
             });
@@ -292,75 +272,75 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View v) {
 
-                    try {
-                        JSONObject jsonObject1 = new JSONObject(chatdata.msg);
-                        String url = new ServerIP().http+"Android/mediahit.php";
-                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    boolean success = jsonObject.getBoolean("success");
-                                    if (success) {
-                                        if (Integer.parseInt(jsonObject.getString("hit")) == 99) {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setTitle("선택완료");
-                                            builder.setMessage("이미 선택이 완료되었습니다.");
-                                            builder.setPositiveButton("확인", null);
-                                            builder.show();
-
-                                        } else if (Integer.parseInt(jsonObject.getString("hit")) >= 6) {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setTitle("횟수초과");
-                                            builder.setMessage("해당 추천의 허용가능한 페이스톡 횟수를 초과하였습니다.");
-                                            builder.setPositiveButton("확인", null);
-                                            builder.show();
-                                        } else {
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                            builder.setTitle("가능횟수");
-                                            String hit = jsonObject.getString("hit");
-                                            builder.setMessage("페이스톡 가능횟수" + String.valueOf((Integer.parseInt(hit) / 2)) + "/3\n\n페이스톡을 진행하시겠습니까?");
-                                            builder.setPositiveButton("진행", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-
-                                                    try {
-                                                        Intent intent = new Intent(context, SendFaceTalk.class);
-                                                        intent.putExtra("room", chatdata.room);
-                                                        intent.putExtra("youid", chatdata.id);
-                                                        intent.putExtra("name", chatdata.name);
-                                                        intent.putExtra("index", jsonObject1.getString("index"));
-                                                        context.startActivity(intent);
-                                                        ((Activity) context).finish();
-
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-
-                                                }
-                                            });
-                                            builder.setNeutralButton("취소", null);
-                                            builder.show();
-                                        }
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        });
-                        simpleMultiPartRequest.setShouldCache(false);
-                        simpleMultiPartRequest.addStringParam("index", jsonObject1.getString("index"));
-                        RequestQueue requestQueue = Volley.newRequestQueue(context);
-                        requestQueue.add(simpleMultiPartRequest);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        JSONObject jsonObject1 = new JSONObject(chatdata.msg);
+//                        String url = new ServerIP().http + "Android/mediahit.php";
+//                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//                                try {
+//                                    JSONObject jsonObject = new JSONObject(response);
+//                                    boolean success = jsonObject.getBoolean("success");
+//                                    if (success) {
+//                                        if (Integer.parseInt(jsonObject.getString("hit")) == 99) {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                            builder.setTitle("선택완료");
+//                                            builder.setMessage("이미 선택이 완료되었습니다.");
+//                                            builder.setPositiveButton("확인", null);
+//                                            builder.show();
+//
+//                                        } else if (Integer.parseInt(jsonObject.getString("hit")) >= 6) {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                            builder.setTitle("횟수초과");
+//                                            builder.setMessage("해당 추천의 허용가능한 페이스톡 횟수를 초과하였습니다.");
+//                                            builder.setPositiveButton("확인", null);
+//                                            builder.show();
+//                                        } else {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                            builder.setTitle("가능횟수");
+//                                            String hit = jsonObject.getString("hit");
+//                                            builder.setMessage("페이스톡 가능횟수" + String.valueOf((Integer.parseInt(hit) / 2)) + "/3\n\n페이스톡을 진행하시겠습니까?");
+//                                            builder.setPositiveButton("진행", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialog, int which) {
+//
+//                                                    try {
+//                                                        Intent intent = new Intent(context, SendFaceTalk.class);
+//                                                        intent.putExtra("room", chatdata.room);
+//                                                        intent.putExtra("youid", chatdata.id);
+//                                                        intent.putExtra("name", chatdata.name);
+//                                                        intent.putExtra("index", jsonObject1.getString("index"));
+//                                                        context.startActivity(intent);
+//                                                        ((Activity) context).finish();
+//
+//                                                    } catch (JSONException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//
+//                                                }
+//                                            });
+//                                            builder.setNeutralButton("취소", null);
+//                                            builder.show();
+//                                        }
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                            }
+//                        }, new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//
+//                            }
+//                        });
+//                        simpleMultiPartRequest.setShouldCache(false);
+//                        simpleMultiPartRequest.addStringParam("index", jsonObject1.getString("index"));
+//                        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//                        requestQueue.add(simpleMultiPartRequest);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
 
                 }
             });
@@ -398,7 +378,7 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             holder7.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("인덱스", ""+chatdata.msg);
+                    Log.e("인덱스", "" + chatdata.msg);
                     loadshop(chatdata.msg);
                 }
             });
@@ -496,7 +476,8 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //
 //                holder.youChatRelative.setVisibility(View.GONE);
 //                holder.inname.setText(chatdata.getName());
-////                holder.youChatImg.setVisibility(View.GONE);
+
+    /// /                holder.youChatImg.setVisibility(View.GONE);
 //                holder.img.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -509,7 +490,6 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //            }
 //        }
 //}
-
     @Override
     public int getItemCount() {
         return arrayList.size();
@@ -661,73 +641,73 @@ public class Chatingadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public void mediahit(String index) {
-        String url = new ServerIP().http+"Android/mediahit.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("index", index);
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/mediahit.php";
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void loadshop(String index) {
-        String url = new ServerIP().http+"Android/Shoploadinfo.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("loginId", Context.MODE_PRIVATE);
-                        String imgurl = sharedPreferences.getString("imgurl", "");
-                        String name = sharedPreferences.getString("loginName", "");
-                        Intent intent = new Intent(context, ShopInfomation.class);
-                        intent.putExtra("Type", "recommender");
-                        intent.putExtra("index", jsonObject.getString("index"));
-                        intent.putExtra("shopcode", jsonObject.getString("shopcode"));
-                        intent.putExtra("shopname", jsonObject.getString("shopname"));
-                        intent.putExtra("shoptype", jsonObject.getString("shoptype"));
-                        intent.putExtra("address", jsonObject.getString("shopaddress"));
-                        intent.putExtra("starttime", jsonObject.getString("shopstarttime"));
-                        intent.putExtra("endtime", jsonObject.getString("endtime"));
-                        intent.putExtra("username", name);
-                        intent.putExtra("roomnum", jsonObject.getString("roomnum"));
-                        intent.putExtra("imgurl", imgurl);
-                        intent.putExtra("reservetime", jsonObject.getString("reservetime"));
-                        context.startActivity(intent);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("index", index);
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/Shoploadinfo.php";
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        SharedPreferences sharedPreferences = context.getSharedPreferences("loginId", Context.MODE_PRIVATE);
+//                        String imgurl = sharedPreferences.getString("imgurl", "");
+//                        String name = sharedPreferences.getString("loginName", "");
+//                        Intent intent = new Intent(context, ShopInfomation.class);
+//                        intent.putExtra("Type", "recommender");
+//                        intent.putExtra("index", jsonObject.getString("index"));
+//                        intent.putExtra("shopcode", jsonObject.getString("shopcode"));
+//                        intent.putExtra("shopname", jsonObject.getString("shopname"));
+//                        intent.putExtra("shoptype", jsonObject.getString("shoptype"));
+//                        intent.putExtra("address", jsonObject.getString("shopaddress"));
+//                        intent.putExtra("starttime", jsonObject.getString("shopstarttime"));
+//                        intent.putExtra("endtime", jsonObject.getString("endtime"));
+//                        intent.putExtra("username", name);
+//                        intent.putExtra("roomnum", jsonObject.getString("roomnum"));
+//                        intent.putExtra("imgurl", imgurl);
+//                        intent.putExtra("reservetime", jsonObject.getString("reservetime"));
+//                        context.startActivity(intent);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 }

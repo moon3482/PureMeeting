@@ -1,19 +1,10 @@
 package com.example.mana;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
+import static com.example.mana.R.color.appThemeColor;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AppOpsManager;
-import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,13 +15,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.mana.chating.Client;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,8 +36,6 @@ import kr.co.bootpay.listener.ErrorListener;
 import kr.co.bootpay.listener.ReadyListener;
 import kr.co.bootpay.model.BootExtra;
 import kr.co.bootpay.model.BootUser;
-
-import static com.example.mana.R.color.appThemeColor;
 
 
 public class ChargeCredit extends AppCompatActivity {
@@ -227,23 +213,23 @@ public class ChargeCredit extends AppCompatActivity {
                     @Override
                     public void onDone(@Nullable String message) {
                         String url = new ServerIP().http+"Android/paydone.php";
-                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        });
-                        simpleMultiPartRequest.addStringParam("id", loginId);
-                        simpleMultiPartRequest.addStringParam("getCredit", String.valueOf(getCredit));
-                        RequestQueue requestQueue = Volley.newRequestQueue(ChargeCredit.this);
-                        requestQueue.add(simpleMultiPartRequest);
-
-                        Log.d("done", message);
+//                        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//
+//                            }
+//                        }, new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//
+//                            }
+//                        });
+//                        simpleMultiPartRequest.addStringParam("id", loginId);
+//                        simpleMultiPartRequest.addStringParam("getCredit", String.valueOf(getCredit));
+//                        RequestQueue requestQueue = Volley.newRequestQueue(ChargeCredit.this);
+//                        requestQueue.add(simpleMultiPartRequest);
+//
+//                        Log.d("done", message);
                     }
                 })
                 .onReady(new ReadyListener() { // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.

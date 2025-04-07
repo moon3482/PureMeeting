@@ -1,9 +1,6 @@
 package com.example.mana.MainPage;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import static com.example.mana.R.color.appThemeColor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,16 +15,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.AuthFailureError;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.request.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
 
@@ -39,15 +31,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.example.mana.R.color.appThemeColor;
 
 public class IdealProfileLoad extends AppCompatActivity {
     TextView tvIdealInfoHeight, tvIdealInfoAge, tvIdealInfoWeight, tvIdealInfoArea, tvIdealInfoJabGroup, tvIdealInfoJab, tvIdealInfoHobby, tvIdealInfoForte, tvIdealInfoFavorite, tvIdealInfoDislike, tvIdealInfoDrink;
-    CircleImageView  ProfileImage1, ProfileImage2, ProfileImage3, ProfileImage4, ProfileImage5;
+    ImageView ProfileImage1, ProfileImage2, ProfileImage3, ProfileImage4, ProfileImage5;
     Button btnChatSubscription;
     String RecommendName, RecommendToken, RecommendID, id, name;
     Intent intent;
@@ -116,87 +103,87 @@ public class IdealProfileLoad extends AppCompatActivity {
 
     public void LoadRecommendProfile(String id) {
         String url = new ServerIP().http+"Android/LoadRecommend.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject1 = new JSONObject(response);
-                    boolean success = jsonObject1.getBoolean("success");
-                    if (success) {
-                        tvIdealInfoHeight.setText(jsonObject1.getString("height"));
-                        int age = Integer.parseInt(jsonObject1.getString("birthday"));
-                        tvIdealInfoAge.setText(String.valueOf(age - 1));
-                        tvIdealInfoWeight.setText(jsonObject1.getString("weight"));
-                        tvIdealInfoArea.setText(jsonObject1.getString("area"));
-                        tvIdealInfoJabGroup.setText(jsonObject1.getString("jabGroup"));
-                        tvIdealInfoJab.setText(jsonObject1.getString("job"));
-                        tvIdealInfoHobby.setText(jsonObject1.getString("hobby"));
-                        tvIdealInfoForte.setText(jsonObject1.getString("forte"));
-                        tvIdealInfoFavorite.setText(jsonObject1.getString("favorite"));
-                        tvIdealInfoDislike.setText(jsonObject1.getString("dislike"));
-                        tvIdealInfoDrink.setText(DrinkPattern(jsonObject1));
-                        RecommendName = jsonObject1.getString("name");
-                        RecommendToken = jsonObject1.getString("token");
-                        if (jsonObject1.getString("profileImage1") != null) {
-                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage1")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage1);
-                        }
-                        if (!jsonObject1.getString("profileImage2").equals("null")) {
-                            Glide.with(IdealProfileLoad.this)
-                                    .load(jsonObject1.getString("profileImage2"))
-                                    .placeholder(R.drawable.ic_baseline_add_circle_24)
-                                    .error(R.drawable.ic_baseline_add_circle_24)
-                                    .into(ProfileImage2);
-                        } else {
-                            ProfileImage2.setVisibility(View.GONE);
-                        }
-                        if (!jsonObject1.getString("profileImage3").equals("null")) {
-                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage3")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage3);
-                        } else {
-                            ProfileImage3.setVisibility(View.GONE);
-                        }
-                        if (!jsonObject1.getString("profileImage4").equals("null")) {
-                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage4")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage4);
-                        } else {
-                            ProfileImage4.setVisibility(View.GONE);
-                        }
-                        if (!jsonObject1.getString("profileImage5").equals("null")) {
-                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage5")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage5);
-                        } else {
-                            ProfileImage5.setVisibility(View.GONE);
-                        }
-                    }
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject1 = new JSONObject(response);
+//                    boolean success = jsonObject1.getBoolean("success");
+//                    if (success) {
+//                        tvIdealInfoHeight.setText(jsonObject1.getString("height"));
+//                        int age = Integer.parseInt(jsonObject1.getString("birthday"));
+//                        tvIdealInfoAge.setText(String.valueOf(age - 1));
+//                        tvIdealInfoWeight.setText(jsonObject1.getString("weight"));
+//                        tvIdealInfoArea.setText(jsonObject1.getString("area"));
+//                        tvIdealInfoJabGroup.setText(jsonObject1.getString("jabGroup"));
+//                        tvIdealInfoJab.setText(jsonObject1.getString("job"));
+//                        tvIdealInfoHobby.setText(jsonObject1.getString("hobby"));
+//                        tvIdealInfoForte.setText(jsonObject1.getString("forte"));
+//                        tvIdealInfoFavorite.setText(jsonObject1.getString("favorite"));
+//                        tvIdealInfoDislike.setText(jsonObject1.getString("dislike"));
+//                        tvIdealInfoDrink.setText(DrinkPattern(jsonObject1));
+//                        RecommendName = jsonObject1.getString("name");
+//                        RecommendToken = jsonObject1.getString("token");
+//                        if (jsonObject1.getString("profileImage1") != null) {
+//                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage1")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage1);
+//                        }
+//                        if (!jsonObject1.getString("profileImage2").equals("null")) {
+//                            Glide.with(IdealProfileLoad.this)
+//                                    .load(jsonObject1.getString("profileImage2"))
+//                                    .placeholder(R.drawable.ic_baseline_add_circle_24)
+//                                    .error(R.drawable.ic_baseline_add_circle_24)
+//                                    .into(ProfileImage2);
+//                        } else {
+//                            ProfileImage2.setVisibility(View.GONE);
+//                        }
+//                        if (!jsonObject1.getString("profileImage3").equals("null")) {
+//                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage3")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage3);
+//                        } else {
+//                            ProfileImage3.setVisibility(View.GONE);
+//                        }
+//                        if (!jsonObject1.getString("profileImage4").equals("null")) {
+//                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage4")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage4);
+//                        } else {
+//                            ProfileImage4.setVisibility(View.GONE);
+//                        }
+//                        if (!jsonObject1.getString("profileImage5").equals("null")) {
+//                            Glide.with(IdealProfileLoad.this).load(jsonObject1.getString("profileImage5")).error(R.drawable.ic_baseline_add_circle_24).into(ProfileImage5);
+//                        } else {
+//                            ProfileImage5.setVisibility(View.GONE);
+//                        }
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        RequestQueue requestQueue = Volley.newRequestQueue(IdealProfileLoad.this);
+//        requestQueue.add(simpleMultiPartRequest);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", id);
-        RequestQueue requestQueue = Volley.newRequestQueue(IdealProfileLoad.this);
-        requestQueue.add(simpleMultiPartRequest);
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                return super.getHeaders();
-            }
-        };
+//        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                return super.getHeaders();
+//            }
+//        };
     }
 
     public String DrinkPattern(JSONObject jsonObject1) {
@@ -301,42 +288,42 @@ public class IdealProfileLoad extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String url = new ServerIP().http+"Android/GetToken.php";
-                SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            JSONObject jsonObject1 = new JSONObject(response);
-                            boolean success = jsonObject1.getBoolean("success");
-                            if (success) {
-                                Log.e("토큰이야", jsonObject1.getString("token"));
-                                FCMsend(jsonObject1.getString("token"));
-                                AlertDialog dialog1;
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
-                                dialog1 = builder1.setMessage(RecommendName+"님에게 대화신청을 보냈습니다.").setPositiveButton("확인", null).show();
-                            } else {
-                                AlertDialog dialog1;
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
-                                dialog1 = builder1.setMessage("이미 보낸 대화신청이 있습니다.").setPositiveButton("확인", null).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-                SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
-                String MyId = sharedPreferences.getString("loginId", "");
-                simpleMultiPartRequest.addStringParam("YouId", RecommendID);
-                simpleMultiPartRequest.addStringParam("MyId", MyId);
-                RequestQueue requestQueue = Volley.newRequestQueue(IdealProfileLoad.this);
-                requestQueue.add(simpleMultiPartRequest);
+//                SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        try {
+//                            JSONObject jsonObject1 = new JSONObject(response);
+//                            boolean success = jsonObject1.getBoolean("success");
+//                            if (success) {
+//                                Log.e("토큰이야", jsonObject1.getString("token"));
+//                                FCMsend(jsonObject1.getString("token"));
+//                                AlertDialog dialog1;
+//                                AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
+//                                dialog1 = builder1.setMessage(RecommendName+"님에게 대화신청을 보냈습니다.").setPositiveButton("확인", null).show();
+//                            } else {
+//                                AlertDialog dialog1;
+//                                AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
+//                                dialog1 = builder1.setMessage("이미 보낸 대화신청이 있습니다.").setPositiveButton("확인", null).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                });
+//                SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
+//                String MyId = sharedPreferences.getString("loginId", "");
+//                simpleMultiPartRequest.addStringParam("YouId", RecommendID);
+//                simpleMultiPartRequest.addStringParam("MyId", MyId);
+//                RequestQueue requestQueue = Volley.newRequestQueue(IdealProfileLoad.this);
+//                requestQueue.add(simpleMultiPartRequest);
             }
         }).show();
     }
@@ -348,48 +335,48 @@ public class IdealProfileLoad extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String url = new ServerIP().http+"Android/afterGetToken.php";
-                SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            JSONObject jsonObject1 = new JSONObject(response);
-                            boolean success = jsonObject1.getBoolean("success");
-                            if (success) {
-                                Log.e("토큰이야", jsonObject1.getString("token"));
-                                FCMsend(jsonObject1.getString("token"));
-                                AlertDialog dialog1;
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
-                                dialog1 = builder1.setMessage(RecommendName+"님에게 대화신청을 보냈습니다.").setPositiveButton("확인", null).show();
-                            } else {
-                                if (jsonObject1.getBoolean("money")) {
-                                    AlertDialog dialog1;
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
-                                    dialog1 = builder1.setMessage("크레딧이 부족합니다.").setPositiveButton("확인", null).show();
-                                } else {
-                                    AlertDialog dialog1;
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
-                                    dialog1 = builder1.setMessage("이미 보낸 대화신청이 있습니다.").setPositiveButton("확인", null).show();
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-                SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
-                String MyId = sharedPreferences.getString("loginId", "");
-                simpleMultiPartRequest.addStringParam("YouId", RecommendID);
-                simpleMultiPartRequest.addStringParam("MyId", MyId);
-                RequestQueue requestQueue = Volley.newRequestQueue(IdealProfileLoad.this);
-                requestQueue.add(simpleMultiPartRequest);
+//                SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//
+//                        try {
+//                            JSONObject jsonObject1 = new JSONObject(response);
+//                            boolean success = jsonObject1.getBoolean("success");
+//                            if (success) {
+//                                Log.e("토큰이야", jsonObject1.getString("token"));
+//                                FCMsend(jsonObject1.getString("token"));
+//                                AlertDialog dialog1;
+//                                AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
+//                                dialog1 = builder1.setMessage(RecommendName+"님에게 대화신청을 보냈습니다.").setPositiveButton("확인", null).show();
+//                            } else {
+//                                if (jsonObject1.getBoolean("money")) {
+//                                    AlertDialog dialog1;
+//                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
+//                                    dialog1 = builder1.setMessage("크레딧이 부족합니다.").setPositiveButton("확인", null).show();
+//                                } else {
+//                                    AlertDialog dialog1;
+//                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(IdealProfileLoad.this);
+//                                    dialog1 = builder1.setMessage("이미 보낸 대화신청이 있습니다.").setPositiveButton("확인", null).show();
+//                                }
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                });
+//                SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
+//                String MyId = sharedPreferences.getString("loginId", "");
+//                simpleMultiPartRequest.addStringParam("YouId", RecommendID);
+//                simpleMultiPartRequest.addStringParam("MyId", MyId);
+//                RequestQueue requestQueue = Volley.newRequestQueue(IdealProfileLoad.this);
+//                requestQueue.add(simpleMultiPartRequest);
             }
         }).show();
     }

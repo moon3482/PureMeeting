@@ -1,7 +1,5 @@
 package com.example.mana;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,17 +8,12 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.remotemonster.sdk.RemonCall;
-import com.remotemonster.sdk.data.CloseType;
-
-import org.webrtc.RendererCommon;
-import org.webrtc.SurfaceViewRenderer;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class onFaceTalkSend extends AppCompatActivity {
-    SurfaceViewRenderer surfRendererLocal, surfRendererRemote;
-    RemonCall remonCall;
+//    SurfaceViewRenderer surfRendererLocal, surfRendererRemote;
+//    RemonCall remonCall;
     String room;
     TextView tvtime;
     boolean start = true;
@@ -36,47 +29,47 @@ public class onFaceTalkSend extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
 
-        surfRendererLocal = findViewById(R.id.surfRendererLocalSend);
-        surfRendererRemote = findViewById(R.id.surfRendererRemoteSend);
+//        surfRendererLocal = findViewById(R.id.surfRendererLocalSend);
+//        surfRendererRemote = findViewById(R.id.surfRendererRemoteSend);
         tvtime = findViewById(R.id.tvReciveTimeSend);
 
         tvtime.setTextColor(Color.parseColor("#FFFFFF"));
         Intent intent = getIntent();
         room = intent.getStringExtra("room");
-        remonCall = RemonCall.builder()
-                .context(onFaceTalkSend.this)
-                .localView(surfRendererLocal)        //나의 Video Renderer
-                .remoteView(surfRendererRemote)      //상대방 video Renderer
-                .serviceId(this.getString(R.string.monster_app_key))    // RemoteMonster 사이트에서 등록했던 당신의 id를 입력하세요.
-                .key(this.getString(R.string.monster_app_sckey))    // RemoteMonster로부터 받은 당신의 key를 입력하세요.
-                .build();
-
-        surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_BALANCED);
-        surfRendererLocal.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_BALANCED);
-        surfRendererLocal.setZOrderMediaOverlay(true);
-        surfRendererRemote.setZOrderMediaOverlay(false);
-        remonCall.onClose(new RemonCall.OnCloseCallback() {
-            @Override
-            public void onClose(CloseType closeType) {
-                start = false;
-                timer.status = false;
-                finish();
-            }
-        });
+//        remonCall = RemonCall.builder()
+//                .context(onFaceTalkSend.this)
+//                .localView(surfRendererLocal)        //나의 Video Renderer
+//                .remoteView(surfRendererRemote)      //상대방 video Renderer
+//                .serviceId(this.getString(R.string.monster_app_key))    // RemoteMonster 사이트에서 등록했던 당신의 id를 입력하세요.
+//                .key(this.getString(R.string.monster_app_sckey))    // RemoteMonster로부터 받은 당신의 key를 입력하세요.
+//                .build();
+//
+//        surfRendererRemote.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_BALANCED);
+//        surfRendererLocal.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_BALANCED);
+//        surfRendererLocal.setZOrderMediaOverlay(true);
+//        surfRendererRemote.setZOrderMediaOverlay(false);
+//        remonCall.onClose(new RemonCall.OnCloseCallback() {
+//            @Override
+//            public void onClose(CloseType closeType) {
+//                start = false;
+//                timer.status = false;
+//                finish();
+//            }
+//        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        remonCall.connect("Buupman" + room);
-        remonCall.onConnect(new RemonCall.OnConnectCallback() {
-            @Override
-            public void onConnect(String chid) {
-                Toast.makeText(onFaceTalkSend.this, "연결이 되었습니다.", Toast.LENGTH_LONG).show();
-                timer = new timer(start, tvtime, 60);
-                timer.start();
-            }
-        });
+//        remonCall.connect("Buupman" + room);
+//        remonCall.onConnect(new RemonCall.OnConnectCallback() {
+//            @Override
+//            public void onConnect(String chid) {
+//                Toast.makeText(onFaceTalkSend.this, "연결이 되었습니다.", Toast.LENGTH_LONG).show();
+//                timer = new timer(start, tvtime, 60);
+//                timer.start();
+//            }
+//        });
 
     }
 
@@ -118,7 +111,7 @@ public class onFaceTalkSend extends AppCompatActivity {
                 if (time <= 0) {
                     status = false;
                     timer.status = false;
-                    remonCall.close();
+//                    remonCall.close();
                     finish();
                 }
             }
@@ -139,7 +132,7 @@ public class onFaceTalkSend extends AppCompatActivity {
         super.onStop();
         start = false;
         timer.status = false;
-        remonCall.close();
+//        remonCall.close();
         finish();
     }
 }

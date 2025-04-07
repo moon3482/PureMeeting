@@ -1,5 +1,20 @@
 package com.example.mana.ShopInfomation;
 
+import static com.example.mana.R.color.appThemeColor;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,30 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.os.Vibrator;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.AuthFailureError;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.request.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.mana.ChatPage.chatPage;
 import com.example.mana.CustomDialogRecommend;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
@@ -50,14 +41,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import static android.widget.Toast.LENGTH_LONG;
-import static com.example.mana.R.color.appThemeColor;
 
 public class ShopInfomation extends AppCompatActivity {
     ShopImageAdapter adapter;
@@ -281,239 +266,239 @@ public class ShopInfomation extends AppCompatActivity {
 
     public void LoadShopInfo(String ShopCode) {
         String url = new ServerIP().http+"Android/LoadShopInfo.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        JSONArray jsonArray = new JSONArray(jsonObject.getString("mainimage"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            ImageDataClass imageDataClass = new ImageDataClass(jsonObject1.getString("imagepath"));
-                            arrayList.add(imageDataClass);
-                        }
-                        JSONArray jsonArray1 = new JSONArray(jsonObject.getString("menuimage"));
-                        for (int i = 0; i < jsonArray1.length(); i++) {
-                            JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
-                            String imagepath = jsonObject1.getString("imagepath");
-                            String meunname = jsonObject1.getString("meunname");
-                            String price = jsonObject1.getString("price");
-                            String explanation = jsonObject1.getString("explanation");
-
-                            ShopInfoMenuData shopInfoMenuData = new ShopInfoMenuData(meunname, imagepath, price, explanation);
-                            menuArrayList.add(shopInfoMenuData);
-                        }
-                        shopInfoAdapter.notifyDataSetChanged();
-                        Log.e("메뉴 이미지", "" + jsonObject.getString("menuimage"));
-
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                adapter = new ShopImageAdapter(ShopInfomation.this, arrayList);
-                viewPager.setAdapter(adapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<String, String>();
-                param.put("shopcode", ShopCode);
-
-                return param;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
-        requestQueue.add(stringRequest);
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        JSONArray jsonArray = new JSONArray(jsonObject.getString("mainimage"));
+//                        for (int i = 0; i < jsonArray.length(); i++) {
+//                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+//                            ImageDataClass imageDataClass = new ImageDataClass(jsonObject1.getString("imagepath"));
+//                            arrayList.add(imageDataClass);
+//                        }
+//                        JSONArray jsonArray1 = new JSONArray(jsonObject.getString("menuimage"));
+//                        for (int i = 0; i < jsonArray1.length(); i++) {
+//                            JSONObject jsonObject1 = jsonArray1.getJSONObject(i);
+//                            String imagepath = jsonObject1.getString("imagepath");
+//                            String meunname = jsonObject1.getString("meunname");
+//                            String price = jsonObject1.getString("price");
+//                            String explanation = jsonObject1.getString("explanation");
+//
+//                            ShopInfoMenuData shopInfoMenuData = new ShopInfoMenuData(meunname, imagepath, price, explanation);
+//                            menuArrayList.add(shopInfoMenuData);
+//                        }
+//                        shopInfoAdapter.notifyDataSetChanged();
+//                        Log.e("메뉴 이미지", "" + jsonObject.getString("menuimage"));
+//
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                adapter = new ShopImageAdapter(ShopInfomation.this, arrayList);
+//                viewPager.setAdapter(adapter);
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> param = new HashMap<String, String>();
+//                param.put("shopcode", ShopCode);
+//
+//                return param;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
+//        requestQueue.add(stringRequest);
     }
 
     public void scheduleCheck(String id, String time, String type, String index) {
         String url = new ServerIP().http+"Android/scheduleCheck.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("리스폰받기", ""+response);
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        RecommendYesOrNo(type, index);
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ShopInfomation.this);
-                        builder.setMessage("이미 예정 된 스케쥴이 있습니다.");
-                        builder.setPositiveButton("확인", null);
-                        builder.show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", id);
-        simpleMultiPartRequest.addStringParam("time", time);
-        Log.e("시간", "" + time);
-        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.e("리스폰받기", ""+response);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        RecommendYesOrNo(type, index);
+//                    } else {
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(ShopInfomation.this);
+//                        builder.setMessage("이미 예정 된 스케쥴이 있습니다.");
+//                        builder.setPositiveButton("확인", null);
+//                        builder.show();
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        simpleMultiPartRequest.addStringParam("time", time);
+//        Log.e("시간", "" + time);
+//        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void RecommendYesOrNo(String type, String index) {
         String url = new ServerIP().http+"Android/RecommendYesOrNo.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        if (jsonObject.getString("Type").equals("OK")) {
-                            Lilbutton.setVisibility(View.GONE);
-                            tvRecommendDone.setVisibility(View.VISIBLE);
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-
-//                                RecommendYesOrNo("OK", index);
-
-                                    try {
-                                        socket = new Socket();
-                                        socket.connect(new InetSocketAddress(new ServerIP().ip, 9000), 1000);
-                                        dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                                        dataOutputStream.writeUTF("map");
-                                        dataOutputStream.writeUTF(userid);
-                                        dataOutputStream.writeUTF(roomnum);
-                                        JSONObject msg = new JSONObject();
-                                        JSONObject root = new JSONObject();
-                                        msg.put("shopcode", SC);
-                                        msg.put("shopname", name);
-                                        msg.put("shoptype", shoptype);
-                                        msg.put("shopaddress", ad);
-                                        msg.put("shopstarttime", st);
-                                        msg.put("endtime", et);
-                                        msg.put("roomnum", roomnum);
-                                        msg.put("reservetime", reservtime);
-                                        msg.put("index", index);
-                                        msg.put("status", "1");
-                                        root.put("type", "zone");
-                                        root.put("name", username);
-                                        root.put("img", imgurl);
-                                        root.put("msg", msg);
-                                        root.put("id", userid);
-                                        root.put("room", roomnum);
-                                        root.put("youid", youid);
-                                        JSONArray jsonArray = new JSONArray();
-                                        String okmsg = jsonArray.put(root).toString();
-                                        Log.e("수락보내기", "" + okmsg);
-                                        dataOutputStream.writeUTF(okmsg);
-                                        socket.close();
-                                        sendFCM(username + "님이 추천을 수락하였습니다.");
-                                        Intent intent1 = new Intent(ShopInfomation.this, Client.class);
-                                        intent1.putExtra("youid", youid);
-                                        intent1.putExtra("room", roomnum);
-                                        startActivity(intent1);
-
-                                    } catch (IOException | JSONException e) {
-
-                                    }
-                                }
-                            }).start();
-                        } else if (jsonObject.getString("Type").equals("NO")) {
-                            Lilbutton.setVisibility(View.GONE);
-                            tvRecommendCancel.setVisibility(View.VISIBLE);
-                        }
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("Type", type);
-        simpleMultiPartRequest.addStringParam("index", index);
-        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        if (jsonObject.getString("Type").equals("OK")) {
+//                            Lilbutton.setVisibility(View.GONE);
+//                            tvRecommendDone.setVisibility(View.VISIBLE);
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+////                                RecommendYesOrNo("OK", index);
+//
+//                                    try {
+//                                        socket = new Socket();
+//                                        socket.connect(new InetSocketAddress(new ServerIP().ip, 9000), 1000);
+//                                        dataOutputStream = new DataOutputStream(socket.getOutputStream());
+//                                        dataOutputStream.writeUTF("map");
+//                                        dataOutputStream.writeUTF(userid);
+//                                        dataOutputStream.writeUTF(roomnum);
+//                                        JSONObject msg = new JSONObject();
+//                                        JSONObject root = new JSONObject();
+//                                        msg.put("shopcode", SC);
+//                                        msg.put("shopname", name);
+//                                        msg.put("shoptype", shoptype);
+//                                        msg.put("shopaddress", ad);
+//                                        msg.put("shopstarttime", st);
+//                                        msg.put("endtime", et);
+//                                        msg.put("roomnum", roomnum);
+//                                        msg.put("reservetime", reservtime);
+//                                        msg.put("index", index);
+//                                        msg.put("status", "1");
+//                                        root.put("type", "zone");
+//                                        root.put("name", username);
+//                                        root.put("img", imgurl);
+//                                        root.put("msg", msg);
+//                                        root.put("id", userid);
+//                                        root.put("room", roomnum);
+//                                        root.put("youid", youid);
+//                                        JSONArray jsonArray = new JSONArray();
+//                                        String okmsg = jsonArray.put(root).toString();
+//                                        Log.e("수락보내기", "" + okmsg);
+//                                        dataOutputStream.writeUTF(okmsg);
+//                                        socket.close();
+//                                        sendFCM(username + "님이 추천을 수락하였습니다.");
+//                                        Intent intent1 = new Intent(ShopInfomation.this, Client.class);
+//                                        intent1.putExtra("youid", youid);
+//                                        intent1.putExtra("room", roomnum);
+//                                        startActivity(intent1);
+//
+//                                    } catch (IOException | JSONException e) {
+//
+//                                    }
+//                                }
+//                            }).start();
+//                        } else if (jsonObject.getString("Type").equals("NO")) {
+//                            Lilbutton.setVisibility(View.GONE);
+//                            tvRecommendCancel.setVisibility(View.VISIBLE);
+//                        }
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("Type", type);
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void RecommendStatus(String index) {
         String url = new ServerIP().http+"Android/RecommendStatus.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                try {
-                    jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        String status = jsonObject.getString("status");
-                        if (status.equals("1") || status.equals("5")) {
-                            Lilbutton.setVisibility(View.GONE);
-                            tvRecommendDone.setVisibility(View.VISIBLE);
-                        } else if (status.equals("2")) {
-                            Lilbutton.setVisibility(View.GONE);
-                            tvRecommendCancel.setVisibility(View.VISIBLE);
-                        } else {
-
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("index", index);
-        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                JSONObject jsonObject = null;
+//                try {
+//                    jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        String status = jsonObject.getString("status");
+//                        if (status.equals("1") || status.equals("5")) {
+//                            Lilbutton.setVisibility(View.GONE);
+//                            tvRecommendDone.setVisibility(View.VISIBLE);
+//                        } else if (status.equals("2")) {
+//                            Lilbutton.setVisibility(View.GONE);
+//                            tvRecommendCancel.setVisibility(View.VISIBLE);
+//                        } else {
+//
+//                        }
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void sendFCM(String msg) {
 
         String url = new ServerIP().http+"Android/GetMsgToken.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.e("FCM보내기", "" + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        FCMsend(jsonObject.getString("token"), msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("youid", youid);
-        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    Log.e("FCM보내기", "" + response);
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        FCMsend(jsonObject.getString("token"), msg);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("youid", youid);
+//        RequestQueue requestQueue = Volley.newRequestQueue(ShopInfomation.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void FCMsend(String token, String msg) {

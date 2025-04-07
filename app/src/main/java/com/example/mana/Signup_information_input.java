@@ -1,26 +1,17 @@
 package com.example.mana;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.loader.content.CursorLoader;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
+import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
+import static android.view.View.OnClickListener;
+import static android.view.View.VISIBLE;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,11 +20,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -48,27 +37,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.loader.content.CursorLoader;
+
 import com.bumptech.glide.Glide;
 import com.example.mana.Camera.Camera1;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static android.view.View.*;
 
 public class Signup_information_input extends AppCompatActivity {
     ImageView iv_image;
@@ -397,60 +380,60 @@ public class Signup_information_input extends AppCompatActivity {
                     dialog.show();
                     return;
                 }
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-
-                            Log.e("아이디", String.valueOf(success));
-
-                            if (success) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
-                                String[] str = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-                                        "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-                                String newCode = new String();
-
-                                for (int x = 0; x < 8; x++) {
-                                    int random = (int) (Math.random() * str.length);
-                                    newCode += str[random];
-                                }
-                                EmailCode = newCode;
-                                sendMail();
-                                handler.removeCallbacks(runnable);
-                                Email_code_Linear.setVisibility(VISIBLE);
-                                sec = 60;
-
-                                dialog = builder.setMessage("이메일 인증번호를 입력해주세요")
-                                        .setTitle("이메일 인증")
-                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                                handler.postDelayed(runnable, 3500);
-                                            }
-                                        })
-                                        .create();
-                                dialog.show();
-
-
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
-                                dialog = builder.setMessage("이미 가입 된 아이디입니다.")
-                                        .setNegativeButton("확인", null)
-                                        .create();
-                                dialog.show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                ValidateRequest validateRequest = new ValidateRequest(userID, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(Signup_information_input.this);
-                queue.add(validateRequest);
-
+//                Response.Listener<String> responseListener = new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonResponse = new JSONObject(response);
+//                            boolean success = jsonResponse.getBoolean("success");
+//
+//                            Log.e("아이디", String.valueOf(success));
+//
+//                            if (success) {
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+//                                String[] str = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+//                                        "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+//                                String newCode = new String();
+//
+//                                for (int x = 0; x < 8; x++) {
+//                                    int random = (int) (Math.random() * str.length);
+//                                    newCode += str[random];
+//                                }
+//                                EmailCode = newCode;
+//                                sendMail();
+//                                handler.removeCallbacks(runnable);
+//                                Email_code_Linear.setVisibility(VISIBLE);
+//                                sec = 60;
+//
+//                                dialog = builder.setMessage("이메일 인증번호를 입력해주세요")
+//                                        .setTitle("이메일 인증")
+//                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                                handler.postDelayed(runnable, 3500);
+//                                            }
+//                                        })
+//                                        .create();
+//                                dialog.show();
+//
+//
+//                            } else {
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+//                                dialog = builder.setMessage("이미 가입 된 아이디입니다.")
+//                                        .setNegativeButton("확인", null)
+//                                        .create();
+//                                dialog.show();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                };
+//                ValidateRequest validateRequest = new ValidateRequest(userID, responseListener);
+//                RequestQueue queue = Volley.newRequestQueue(Signup_information_input.this);
+//                queue.add(validateRequest);
+//
 
             }
 
@@ -539,7 +522,7 @@ public class Signup_information_input extends AppCompatActivity {
         submit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 String ID = email.getText().toString();
                 String Password = input_Pw_Check.getText().toString();
                 String birth = birthday.getText().toString();
@@ -569,73 +552,73 @@ public class Signup_information_input extends AppCompatActivity {
                         alertDialog.setPositiveButton("확인", null);
                         alertDialog.show();
                     } else {//안드로이드에서 보낼 데이터를 받을 php 서버 주소
-                        String serverUrl = new ServerIP().http+"Android/insertDB.php";
+                        String serverUrl = new ServerIP().http + "Android/insertDB.php";
 
                         //Volley plus Library를 이용해서
                         //파일 전송하도록..
                         //Volley+는 AndroidStudio에서 검색이 안됨 [google 검색 이용]
 
                         //파일 전송 요청 객체 생성[결과를 String으로 받음]
-                        SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                JSONObject jsonResponse = null;
-                                try {
-                                    jsonResponse = new JSONObject(response);
-                                    boolean success = jsonResponse.getBoolean("success");
-                                    if (success) {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
-                                        dialog = builder.setMessage("회원가입이 완료되어습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(Signup_information_input.this, MainActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        }).create();
-                                        dialog.show();
-
-                                        validate = true; //검증 완료
-
-                                    } else {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
-                                        dialog = builder.setMessage("가입실패").setNegativeButton("확인", null).create();
-                                        dialog.show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(Signup_information_input.this, "ERROR", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                        //요청 객체에 보낼 데이터를 추가
-                        smpr.setShouldCache(false);
-                        smpr.addStringParam("email", ID);
-                        Log.e("가입 아이디:", "" + ID);
-                        smpr.addStringParam("password", Password);
-                        smpr.addStringParam("birthday", birth);
-                        smpr.addStringParam("name", input_name);
-                        smpr.addStringParam("gender", sign_Gender);
-                        if (intent_kakaoid != null) {
-                            Log.e("카카오톡 아이디", "" + intent_kakaoid);
-                            smpr.addStringParam("kakaoid", intent_kakaoid);
-                        }
-                        //이미지 파일 추가
-
-                        smpr.addFile("img", img);
-
-                        //요청객체를 서버로 보낼 우체통 같은 객체 생성
-
-                        RequestQueue requestQueue = Volley.newRequestQueue(Signup_information_input.this);
-                        requestQueue.add(smpr);
+//                        SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//                                JSONObject jsonResponse = null;
+//                                try {
+//                                    jsonResponse = new JSONObject(response);
+//                                    boolean success = jsonResponse.getBoolean("success");
+//                                    if (success) {
+//                                        AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+//                                        dialog = builder.setMessage("회원가입이 완료되어습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                Intent intent = new Intent(Signup_information_input.this, MainActivity.class);
+//                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                        }).create();
+//                                        dialog.show();
+//
+//                                        validate = true; //검증 완료
+//
+//                                    } else {
+//                                        AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
+//                                        dialog = builder.setMessage("가입실패").setNegativeButton("확인", null).create();
+//                                        dialog.show();
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//
+//                            }
+//                        }, new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//                                Toast.makeText(Signup_information_input.this, "ERROR", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//
+//                        //요청 객체에 보낼 데이터를 추가
+//                        smpr.setShouldCache(false);
+//                        smpr.addStringParam("email", ID);
+//                        Log.e("가입 아이디:", "" + ID);
+//                        smpr.addStringParam("password", Password);
+//                        smpr.addStringParam("birthday", birth);
+//                        smpr.addStringParam("name", input_name);
+//                        smpr.addStringParam("gender", sign_Gender);
+//                        if (intent_kakaoid != null) {
+//                            Log.e("카카오톡 아이디", "" + intent_kakaoid);
+//                            smpr.addStringParam("kakaoid", intent_kakaoid);
+//                        }
+//                        //이미지 파일 추가
+//
+//                        smpr.addFile("img", img);
+//
+//                        //요청객체를 서버로 보낼 우체통 같은 객체 생성
+//
+//                        RequestQueue requestQueue = Volley.newRequestQueue(Signup_information_input.this);
+//                        requestQueue.add(smpr);
                     }
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Signup_information_input.this);
@@ -650,12 +633,9 @@ public class Signup_information_input extends AppCompatActivity {
 
 
     private void sendMail() {
-
-
         //Send Mail
-        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email.getText().toString(), "[부없만] 이메일 인증코드", "어플에서 코드를 입력하고 인증 버튼을 눌려주세요.\n" + "인증코드 : " + EmailCode);
-
-        javaMailAPI.execute();
+//        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email.getText().toString(), "[부없만] 이메일 인증코드", "어플에서 코드를 입력하고 인증 버튼을 눌려주세요.\n" + "인증코드 : " + EmailCode);
+//        javaMailAPI.execute();
 
     }
 

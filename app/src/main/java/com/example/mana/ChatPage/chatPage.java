@@ -1,13 +1,6 @@
 package com.example.mana.ChatPage;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import static com.example.mana.R.color.appThemeColor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,18 +8,19 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.mana.MainPage.mainPage;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
@@ -34,13 +28,7 @@ import com.example.mana.chating.Client;
 import com.example.mana.main.MyPage;
 import com.example.mana.main.mapPage;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import static com.example.mana.R.color.appThemeColor;
 
 public class chatPage extends AppCompatActivity {
     public ArrayList<ChatListData> arrayList;
@@ -181,45 +169,45 @@ public class chatPage extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
         String id = sharedPreferences.getString("loginId", "");
         String url = new ServerIP().http+"Android/LoadChatList.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("채팅방", response);
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    Log.e("어레이", String.valueOf(jsonArray));
-
-
-                    arrayList = new ArrayList<>();
-                    chatPageAdapter = new ChatPageAdapter(arrayList, chatPage.this);
-                    recyclerView.setAdapter(chatPageAdapter);
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        Log.e("어레이", String.valueOf(i));
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String roomnum = jsonObject.getString("RoomNumber");
-                        String name = jsonObject.getString("name");
-                        String profileimg = jsonObject.getString("profileimg");
-                        String id = jsonObject.getString("id");
-                        String lastmessage = jsonObject.getString("lastmessage");
-                        ChatListData chatListData = new ChatListData(roomnum, name, profileimg, id, lastmessage);
-                        arrayList.add(chatListData);
-                    }
-                    chatPageAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", id);
-        RequestQueue requestQueue = Volley.newRequestQueue(chatPage.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Log.e("채팅방", response);
+//                try {
+//                    JSONArray jsonArray = new JSONArray(response);
+//                    Log.e("어레이", String.valueOf(jsonArray));
+//
+//
+//                    arrayList = new ArrayList<>();
+//                    chatPageAdapter = new ChatPageAdapter(arrayList, chatPage.this);
+//                    recyclerView.setAdapter(chatPageAdapter);
+//
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        Log.e("어레이", String.valueOf(i));
+//                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                        String roomnum = jsonObject.getString("RoomNumber");
+//                        String name = jsonObject.getString("name");
+//                        String profileimg = jsonObject.getString("profileimg");
+//                        String id = jsonObject.getString("id");
+//                        String lastmessage = jsonObject.getString("lastmessage");
+//                        ChatListData chatListData = new ChatListData(roomnum, name, profileimg, id, lastmessage);
+//                        arrayList.add(chatListData);
+//                    }
+//                    chatPageAdapter.notifyDataSetChanged();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        RequestQueue requestQueue = Volley.newRequestQueue(chatPage.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 }

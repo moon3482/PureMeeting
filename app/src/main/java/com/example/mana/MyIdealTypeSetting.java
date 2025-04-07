@@ -1,37 +1,24 @@
 package com.example.mana;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import static com.example.mana.R.color.appThemeColor;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
-
-import static com.example.mana.R.color.appThemeColor;
 
 public class MyIdealTypeSetting extends AppCompatActivity {
     Spinner spinnerIdealJabGroup, spinnerIdealHeight;
@@ -186,120 +173,120 @@ public class MyIdealTypeSetting extends AppCompatActivity {
 
     public void MyldealLoad() {
         String url = new ServerIP().http+"Android/MyIdealLoad.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject1 = new JSONObject(response);
-                    boolean success = jsonObject1.getBoolean("success");
-                    if (success) {
-                        Log.e("dsadad",jsonObject1.getString("jobgroup"));
-                        if (jsonObject1.getString("jobgroup").equals("null")) {
-                        } else if (jsonObject1.getString("jobgroup").equals("상관없음")) {
-                            checkBoxIdealJabGroupNo.setChecked(true);
-                        } else {
-                            String[] jabgroupsplit = jsonObject1.getString("jobgroup").split(",");
-                            spinnerIdealJabGroup.setSelection(Integer.parseInt(jabgroupsplit[0]));
-                        }
-                        if (jsonObject1.getString("spinnerheight").equals("255")) {
-                            checkBoxIdealHeightNo.setChecked(true);
-
-                        } else {
-                            spinnerIdealHeight.setSelection(Integer.parseInt(jsonObject1.getString("spinnerheight")));
-                        }
-                        if(jsonObject1.getString("heightcompare").equals(">=")){
-radioButtonIdealHeightMore.setChecked(true);
-                        }else {
-                            radioButtonIdealHeightLess.setChecked(true);
-                        }
-                        if (jsonObject1.getString("idealage").equals("X")) {
-
-                        } else if (jsonObject1.getString("idealage").equals(">=")) {
-                            checkBoxIdealYoungerAge.setChecked(true);
-                            checkBoxSameAge.setChecked(true);
-                        } else if (jsonObject1.getString("idealage").equals("<>")) {
-                            checkBoxIdealYoungerAge.setChecked(true);
-                            checkBoxOrderAge.setChecked(true);
-                        } else if (jsonObject1.getString("idealage").equals("<=")) {
-                            checkBoxOrderAge.setChecked(true);
-                            checkBoxSameAge.setChecked(true);
-                        } else if (jsonObject1.getString("idealage").equals(">")) {
-                            checkBoxIdealYoungerAge.setChecked(true);
-                        } else if (jsonObject1.getString("idealage").equals("=")) {
-                            checkBoxSameAge.setChecked(true);
-                        } else if (jsonObject1.getString("idealage").equals("<")) {
-                            checkBoxOrderAge.setChecked(true);
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("id", loginId);
-        RequestQueue requestQueue = Volley.newRequestQueue(MyIdealTypeSetting.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject1 = new JSONObject(response);
+//                    boolean success = jsonObject1.getBoolean("success");
+//                    if (success) {
+//                        Log.e("dsadad",jsonObject1.getString("jobgroup"));
+//                        if (jsonObject1.getString("jobgroup").equals("null")) {
+//                        } else if (jsonObject1.getString("jobgroup").equals("상관없음")) {
+//                            checkBoxIdealJabGroupNo.setChecked(true);
+//                        } else {
+//                            String[] jabgroupsplit = jsonObject1.getString("jobgroup").split(",");
+//                            spinnerIdealJabGroup.setSelection(Integer.parseInt(jabgroupsplit[0]));
+//                        }
+//                        if (jsonObject1.getString("spinnerheight").equals("255")) {
+//                            checkBoxIdealHeightNo.setChecked(true);
+//
+//                        } else {
+//                            spinnerIdealHeight.setSelection(Integer.parseInt(jsonObject1.getString("spinnerheight")));
+//                        }
+//                        if(jsonObject1.getString("heightcompare").equals(">=")){
+//radioButtonIdealHeightMore.setChecked(true);
+//                        }else {
+//                            radioButtonIdealHeightLess.setChecked(true);
+//                        }
+//                        if (jsonObject1.getString("idealage").equals("X")) {
+//
+//                        } else if (jsonObject1.getString("idealage").equals(">=")) {
+//                            checkBoxIdealYoungerAge.setChecked(true);
+//                            checkBoxSameAge.setChecked(true);
+//                        } else if (jsonObject1.getString("idealage").equals("<>")) {
+//                            checkBoxIdealYoungerAge.setChecked(true);
+//                            checkBoxOrderAge.setChecked(true);
+//                        } else if (jsonObject1.getString("idealage").equals("<=")) {
+//                            checkBoxOrderAge.setChecked(true);
+//                            checkBoxSameAge.setChecked(true);
+//                        } else if (jsonObject1.getString("idealage").equals(">")) {
+//                            checkBoxIdealYoungerAge.setChecked(true);
+//                        } else if (jsonObject1.getString("idealage").equals("=")) {
+//                            checkBoxSameAge.setChecked(true);
+//                        } else if (jsonObject1.getString("idealage").equals("<")) {
+//                            checkBoxOrderAge.setChecked(true);
+//                        }
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("id", loginId);
+//        RequestQueue requestQueue = Volley.newRequestQueue(MyIdealTypeSetting.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void MyIdealUpdate() {
         String url = new ServerIP().http+"Android/idealprofile.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject1 = new JSONObject(response);
-                    boolean success = jsonObject1.getBoolean("success");
-                    if (success) {
-                        Log.e("저장", "이상형 저장됨");
-                        Log.e("저장", response);
-                    } else {
-                        Log.e("저장", "이상형 저장실패");
-                        Log.e("저장", response);
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        if (checkBoxIdealJabGroupNo.isChecked()) {
-            simpleMultiPartRequest.addStringParam("jabgroup", "상관없음");
-            Log.e("로그", "NULL1");
-        } else {
-            String value = spinnerIdealJabGroup.getSelectedItemPosition() + "," + spinnerIdealJabGroup.getSelectedItem().toString();
-            simpleMultiPartRequest.addStringParam("jabgroup", value);
-            Log.e("로그", value);
-        }
-        if (checkBoxIdealHeightNo.isChecked()) {
-            simpleMultiPartRequest.addStringParam("height", ">#255,255");
-            Log.e("로그", "NULL2");
-        } else if (radioButtonIdealHeightMore.isChecked()) {
-            String value = ">=#" + spinnerIdealHeight.getSelectedItemPosition() + "," + spinnerIdealHeight.getSelectedItem().toString();
-            simpleMultiPartRequest.addStringParam("height", value);
-            Log.e("로그", value);
-        } else {
-            String value = "<=#" + spinnerIdealHeight.getSelectedItemPosition() + "," + spinnerIdealHeight.getSelectedItem().toString();
-            simpleMultiPartRequest.addStringParam("height", value);
-            Log.e("로그", value);
-        }
-        simpleMultiPartRequest.addStringParam("idealage", AgeCheck());
-        Log.e("로그", AgeCheck());
-        simpleMultiPartRequest.addStringParam("id", loginId);
-
-        simpleMultiPartRequest.setShouldCache(false);
-        RequestQueue requestQueue = Volley.newRequestQueue(MyIdealTypeSetting.this);
-        requestQueue.add(simpleMultiPartRequest);
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject1 = new JSONObject(response);
+//                    boolean success = jsonObject1.getBoolean("success");
+//                    if (success) {
+//                        Log.e("저장", "이상형 저장됨");
+//                        Log.e("저장", response);
+//                    } else {
+//                        Log.e("저장", "이상형 저장실패");
+//                        Log.e("저장", response);
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        if (checkBoxIdealJabGroupNo.isChecked()) {
+//            simpleMultiPartRequest.addStringParam("jabgroup", "상관없음");
+//            Log.e("로그", "NULL1");
+//        } else {
+//            String value = spinnerIdealJabGroup.getSelectedItemPosition() + "," + spinnerIdealJabGroup.getSelectedItem().toString();
+//            simpleMultiPartRequest.addStringParam("jabgroup", value);
+//            Log.e("로그", value);
+//        }
+//        if (checkBoxIdealHeightNo.isChecked()) {
+//            simpleMultiPartRequest.addStringParam("height", ">#255,255");
+//            Log.e("로그", "NULL2");
+//        } else if (radioButtonIdealHeightMore.isChecked()) {
+//            String value = ">=#" + spinnerIdealHeight.getSelectedItemPosition() + "," + spinnerIdealHeight.getSelectedItem().toString();
+//            simpleMultiPartRequest.addStringParam("height", value);
+//            Log.e("로그", value);
+//        } else {
+//            String value = "<=#" + spinnerIdealHeight.getSelectedItemPosition() + "," + spinnerIdealHeight.getSelectedItem().toString();
+//            simpleMultiPartRequest.addStringParam("height", value);
+//            Log.e("로그", value);
+//        }
+//        simpleMultiPartRequest.addStringParam("idealage", AgeCheck());
+//        Log.e("로그", AgeCheck());
+//        simpleMultiPartRequest.addStringParam("id", loginId);
+//
+//        simpleMultiPartRequest.setShouldCache(false);
+//        RequestQueue requestQueue = Volley.newRequestQueue(MyIdealTypeSetting.this);
+//        requestQueue.add(simpleMultiPartRequest);
 
     }
 

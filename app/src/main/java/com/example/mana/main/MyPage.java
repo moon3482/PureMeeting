@@ -1,11 +1,6 @@
 package com.example.mana.main;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
+import static com.example.mana.R.color.appThemeColor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,9 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,13 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.misc.AsyncTask;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import com.example.mana.ChargeCredit;
 import com.example.mana.ChatPage.chatPage;
 import com.example.mana.MainActivity;
@@ -41,15 +34,7 @@ import com.example.mana.MyProfileLoad;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Calendar;
-
-import static com.example.mana.R.color.appThemeColor;
 
 public class MyPage extends AppCompatActivity {
     ImageView ivMyImage;
@@ -231,36 +216,36 @@ public class MyPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class ImageDonwTask extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            Bitmap bitmap = null;
-
-            try {
-                String imgurl = strings[0];
-                URL url = new URL(imgurl);
-                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            ivMyImage.setImageBitmap(bitmap);
-        }
-    }
+//    private class ImageDonwTask extends AsyncTask<String, Void, Bitmap> {
+//
+//        @Override
+//        protected Bitmap doInBackground(String... strings) {
+//            Bitmap bitmap = null;
+//
+//            try {
+//                String imgurl = strings[0];
+//                URL url = new URL(imgurl);
+//                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return bitmap;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Bitmap bitmap) {
+//            super.onPostExecute(bitmap);
+//            ivMyImage.setImageBitmap(bitmap);
+//        }
+//    }
 
     public int getAge(int birthYear, int birthMonth, int birthDay) {
         Calendar current = Calendar.getInstance();
@@ -300,56 +285,56 @@ public class MyPage extends AppCompatActivity {
             @Override
             public void run() {
                 String url = new ServerIP().http+"Android/myinfo.php";
-                SimpleMultiPartRequest myInfomation = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        System.out.println(response);
-                        try {
-                            JSONObject jsonObject1 = new JSONObject(response);
-                            Boolean success = jsonObject1.getBoolean("success");
-
-                            if (success) {
-                                new Handler().post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            String agesplit[] = jsonObject1.getString("birthday").split("-");
-                                            int age = getAge(Integer.parseInt(agesplit[0]), Integer.parseInt(agesplit[1]), Integer.parseInt(agesplit[2]));
-                                            String credit = String.valueOf(jsonObject1.getInt("credit"));
-
-                                            tvMyName.setText(jsonObject1.getString("name") + " / " + jsonObject1.getString("gender"));
-                                            tvMyAge.setText(String.valueOf(age) + "세");
-                                            tvMyCredit.setText(credit);
-                                            SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
-                                            String myinfoBitStr = sharedPreferences.getString("loginbit", "");
-                                            Bitmap myinfoStrBit = StringToBitmap(myinfoBitStr);
-                                            ivMyImage.setImageBitmap(myinfoStrBit);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-                                });
-
-                            }
-                            ;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        ;
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-
-
-                });
-                Log.e("보내는 아이디", id);
-                myInfomation.addStringParam("loginId", id);
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                requestQueue.add(myInfomation);
+//                SimpleMultiPartRequest myInfomation = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        System.out.println(response);
+//                        try {
+//                            JSONObject jsonObject1 = new JSONObject(response);
+//                            Boolean success = jsonObject1.getBoolean("success");
+//
+//                            if (success) {
+//                                new Handler().post(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        try {
+//                                            String agesplit[] = jsonObject1.getString("birthday").split("-");
+//                                            int age = getAge(Integer.parseInt(agesplit[0]), Integer.parseInt(agesplit[1]), Integer.parseInt(agesplit[2]));
+//                                            String credit = String.valueOf(jsonObject1.getInt("credit"));
+//
+//                                            tvMyName.setText(jsonObject1.getString("name") + " / " + jsonObject1.getString("gender"));
+//                                            tvMyAge.setText(String.valueOf(age) + "세");
+//                                            tvMyCredit.setText(credit);
+//                                            SharedPreferences sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
+//                                            String myinfoBitStr = sharedPreferences.getString("loginbit", "");
+//                                            Bitmap myinfoStrBit = StringToBitmap(myinfoBitStr);
+//                                            ivMyImage.setImageBitmap(myinfoStrBit);
+//                                        } catch (JSONException e) {
+//                                            e.printStackTrace();
+//                                        }
+//
+//                                    }
+//                                });
+//
+//                            }
+//                            ;
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        ;
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//
+//
+//                });
+//                Log.e("보내는 아이디", id);
+//                myInfomation.addStringParam("loginId", id);
+//                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//                requestQueue.add(myInfomation);
             }
         }).start();
     }

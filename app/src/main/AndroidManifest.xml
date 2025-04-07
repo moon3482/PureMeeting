@@ -68,9 +68,9 @@
         <activity android:name=".ShopInfomation.ShopInfomation" />
         <activity android:name=".MyProfileLoad" />
 
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="@string/naver_id" />
+<!--        <meta-data-->
+<!--            android:name="com.naver.maps.map.CLIENT_ID"-->
+<!--            android:value="@string/naver_id" />-->
 
         <activity android:name=".main.mapPage" />
         <activity android:name=".main.MyPage" />
@@ -92,8 +92,6 @@
             </intent-filter>
         </service>
 
-
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
@@ -106,6 +104,20 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="@string/kakao_app_key" />
             </intent-filter>
         </activity>
         <activity android:name=".Signup_Terms_Activity" />

@@ -1,12 +1,8 @@
 package com.example.mana.MainPage;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.VoiceInteractor;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
@@ -20,18 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.mana.R;
-import com.example.mana.chating.Client;
-import com.google.android.gms.security.ProviderInstaller;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.OutputStream;

@@ -1,43 +1,25 @@
 package com.example.mana.chating;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.IntentService;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.Layout;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,18 +31,10 @@ import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.mana.ChargeCredit;
 import com.example.mana.ChatPage.chatPage;
 import com.example.mana.CustomDialog3;
 import com.example.mana.R;
 import com.example.mana.ServerIP;
-import com.example.mana.SoftKeyboardDectectorView;
 import com.example.mana.ZoneAdd;
 import com.example.mana.socketclass;
 
@@ -68,11 +42,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
@@ -86,8 +58,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import gun0912.tedkeyboardobserver.TedKeyboardObserver;
 
 public class Client extends AppCompatActivity {
     String rnum, index;
@@ -330,9 +300,10 @@ public class Client extends AppCompatActivity {
         Intent intent = getIntent();
         conSocket();
         LoadMsg(rnum);
-        new TedKeyboardObserver(this).listen(isShow -> {
-            recyclerView.scrollToPosition(arrayList.size() - 1);
-        });
+        //TODO("최하단 메시지 이동")
+//        new TedKeyboardObserver(this).listen(isShow -> {
+//            recyclerView.scrollToPosition(arrayList.size() - 1);
+//        });
     }
 
     class msgUpdate implements Runnable {
@@ -480,49 +451,49 @@ public class Client extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
 
-                String url = new ServerIP().http+"Android/chatImg.php";
+                String url = new ServerIP().http + "Android/chatImg.php";
                 Uri uri = data.getData();
 
-
+                //TODO("이미지 처리")
                 String imguri = getRealPathFromUri(uri);
 //                new AlertDialog.Builder(this).setMessage(uri.toString() + "\n" + imguri).create().show();
-                SimpleMultiPartRequest chatImageRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        JSONObject jsonResponse = null;
-                        try {
-                            jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            String chatImgUrl = jsonResponse.getString("url");
-                            if (success) {
-
-
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        try {
-                                            JSONArray jsonArray = new JSONArray();
-
-                                            JSONObject jsonObject = new JSONObject();
-                                            jsonObject.put("type", "img");
-                                            jsonObject.put("name", name);
-                                            jsonObject.put("img", imgurl);
-                                            if (chatImgUrl.length() > 0) {
-                                                jsonObject.put("msg", chatImgUrl);
-                                            }
-                                            jsonObject.put("id", id);
-                                            jsonObject.put("room", rnum);
-
-
-                                            String aa = jsonArray.put(jsonObject).toString();
-
-                                            if (success) {
-                                                outs.writeUTF(aa);
-                                                outs.flush();
-
-
-                                            }
+//                SimpleMultiPartRequest chatImageRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        JSONObject jsonResponse = null;
+//                        try {
+//                            jsonResponse = new JSONObject(response);
+//                            boolean success = jsonResponse.getBoolean("success");
+//                            String chatImgUrl = jsonResponse.getString("url");
+//                            if (success) {
+//
+//
+//                                new Thread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//
+//                                        try {
+//                                            JSONArray jsonArray = new JSONArray();
+//
+//                                            JSONObject jsonObject = new JSONObject();
+//                                            jsonObject.put("type", "img");
+//                                            jsonObject.put("name", name);
+//                                            jsonObject.put("img", imgurl);
+//                                            if (chatImgUrl.length() > 0) {
+//                                                jsonObject.put("msg", chatImgUrl);
+//                                            }
+//                                            jsonObject.put("id", id);
+//                                            jsonObject.put("room", rnum);
+//
+//
+//                                            String aa = jsonArray.put(jsonObject).toString();
+//
+//                                            if (success) {
+//                                                outs.writeUTF(aa);
+//                                                outs.flush();
+//
+//
+//                                            }
 //                                            Handler handler = new Handler(Looper.getMainLooper());
 //                                            handler.postDelayed(new Runnable() {
 //                                                @Override
@@ -530,36 +501,34 @@ public class Client extends AppCompatActivity {
 //                                                    message.getText().clear();
 //                                                }
 //                                            }, 0);
-
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }).start();
-
-                            } else {
-
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        ;
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
+//
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+//                                    }
+//                                }).start();
+//
+//                            } else {
+//
+//
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        ;
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                });
 //                    chatImageRequst.addStringParam("id", id);
-                chatImageRequest.addFile("img", imguri);
-
-                RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-                requestQueue.add(chatImageRequest);
-
-
+//                chatImageRequest.addFile("img", imguri);
+//
+//                RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//                requestQueue.add(chatImageRequest);
             }
         }
 
@@ -717,100 +686,99 @@ public class Client extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.zonebutton:
-                try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(Client.this, ZoneAdd.class);
-                intent.putExtra("username", name);
-                intent.putExtra("roomnumber", rnum);
-                intent.putExtra("imgurl", imgurl);
-                intent.putExtra("youid", youid);
-                startActivityForResult(intent, GETSHOPRESULTCODE);
-                return true;
-            case android.R.id.home: //toolbar의 back키 눌렀을 때 동작
-                Intent intent1 = new Intent(Client.this, chatPage.class);
-                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent1);
-                return true;
-
-
-            default:
-//                Toast.makeText(Client.this, "문제 있음", Toast.LENGTH_LONG).show();
+        if (R.id.zonebutton == item.getItemId()) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(Client.this, ZoneAdd.class);
+            intent.putExtra("username", name);
+            intent.putExtra("roomnumber", rnum);
+            intent.putExtra("imgurl", imgurl);
+            intent.putExtra("youid", youid);
+            startActivityForResult(intent, GETSHOPRESULTCODE);
+            return true;
+        } else if (android.R.id.home == item.getItemId()) {
+            //toolbar의 back키 눌렀을 때 동작
+            Intent intent1 = new Intent(Client.this, chatPage.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent1);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void LoadMsg(String roomnum) {
-        String url = new ServerIP().http+"Android/LoadMsg.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.e("채팅불러오기", "" + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        JSONArray jsonArray = new JSONArray(jsonObject.getString("list"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            String type = jsonObject1.getString("type");
-                            String name = jsonObject1.getString("name");
-                            String msg = jsonObject1.getString("msg");
-                            String img = jsonObject1.getString("img");
-                            String id = jsonObject1.getString("id");
-                            String room = jsonObject1.getString("room");
-                            String youid = jsonObject1.getString("youid");
-                            chatdata chatdata = new chatdata(type, name, msg, img, id, room, youid);
-                            arrayList.add(chatdata);
-                        }
-                        chatingadapter.notifyDataSetChanged();
-                        recyclerView.scrollToPosition(arrayList.size() - 1);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("room", roomnum);
-        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/LoadMsg.php";
+        //TODO("메시지 로딩")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    Log.e("채팅불러오기", "" + response);
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        JSONArray jsonArray = new JSONArray(jsonObject.getString("list"));
+//                        for (int i = 0; i < jsonArray.length(); i++) {
+//                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+//                            String type = jsonObject1.getString("type");
+//                            String name = jsonObject1.getString("name");
+//                            String msg = jsonObject1.getString("msg");
+//                            String img = jsonObject1.getString("img");
+//                            String id = jsonObject1.getString("id");
+//                            String room = jsonObject1.getString("room");
+//                            String youid = jsonObject1.getString("youid");
+//                            chatdata chatdata = new chatdata(type, name, msg, img, id, room, youid);
+//                            arrayList.add(chatdata);
+//                        }
+//                        chatingadapter.notifyDataSetChanged();
+//                        recyclerView.scrollToPosition(arrayList.size() - 1);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("room", roomnum);
+//        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void sendFCM(String msg) {
         Log.e("아이디는?", youid);
-        String url = new ServerIP().http+"Android/GetMsgToken.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.e("FCM보내기", "" + response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        FCMsend(jsonObject.getString("token"), msg);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("youid", youid);
-        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/GetMsgToken.php";
+        //TODO("메시지 보내기")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    Log.e("FCM보내기", "" + response);
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        FCMsend(jsonObject.getString("token"), msg);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("youid", youid);
+//        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void FCMsend(String token, String msg) {
@@ -869,248 +837,252 @@ public class Client extends AppCompatActivity {
     }
 
     public void cancel(String id, String index, String name, String imgurl, String rnum, String youid) {
-        String url = new ServerIP().http+"Android/finalzone.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response.length() > 0) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        boolean success = jsonObject.getBoolean("success");
-                        if (success) {
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    try {
-
-
-                                        JSONArray jsonArray = new JSONArray();
-                                        JSONObject indexjson = new JSONObject();
-                                        JSONObject jsonObject = new JSONObject();
-                                        jsonObject.put("type", "ChooseCancel");
-                                        jsonObject.put("name", name);
-                                        jsonObject.put("img", imgurl);
-                                        jsonObject.put("msg", indexjson);
-                                        jsonObject.put("id", id);
-                                        jsonObject.put("room", rnum);
-                                        jsonObject.put("youid", youid);
-                                        String aa = jsonArray.put(jsonObject).toString();
-                                        outs.writeUTF(aa);
-                                        outs.flush();
-
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            }).start();
-                            finalcheck(index, "0", id, name, imgurl, rnum, youid);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", id);
-        simpleMultiPartRequest.addStringParam("final", "cancel");
-        simpleMultiPartRequest.addStringParam("index", index);
-        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/finalzone.php";
+        //TODO("취소 처리?")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                if (response.length() > 0) {
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        boolean success = jsonObject.getBoolean("success");
+//                        if (success) {
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+//                                    try {
+//
+//
+//                                        JSONArray jsonArray = new JSONArray();
+//                                        JSONObject indexjson = new JSONObject();
+//                                        JSONObject jsonObject = new JSONObject();
+//                                        jsonObject.put("type", "ChooseCancel");
+//                                        jsonObject.put("name", name);
+//                                        jsonObject.put("img", imgurl);
+//                                        jsonObject.put("msg", indexjson);
+//                                        jsonObject.put("id", id);
+//                                        jsonObject.put("room", rnum);
+//                                        jsonObject.put("youid", youid);
+//                                        String aa = jsonArray.put(jsonObject).toString();
+//                                        outs.writeUTF(aa);
+//                                        outs.flush();
+//
+//
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//                            }).start();
+//                            finalcheck(index, "0", id, name, imgurl, rnum, youid);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        simpleMultiPartRequest.addStringParam("final", "cancel");
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     public void finalzone(String sign, AlertDialog dialog) {
-        String url = new ServerIP().http+"Android/finalzone.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    Log.e("다이얼로그2", "" + response);
-                    String success = jsonObject.getString("success");
-                    if (success.equals("money")) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(Client.this)
-                                .setTitle("여유 금액 부족").setMessage("결제금액이 부족합니다.\n충전화면으로 이동하시겠습니까?").setPositiveButton("이동", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                }).setNegativeButton("취소", null).create();
-                        alertDialog.show();
-                    } else if (success.equals("ok")) {
-                        int hit = jsonObject.getInt("hit");
-                        int succe = jsonObject.getInt("succe");
-                        if (hit == 2 && succe == 2) {
-                            JSONArray jsonArray = new JSONArray();
-
-                            JSONObject jsonObject2 = new JSONObject();
-                            JSONObject indexjson = new JSONObject();
-                            indexjson.put("index", index);
-                            jsonObject2.put("type", "finalok");
-                            jsonObject2.put("name", name);
-                            jsonObject2.put("img", imgurl);
-                            jsonObject2.put("msg", indexjson);
-                            jsonObject2.put("id", id);
-                            jsonObject2.put("room", rnum);
-                            jsonObject2.put("youid", youid);
-                            String aa = jsonArray.put(jsonObject2).toString();
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        outs.writeUTF(aa);
-                                        outs.flush();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            }).start();
-                            dialog.dismiss();
-                        } else if (hit == 2 && succe < 2) {
-                            JSONArray jsonArray = new JSONArray();
-
-                            JSONObject jsonObject2 = new JSONObject();
-                            JSONObject indexjson = new JSONObject();
-                            indexjson.put("index", index);
-                            jsonObject2.put("type", "finalcancel");
-                            jsonObject2.put("name", name);
-                            jsonObject2.put("img", imgurl);
-                            jsonObject2.put("msg", indexjson);
-                            jsonObject2.put("id", id);
-                            jsonObject2.put("room", rnum);
-                            jsonObject2.put("youid", youid);
-                            String aa = jsonArray.put(jsonObject2).toString();
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        outs.writeUTF(aa);
-                                        outs.flush();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            }).start();
-                            dialog.dismiss();
-                        } else {
-                            dialog.dismiss();
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        Log.e("다이얼로그2 인덱스", "" + index);
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", id);
-        simpleMultiPartRequest.addStringParam("pay", "15000");
-        simpleMultiPartRequest.addStringParam("index", index);
-        simpleMultiPartRequest.addStringParam("final", sign);
-        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/finalzone.php";
+        //TODO("취소 처리?")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    Log.e("다이얼로그2", "" + response);
+//                    String success = jsonObject.getString("success");
+//                    if (success.equals("money")) {
+//                        AlertDialog alertDialog = new AlertDialog.Builder(Client.this)
+//                                .setTitle("여유 금액 부족").setMessage("결제금액이 부족합니다.\n충전화면으로 이동하시겠습니까?").setPositiveButton("이동", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//
+//                                    }
+//                                }).setNegativeButton("취소", null).create();
+//                        alertDialog.show();
+//                    } else if (success.equals("ok")) {
+//                        int hit = jsonObject.getInt("hit");
+//                        int succe = jsonObject.getInt("succe");
+//                        if (hit == 2 && succe == 2) {
+//                            JSONArray jsonArray = new JSONArray();
+//
+//                            JSONObject jsonObject2 = new JSONObject();
+//                            JSONObject indexjson = new JSONObject();
+//                            indexjson.put("index", index);
+//                            jsonObject2.put("type", "finalok");
+//                            jsonObject2.put("name", name);
+//                            jsonObject2.put("img", imgurl);
+//                            jsonObject2.put("msg", indexjson);
+//                            jsonObject2.put("id", id);
+//                            jsonObject2.put("room", rnum);
+//                            jsonObject2.put("youid", youid);
+//                            String aa = jsonArray.put(jsonObject2).toString();
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    try {
+//                                        outs.writeUTF(aa);
+//                                        outs.flush();
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//                            }).start();
+//                            dialog.dismiss();
+//                        } else if (hit == 2 && succe < 2) {
+//                            JSONArray jsonArray = new JSONArray();
+//
+//                            JSONObject jsonObject2 = new JSONObject();
+//                            JSONObject indexjson = new JSONObject();
+//                            indexjson.put("index", index);
+//                            jsonObject2.put("type", "finalcancel");
+//                            jsonObject2.put("name", name);
+//                            jsonObject2.put("img", imgurl);
+//                            jsonObject2.put("msg", indexjson);
+//                            jsonObject2.put("id", id);
+//                            jsonObject2.put("room", rnum);
+//                            jsonObject2.put("youid", youid);
+//                            String aa = jsonArray.put(jsonObject2).toString();
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    try {
+//                                        outs.writeUTF(aa);
+//                                        outs.flush();
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//                            }).start();
+//                            dialog.dismiss();
+//                        } else {
+//                            dialog.dismiss();
+//                        }
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        Log.e("다이얼로그2 인덱스", "" + index);
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        simpleMultiPartRequest.addStringParam("pay", "15000");
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        simpleMultiPartRequest.addStringParam("final", sign);
+//        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//        requestQueue.add(simpleMultiPartRequest);
 
     }
 
     public void profileimgload() {
-        String url = new ServerIP().http+"/Android/main.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                JSONObject jsonObject = null;
-                try {
-
-                    jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        imgurl = jsonObject.getString("profilethumimg");
-
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.addStringParam("email", id);
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "/Android/main.php";
+        //TODO("프로필 이미지 로드")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                JSONObject jsonObject = null;
+//                try {
+//
+//                    jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        imgurl = jsonObject.getString("profilethumimg");
+//
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.addStringParam("email", id);
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
 
     public void CheckCredit(String id) {
-        String url = new ServerIP().http+"Android/CheckCredit.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success) {
-                        dialog3 = new CustomDialog3(Client.this, dialogcheck);
-                        try {
-                            dialog3.Colldialog(id, index, name, imgurl, rnum, youid);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Dialog dialog = new Dialog(Client.this);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Client.this);
-                        dialog = builder.setTitle("크레딧 부족").setMessage("크레딧이 부족합니다 충전하시겠습니까?").setPositiveButton("충천", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(Client.this, ChargeCredit.class);
-                                intent.putExtra("charge", "charge");
-                                intent.putExtra("index", index);
-                                startActivityForResult(intent, 3378);
-
-                            }
-                        }).setNeutralButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                cancel(id, index, name, imgurl, rnum, youid);
-                            }
-                        }).create();
-                        dialog.show();
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("id", id);
-        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/CheckCredit.php";
+        //TODO("크래딧 체크")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    boolean success = jsonObject.getBoolean("success");
+//                    if (success) {
+//                        dialog3 = new CustomDialog3(Client.this, dialogcheck);
+//                        try {
+//                            dialog3.Colldialog(id, index, name, imgurl, rnum, youid);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        Dialog dialog = new Dialog(Client.this);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(Client.this);
+//                        dialog = builder.setTitle("크레딧 부족").setMessage("크레딧이 부족합니다 충전하시겠습니까?").setPositiveButton("충천", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Intent intent = new Intent(Client.this, ChargeCredit.class);
+//                                intent.putExtra("charge", "charge");
+//                                intent.putExtra("index", index);
+//                                startActivityForResult(intent, 3378);
+//
+//                            }
+//                        }).setNeutralButton("취소", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                cancel(id, index, name, imgurl, rnum, youid);
+//                            }
+//                        }).create();
+//                        dialog.show();
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("id", id);
+//        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 
     //    public void LoadCredit(String id) {
@@ -1144,83 +1116,84 @@ public class Client extends AppCompatActivity {
 //        requestQueue.add(simpleMultiPartRequest);
 //    }
     public void finalcheck(String index, String pay, String id, String name, String imgurl, String rnum, String youid) {
-        String url = new ServerIP().http+"Android/finalcheck.php";
-        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response.length() > 0) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String success = jsonObject.getString("success");
-                        if (success.equals("ok")) {
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    JSONArray jsonArray = new JSONArray();
-                                    JSONObject jsonObject2 = new JSONObject();
-                                    JSONObject indexjson = new JSONObject();
-                                    try {
-                                        indexjson.put("index", index);
-                                        jsonObject2.put("type", "finalok");
-                                        jsonObject2.put("name", name);
-                                        jsonObject2.put("img", imgurl);
-                                        jsonObject2.put("msg", indexjson);
-                                        jsonObject2.put("id", id);
-                                        jsonObject2.put("room", rnum);
-                                        jsonObject2.put("youid", youid);
-                                        String aa = jsonArray.put(jsonObject2).toString();
-                                        outs.writeUTF(aa);
-                                        outs.flush();
-                                    } catch (JSONException | IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            }).start();
-                        } else if (success.equals("cancel")) {
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    JSONArray jsonArray = new JSONArray();
-
-                                    JSONObject jsonObject2 = new JSONObject();
-                                    JSONObject indexjson = new JSONObject();
-                                    try {
-                                        indexjson.put("index", index);
-                                        jsonObject2.put("type", "finalcancel");
-                                        jsonObject2.put("name", name);
-                                        jsonObject2.put("img", imgurl);
-                                        jsonObject2.put("msg", indexjson);
-                                        jsonObject2.put("id", id);
-                                        jsonObject2.put("room", rnum);
-                                        jsonObject2.put("youid", youid);
-                                        String aa = jsonArray.put(jsonObject2).toString();
-                                        outs.writeUTF(aa);
-                                        outs.flush();
-                                    } catch (JSONException | IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            }).start();
-                        } else {
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        simpleMultiPartRequest.setShouldCache(false);
-        simpleMultiPartRequest.addStringParam("index", index);
-        simpleMultiPartRequest.addStringParam("pay", pay);
-        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
-        requestQueue.add(simpleMultiPartRequest);
+        String url = new ServerIP().http + "Android/finalcheck.php";
+        //TODO("최종 체크")
+//        SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                if (response.length() > 0) {
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        String success = jsonObject.getString("success");
+//                        if (success.equals("ok")) {
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    JSONArray jsonArray = new JSONArray();
+//                                    JSONObject jsonObject2 = new JSONObject();
+//                                    JSONObject indexjson = new JSONObject();
+//                                    try {
+//                                        indexjson.put("index", index);
+//                                        jsonObject2.put("type", "finalok");
+//                                        jsonObject2.put("name", name);
+//                                        jsonObject2.put("img", imgurl);
+//                                        jsonObject2.put("msg", indexjson);
+//                                        jsonObject2.put("id", id);
+//                                        jsonObject2.put("room", rnum);
+//                                        jsonObject2.put("youid", youid);
+//                                        String aa = jsonArray.put(jsonObject2).toString();
+//                                        outs.writeUTF(aa);
+//                                        outs.flush();
+//                                    } catch (JSONException | IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//                            }).start();
+//                        } else if (success.equals("cancel")) {
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    JSONArray jsonArray = new JSONArray();
+//
+//                                    JSONObject jsonObject2 = new JSONObject();
+//                                    JSONObject indexjson = new JSONObject();
+//                                    try {
+//                                        indexjson.put("index", index);
+//                                        jsonObject2.put("type", "finalcancel");
+//                                        jsonObject2.put("name", name);
+//                                        jsonObject2.put("img", imgurl);
+//                                        jsonObject2.put("msg", indexjson);
+//                                        jsonObject2.put("id", id);
+//                                        jsonObject2.put("room", rnum);
+//                                        jsonObject2.put("youid", youid);
+//                                        String aa = jsonArray.put(jsonObject2).toString();
+//                                        outs.writeUTF(aa);
+//                                        outs.flush();
+//                                    } catch (JSONException | IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                }
+//                            }).start();
+//                        } else {
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        });
+//        simpleMultiPartRequest.setShouldCache(false);
+//        simpleMultiPartRequest.addStringParam("index", index);
+//        simpleMultiPartRequest.addStringParam("pay", pay);
+//        RequestQueue requestQueue = Volley.newRequestQueue(Client.this);
+//        requestQueue.add(simpleMultiPartRequest);
     }
 }
 
