@@ -2,30 +2,13 @@ package com.example.mana;
 
 import android.app.Application;
 
-public class GlobalApplication extends Application {
-    private static GlobalApplication instance;
+import timber.log.Timber;
 
-    public static GlobalApplication getGlobalApplicationContext() {
-        if (instance == null) {
-            throw new IllegalStateException("This Application does not inherit com.kakao.GlobalApplication");
-        }
-
-        return instance;
-    }
-
+public class ManaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-
-        // Kakao Sdk 초기화
-//        KakaoSDK.init(new KakaoSDKAdapter());
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        instance = null;
+        Timber.plant(new Timber.DebugTree());
     }
 
 //    public class KakaoSDKAdapter extends KakaoAdapter {

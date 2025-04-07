@@ -26,6 +26,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,18 +37,29 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
+
 public class MainActivity extends AppCompatActivity {
     //로그인 입력 변수
     String EditTextGetId;
     String EditTextGetPassword;
     String kakaoid, token;
     public static String userid;
-//    private SessionCallback sessionCallback = new SessionCallback();
+    //    private SessionCallback sessionCallback = new SessionCallback();
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     EditText login_input_id, login_input_password;
     Activity activity;
     Button login_Button, login_Button_false;
+    Function2<? super OAuthToken, ? super Throwable, Unit> kakaoLoginCallback = (Function2<OAuthToken, Throwable, Unit>) (oAuthToken, throwable) -> {
+        if (throwable != null) {
+
+        } else if (oAuthToken != null){
+
+        }
+        return null;
+    };
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -148,6 +161,12 @@ public class MainActivity extends AppCompatActivity {
         kakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean available = UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this);
+                if (available) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(MainActivity.this, kakaoLoginCallback);
+                } else {
+                    //TODO("카카오 로그인이 안될 경우")
+                }
                 //TODO("카카오 로그인")
 //                session.open(AuthType.KAKAO_LOGIN_ALL, MainActivity.this);
             }
