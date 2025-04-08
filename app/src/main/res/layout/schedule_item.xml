@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -98,7 +97,7 @@
                 android:id="@+id/tvScheduleDday"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/card_skok"
+                android:background="@drawable/chatimage"
                 android:gravity="center"
                 android:text="날짜"
                 android:textColor="@color/White"
@@ -110,14 +109,13 @@
                 android:id="@+id/tvScheduleDDday"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/chatimage"
                 android:gravity="center"
                 android:text="D-day"
-                android:textSize="12sp"
-                android:background="@drawable/card_kb"
                 android:textColor="@color/black"
-                android:visibility="gone"
+                android:textSize="12sp"
                 android:textStyle="bold"
-                />
+                android:visibility="gone" />
 
         </LinearLayout>
     </LinearLayout>
