@@ -19,7 +19,7 @@
         android:padding="20dp"
         >
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/cvChatProfileImg"
             android:layout_width="70dp"
             android:layout_height="70dp"

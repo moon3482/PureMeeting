@@ -32,7 +32,7 @@
             android:background="@drawable/chatitem"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/ivMyMainImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"

@@ -81,7 +81,7 @@
                 android:background="@drawable/input_chat"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/sendmassege" />
+                android:src="@drawable/round_send_24" />
         </LinearLayout>
 
     </LinearLayout>
