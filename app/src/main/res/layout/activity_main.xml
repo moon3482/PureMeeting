@@ -4,156 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".feature.login.MainActivity"
     android:background="@color/white"
-    >
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".feature.login.MainActivity">
 
             <ImageView
-                android:id="@+id/app_Title"
+                android:id="@+id/appLogo"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:paddingTop="100dp"
+                android:contentDescription="@string/app_main_logo_description"
+                android:padding="50dp"
                 android:src="@drawable/logo_mana" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/appTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="부담 없이 만나"
-                android:textSize="24sp" />
+                android:text="@string/app_name"
+                android:textColor="@color/google_login_font"
+                android:textSize="40sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="bottom"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="50dp"
+                android:paddingVertical="20dp">
 
-                <LinearLayout
+
+                <com.example.mana.SocialLoginButton
+                    android:id="@+id/kakaoLoginButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/kakao_yellow"
+                    android:contentDescription="@string/kakao_login_button_description"
+                    android:elevation="2dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:loginText="카카오 로그인"
+                    app:logoSrc="@drawable/kakao_logo"
+                    app:radius="10dp"
+                    app:textColor="@color/kakao_login_font" />
 
-                    <EditText
-                        android:id="@+id/login_Input_Id"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#B9656565"
-                        android:ems="10"
-                        android:hint="아이디"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text=""
-                        android:textColorHint="#B9656565" />
+                <com.example.mana.SocialLoginButton
+                    android:id="@+id/naverLoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/naver_green"
+                    android:contentDescription="@string/naver_login_button_description"
+                    android:elevation="2dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:loginText="네이버 로그인"
+                    app:logoSrc="@drawable/naver_logo"
+                    app:radius="10dp"
+                    app:textColor="@color/white" />
 
-                    <EditText
-                        android:id="@+id/login_Input_Password"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="#B9656565"
-                        android:ems="10"
-                        android:hint="패스워드"
-                        android:inputType="textPassword"
-                        android:minHeight="48dp"
-                        android:text=""
-                        android:textColorHint="#B9505050" />
-
-                    <LinearLayout
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:id="@+id/login_Button"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape2"
-                            android:text="로그인"
-                            android:textColor="#FFFFFF"
-                            android:textColorHighlight="#FFFFFF"
-                            android:textStyle="bold"
-                            android:visibility="gone" />
-
-                        <Button
-                            android:id="@+id/login_Button_false"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape13"
-                            android:text="로그인"
-                            android:textColor="#FFFFFF"
-                            android:textColorHighlight="#FFFFFF"
-                            android:textStyle="bold"
-                            tools:ignore="TouchTargetSizeCheck" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
-                        android:text="or" />
-
-                    <LinearLayout
-                        android:layout_width="298dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/kakaologin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/kakao_login_medium_wide" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="계정이 없으신가요?" />
-
-                        <TextView
-                            android:id="@+id/signup_Button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="회원가입"
-                            android:textColor="#0AA8F3"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
+                <com.example.mana.SocialLoginButton
+                    android:id="@+id/googleLoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:contentDescription="@string/google_login_button_description"
+                    android:elevation="2dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:borderColor="@color/google_login_stroke"
+                    app:borderWidth="1dp"
+                    app:loginText="구글 로그인"
+                    app:logoPadding="12dp"
+                    app:logoSrc="@drawable/google_logo"
+                    app:radius="10dp"
+                    app:textColor="@color/google_login_font" />
             </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
+
 
 </LinearLayout>

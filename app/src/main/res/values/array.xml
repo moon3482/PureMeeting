@@ -59,8 +59,6 @@
     </string-array>
 
     <string-array name="drink_kind">
-
-
         <item>소주</item>
         <item>맥주</item>
         <item>소맥</item>
@@ -70,7 +68,6 @@
         <item>브랜디</item>
         <item>데킬라</item>
         <item>위스키</item>
-
     </string-array>
 
     <string-array name="drink_bottle">

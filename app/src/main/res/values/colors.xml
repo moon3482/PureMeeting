@@ -6,4 +6,9 @@
     <color name="appThemeColor">#E91E63</color>
     <color name="White">#FFFFFF</color>
     <color name="gray">#444242</color>
+    <color name="kakao_yellow">#FDDC40</color>
+    <color name="kakao_login_font">#D9000000</color>
+    <color name="naver_green">#03C75A</color>
+    <color name="google_login_stroke">#747775</color>
+    <color name="google_login_font">#1F1F1F</color>
 </resources>

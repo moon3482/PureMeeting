@@ -2,33 +2,22 @@ package com.example.mana.feature.login;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mana.R;
-import com.example.mana.ServerIP;
+import com.example.mana.SocialLoginButton;
 import com.example.mana.logging.Tag;
-import com.example.mana.signupTermsActivity;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 
@@ -37,25 +26,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-    //로그인 입력 변수
-    String EditTextGetId;
-    String EditTextGetPassword;
-    String kakaoid, token;
-    public static String userid;
-    //    private SessionCallback sessionCallback = new SessionCallback();
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    EditText login_input_id, login_input_password;
     Activity activity;
-    Button login_Button, login_Button_false;
+    SocialLoginButton kakaoLogin;
+    SocialLoginButton naverLogin;
     Function2<? super OAuthToken, ? super Throwable, Unit> kakaoLoginCallback = (Function2<OAuthToken, Throwable, Unit>) (oAuthToken, throwable) -> {
         if (throwable != null) {
             Timber.tag(Tag.KAKAO_LOGIN).d("Login Failure : %s", throwable.getMessage());
@@ -70,14 +49,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activity = this;
-        login_input_id = (EditText) findViewById(R.id.login_Input_Id);
-        login_input_password = (EditText) findViewById(R.id.login_Input_Password);
-        login_Button = (Button) findViewById(R.id.login_Button);
-        login_Button_false = (Button) findViewById(R.id.login_Button_false);
-        TextView sign_Up_Button = (TextView) findViewById(R.id.signup_Button);
-        ImageView kakaoLogin = (ImageView) findViewById(R.id.kakaologin);
-        getHashKey();
-
+        kakaoLogin = findViewById(R.id.kakaoLoginButton);
+        naverLogin = findViewById(R.id.naverLoginButton);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int permissionResult = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
@@ -87,82 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        //앱 해쉬키
-        //        getHashKey();
 
-        //가입버튼
-        sign_Up_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, signupTermsActivity.class);
-                startActivity(intent);
-
-            }
-        });
-        //로그인 버튼
-        login_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String serverUrl = new ServerIP().http + "Android/login.php";
-                EditTextGetId = login_input_id.getText().toString();
-                EditTextGetPassword = login_input_password.getText().toString();
-                //TODO("로그인")
-//                SimpleMultiPartRequest simpleMultiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        JSONObject jsonObject = null;
-//                        try {
-//                            jsonObject = new JSONObject(response);
-//                            boolean login = jsonObject.getBoolean("success");
-//                            if (login) {
-//                                String st = jsonObject.getString("profilethumimg");
-//                                String name = jsonObject.getString("name");
-//
-//
-//                                sharedPreferences = getSharedPreferences("loginId", MODE_PRIVATE);
-//                                new insertshar().execute(st);
-//                                editor = sharedPreferences.edit();
-//                                editor.putString("imgurl", st);
-//                                editor.putString("loginId", EditTextGetId);
-//                                editor.putString("loginName", name);
-//
-//                                editor.commit();
-//                                userid = EditTextGetId;
-//                                if (jsonObject.getString("first").equals("0")) {
-//                                    Intent intent = new Intent(MainActivity.this, InsertMyinfoDetail.class);
-//                                    intent.putExtra("id", EditTextGetId);
-//                                    startActivity(intent);
-//                                } else {
-//                                    Toast.makeText(MainActivity.this, "로그인이 되었습니다.", Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(MainActivity.this, mainPage.class);
-//
-//                                    startActivity(intent);
-//                                }
-//                            } else {
-//                                Toast.makeText(MainActivity.this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
-//
-//                            }
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//                simpleMultiPartRequest.setShouldCache(false);
-//                simpleMultiPartRequest.addStringParam("email", EditTextGetId);
-//                simpleMultiPartRequest.addStringParam("pasw", EditTextGetPassword);
-//                simpleMultiPartRequest.addStringParam("token", token);
-//                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-//                requestQueue.add(simpleMultiPartRequest);
-            }
-        });
-
-        kakaoLogin.setOnClickListener(v -> {
+        kakaoLogin.setOnClickListener(view -> {
             boolean available = UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this);
             if (available) {
                 Timber.tag(Tag.KAKAO_LOGIN).d("KakaoTalk Login Available");
@@ -171,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
                 Timber.tag(Tag.KAKAO_LOGIN).d("KakaoTalk Login UnAvailable");
                 UserApiClient.getInstance().loginWithKakaoAccount(MainActivity.this, kakaoLoginCallback);
             }
+        });
+
+        naverLogin.setOnClickListener(view -> {
         });
 //        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
 //            if (!task.isSuccessful()) {
@@ -186,28 +88,6 @@ public class MainActivity extends AppCompatActivity {
 //            editor.putString("token", token);
 //            editor.commit();
 //        });
-    }
-
-
-    private void getHashKey() {
-        PackageInfo packageInfo = null;
-        try {
-            packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (packageInfo == null)
-            Log.e("KeyHash", "KeyHash:null");
-
-        for (Signature signature : packageInfo.signatures) {
-            try {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            } catch (NoSuchAlgorithmException e) {
-                Log.e("KeyHash", "Unable to get MessageDigest. signature=" + signature, e);
-            }
-        }
     }
 
 //    public class SessionCallback implements ISessionCallback {
@@ -409,58 +289,5 @@ public class MainActivity extends AppCompatActivity {
         System.exit(0);
 
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        login_input_id.setText("");
-        login_input_password.setText("");
-        login_input_id.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if (login_input_id.getText().toString().trim().length() > 0 && login_input_password.getText().toString().trim().length() > 0) {
-                    login_Button_false.setVisibility(View.GONE);
-                    login_Button.setVisibility(View.VISIBLE);
-                } else {
-                    login_Button.setVisibility(View.GONE);
-                    login_Button_false.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        login_input_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (login_input_id.getText().toString().trim().length() > 0 && login_input_password.getText().toString().trim().length() > 0) {
-                    login_Button_false.setVisibility(View.GONE);
-                    login_Button.setVisibility(View.VISIBLE);
-                } else {
-                    login_Button.setVisibility(View.GONE);
-                    login_Button_false.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 }
