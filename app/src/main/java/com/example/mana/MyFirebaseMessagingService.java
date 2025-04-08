@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.mana.chatPage.ChatPage;
+import com.example.mana.feature.login.MainActivity;
 import com.example.mana.mainPage.MainPage;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

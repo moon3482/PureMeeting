@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mana.chatPage.ChatPage;
-import com.example.mana.MainActivity;
+import com.example.mana.feature.login.MainActivity;
 import com.example.mana.NewSubscriptionBox;
 import com.example.mana.R;
 import com.example.mana.ServerIP;

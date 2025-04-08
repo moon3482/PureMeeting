@@ -27,7 +27,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.example.mana.ChargeCredit;
 import com.example.mana.chatPage.ChatPage;
-import com.example.mana.MainActivity;
+import com.example.mana.feature.login.MainActivity;
 import com.example.mana.mainPage.MainPage;
 import com.example.mana.MyIdealTypeSetting;
 import com.example.mana.MyProfileLoad;

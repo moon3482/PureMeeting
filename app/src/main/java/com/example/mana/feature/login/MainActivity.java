@@ -1,4 +1,4 @@
-package com.example.mana;
+package com.example.mana.feature.login;
 
 import android.Manifest;
 import android.app.Activity;
@@ -25,7 +25,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mana.R;
+import com.example.mana.ServerIP;
 import com.example.mana.logging.Tag;
+import com.example.mana.signupTermsActivity;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 
