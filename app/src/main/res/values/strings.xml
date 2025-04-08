@@ -1,7 +1,3 @@
 <resources>
-    <string name="app_name">Mana</string>
-    <string name="kakao_app_key">27496fbe7574f0e915b5f5d714b83f0c</string>
-    <string name="monster_app_key">c148fb6b-6cf5-439e-89e1-b010f750fdf0</string>
-    <string name="monster_app_sckey">c898eb2d41c434f92dccf8103d4b4c3bd203ef9d6da01d79923d558a7951f34e</string>
-
+    <string name="app_name">PureMeet</string>
 </resources>
