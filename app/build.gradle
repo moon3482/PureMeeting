@@ -3,6 +3,17 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') {
+        localProperties.load(it)
+    }
+}
+
+def kakaoTokenDebug = localProperties.getProperty('kakao.login.debug.token', '')
+def kakaoTokenRelease = localProperties.getProperty('kakao.login.release.token', '')
+
 android {
      compileSdk 34
 
@@ -19,28 +30,32 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        def localProperties = new Properties()
-        def localPropertiesFile = rootProject.file('local.properties')
-        if (localPropertiesFile.exists()) {
-           localPropertiesFile.withReader('UTF-8') {
-               localProperties.load(it)
-           }
-        }
 
-        manifestPlaceholders = [
-                kakaoLoginToken: localProperties.getProperty('kakao.login.token', null)
-        ]
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'String', 'KAKAO_TOKEN', "\"${kakaoTokenDebug}\""
+            manifestPlaceholders = [
+                    kakaoLoginToken: kakaoTokenDebug,
+                    analyticsEnabled: "false"
+            ]
+        }
+
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'KAKAO_TOKEN', "\"${kakaoTokenRelease}\""
+            manifestPlaceholders = [
+                    kakaoLoginToken: kakaoTokenRelease,
+                    analyticsEnabled: "true"
+            ]
         }
     }
     buildFeatures {
-        dataBinding  true
+        dataBinding true
+        buildConfig true
     }
 }
 

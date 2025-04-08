@@ -25,7 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.example.mana.logging.Tag;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 
@@ -39,6 +39,7 @@ import java.security.NoSuchAlgorithmException;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
     //로그인 입력 변수
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
     Button login_Button, login_Button_false;
     Function2<? super OAuthToken, ? super Throwable, Unit> kakaoLoginCallback = (Function2<OAuthToken, Throwable, Unit>) (oAuthToken, throwable) -> {
         if (throwable != null) {
-
-        } else if (oAuthToken != null){
-
+            Timber.tag(Tag.KAKAO_LOGIN).d("Login Failure : %s", throwable.getMessage());
+        } else if (oAuthToken != null) {
+            Timber.tag(Tag.KAKAO_LOGIN).d("Login Success : %s", oAuthToken);
         }
         return null;
     };
@@ -158,34 +159,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        kakaoLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean available = UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this);
-                if (available) {
-                    UserApiClient.getInstance().loginWithKakaoTalk(MainActivity.this, kakaoLoginCallback);
-                } else {
-                    //TODO("카카오 로그인이 안될 경우")
-                }
-                //TODO("카카오 로그인")
-//                session.open(AuthType.KAKAO_LOGIN_ALL, MainActivity.this);
+        kakaoLogin.setOnClickListener(v -> {
+            boolean available = UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this);
+            if (available) {
+                Timber.tag(Tag.KAKAO_LOGIN).d("KakaoTalk Login Available");
+                UserApiClient.getInstance().loginWithKakaoTalk(MainActivity.this, kakaoLoginCallback);
+            } else {
+                Timber.tag(Tag.KAKAO_LOGIN).d("KakaoTalk Login UnAvailable");
+                UserApiClient.getInstance().loginWithKakaoAccount(MainActivity.this, kakaoLoginCallback);
             }
         });
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.w("FirebaseSettingEx", "getInstanceId failed", task.getException());
-                return;
-            }
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+//            if (!task.isSuccessful()) {
+//                Log.w("FirebaseSettingEx", "getInstanceId failed", task.getException());
+//                return;
+//            }
 
-            //TODO("토큰 저장")
-            // 토큰을 읽고, 텍스트 뷰에 보여주기
+        //TODO("토큰 저장")
+        // 토큰을 읽고, 텍스트 뷰에 보여주기
 //            token = task.getResult().getToken();
 //            SharedPreferences sharedPreferences = getSharedPreferences("token", MODE_PRIVATE);
 //            SharedPreferences.Editor editor = sharedPreferences.edit();
 //            editor.putString("token", token);
 //            editor.commit();
-        });
-
+//        });
     }
 
 

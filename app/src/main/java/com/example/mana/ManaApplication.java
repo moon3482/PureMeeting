@@ -2,6 +2,8 @@ package com.example.mana;
 
 import android.app.Application;
 
+import com.kakao.sdk.common.KakaoSdk;
+
 import timber.log.Timber;
 
 public class ManaApplication extends Application {
@@ -9,6 +11,7 @@ public class ManaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Timber.plant(new Timber.DebugTree());
+        KakaoSdk.init(ManaApplication.this, BuildConfig.KAKAO_TOKEN);
     }
 
 //    public class KakaoSDKAdapter extends KakaoAdapter {
