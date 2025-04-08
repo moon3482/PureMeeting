@@ -105,7 +105,7 @@
                     android:scheme="kakao${kakaoLoginToken}" />
             </intent-filter>
         </activity>
-        <activity android:name=".signupTermsActivity" />
+        <activity android:name=".SignupTermsActivity" />
         <activity
             android:name=".SignupInformationInput"
             tools:ignore="all" />

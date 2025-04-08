@@ -4,7 +4,6 @@ package com.example.mana;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,18 +11,15 @@ import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class signupTermsActivity extends AppCompatActivity {
+public class SignupTermsActivity extends AppCompatActivity {
     CheckBox service, info;
     String email, img, gender, kakaoid;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +105,7 @@ public class signupTermsActivity extends AppCompatActivity {
                 } else if (!terms2[0]) {
                     dialog("개인정보 이용약관");
                 } else {
-                    Intent intent = new Intent(signupTermsActivity.this, SignupInformationInput.class);
+                    Intent intent = new Intent(SignupTermsActivity.this, SignupInformationInput.class);
                     if (email != null) {
                         intent.putExtra("email", email);
                     }
