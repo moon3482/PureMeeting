@@ -81,10 +81,6 @@
             </intent-filter>
         </service>
 
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
-
         <activity android:name=".SignupInformationInput" />
         <activity
             android:name=".feature.login.MainActivity"
