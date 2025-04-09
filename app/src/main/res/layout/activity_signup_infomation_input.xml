@@ -41,7 +41,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="40dp"
                     android:layout_marginBottom="40dp"
-                    android:src="@drawable/basicprofile" />
+                    tools:src="@drawable/basicprofile" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

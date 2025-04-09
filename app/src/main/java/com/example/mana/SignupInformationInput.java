@@ -6,6 +6,7 @@ import static android.view.View.OnClickListener;
 import static android.view.View.VISIBLE;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
@@ -17,7 +18,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -37,21 +37,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
-import com.example.mana.camera.Camera1;
+import com.example.mana.feature.camera.PureMeetCamera;
+import com.example.mana.feature.common.Constants;
+import com.example.mana.logging.Tag;
 
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import timber.log.Timber;
 
 public class SignupInformationInput extends AppCompatActivity {
     ImageView iv_image;
@@ -62,24 +67,20 @@ public class SignupInformationInput extends AppCompatActivity {
     String password_Check;
     boolean pw_Check = false;
     String sign_Gender;
-    String sign_Area;
-    String sign_Jabs;
     Button id_Check;
     String imgPath;
     String EmailCode;
-    String sign_Name, sign_email, sign_Birthday;
     TextView timer;
     LinearLayout Email_code_Linear;
     Button submit;
     EditText input_email_code;
     EditText input_Pw;
     EditText input_Pw_Check;
-    String intent_email, intent_img, intent_gender, intent_kakaoid, imgurl;
+    String intent_email, intent_kakaoid;
     Bitmap bm;
     String img;
-    int CAMERA_RESULT_CODE = 335;
     private AlertDialog dialog;
-    boolean validate, spinner_Gen, spinner_Jab, spinner_Area;
+    boolean validate, spinner_Gen;
     int sec;
 
     private Handler handler = new Handler();
@@ -91,23 +92,54 @@ public class SignupInformationInput extends AppCompatActivity {
             sec--;
             handler.postDelayed(this, 1000);
             if (sec < 0) {
-
                 handler.removeCallbacks(this);
-//                timer.setVisibility(View.INVISIBLE);
-
-
             }
         }
     };
 
+    private Uri currentPhotoUri;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private final ActivityResultLauncher<Intent> takePictureLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Timber.tag(Tag.SIGNUP_INFO_INPUT).d("Result Ok");
+                    Intent data = result.getData();
+                    if (data == null) {
+                        Timber.tag(Tag.SIGNUP_INFO_INPUT).e("Can Not Load Photo Data");
+                        return;
+                    }
+
+                    String photoUriString = data.getStringExtra(Constants.BundleKey.MANA_PHOTO_URI);
+                    String photoPath = data.getStringExtra(Constants.BundleKey.MANA_PHOTO_PATH);
+
+                    Timber.tag(Tag.SIGNUP_INFO_INPUT).d("PhotoUri : %s", photoUriString);
+                    Timber.tag(Tag.SIGNUP_INFO_INPUT).d("PhotoPath : %s", photoPath);
+
+                    if (photoUriString == null) {
+                        Timber.tag(Tag.SIGNUP_INFO_INPUT).e("Can Not Load Photo Uri");
+                        return;
+                    }
+
+                    currentPhotoUri = Uri.parse(photoUriString);
+                    Glide.with(this)
+                            .load(currentPhotoUri)
+                            .optionalCircleCrop()
+                            .into(iv_image);
+
+                } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                    Timber.tag(Tag.SIGNUP_INFO_INPUT).d("Result Canceled");
+                }
+            }
+    );
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_infomation_input);
         //툴바 선언
-        Toolbar toolbar = (Toolbar) findViewById(R.id.signup_information_ToolBar);
+        Toolbar toolbar = findViewById(R.id.signup_information_ToolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("회원정보입력");
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
@@ -116,18 +148,17 @@ public class SignupInformationInput extends AppCompatActivity {
         timer = findViewById(R.id.timer);
         birthday = findViewById(R.id.Sign_input_Birthday);
         iv_image = findViewById(R.id.imageView);
-
-        input_Pw = (EditText) findViewById(R.id.sign_input_Pw);
+        input_Pw = findViewById(R.id.sign_input_Pw);
         password = input_Pw.getText().toString();
-        input_Pw_Check = (EditText) findViewById(R.id.sign_input_PwCheck);
+        input_Pw_Check = findViewById(R.id.sign_input_PwCheck);
         password_Check = input_Pw_Check.getText().toString();
         id_Check = findViewById(R.id.id_Check_Button);
         email = findViewById(R.id.sign_input_Email);
         name = findViewById(R.id.sing_input_name);
         Email_code_Linear = findViewById(R.id.email_code_insert_Linear);
         submit = findViewById(R.id.sign_Submit);
-        Button button_email_code = (Button) findViewById(R.id.button_Email_Code);
-        input_email_code = (EditText) findViewById(R.id.sign_input_code);
+        Button button_email_code = findViewById(R.id.button_Email_Code);
+        input_email_code = findViewById(R.id.sign_input_code);
         Email_code_Linear.setVisibility(GONE);
         Intent intent = getIntent();
 
@@ -141,9 +172,12 @@ public class SignupInformationInput extends AppCompatActivity {
             validate = true;
             id_Check.setBackgroundColor(Color.parseColor("#19FC00"));
             id_Check.setText("인증완료");
-
-
         }
+
+        Glide.with(this)
+                .load(R.drawable.basicprofile)
+                .optionalCircleCrop()
+                .into(iv_image);
 
         /**
          *
@@ -289,34 +323,16 @@ public class SignupInformationInput extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-        /**********************************/
-        /************사진등록***************/
-        /**********************************/
+
+
         iv_image.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    int permissionResult = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-                    if (permissionResult == PackageManager.PERMISSION_DENIED) {
-                        String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, 11);
-
-
-                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-//                            Log.d(TAG, "권한 설정 완료");
-                        } else {
-//                            Log.d(TAG, "권한 설정 요청");
-                            ActivityCompat.requestPermissions(SignupInformationInput.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                        }
-                    } else {
-
-                    }
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(SignupInformationInput.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 }
-                Intent intent1 = new Intent(SignupInformationInput.this, Camera1.class);
-                startActivityForResult(intent1, CAMERA_RESULT_CODE);
-
+                Intent takePhotoIntent = new Intent(SignupInformationInput.this, PureMeetCamera.class);
+                takePictureLauncher.launch(takePhotoIntent);
             }
         });
 
@@ -637,91 +653,6 @@ public class SignupInformationInput extends AppCompatActivity {
 //        JavaMailAPI javaMailAPI = new JavaMailAPI(this, email.getText().toString(), "[부없만] 이메일 인증코드", "어플에서 코드를 입력하고 인증 버튼을 눌려주세요.\n" + "인증코드 : " + EmailCode);
 //        javaMailAPI.execute();
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case 10:
-                if (resultCode == RESULT_OK) {
-                    Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
-                    Uri uri = data.getData();
-                    if (uri != null) {
-
-
-                        Glide.with(SignupInformationInput.this)
-                                .load(uri)
-
-                                .into(iv_image);
-
-                        //갤러리앱에서 관리하는 DB정보가 있는데, 그것이 나온다 [실제 파일 경로가 아님!!]
-                        //얻어온 Uri는 Gallery앱의 DB번호임. (content://-----/2854)
-                        //업로드를 하려면 이미지의 절대경로(실제 경로: file:// -------/aaa.png 이런식)가 필요함
-                        //Uri -->절대경로(String)로 변환
-                        imgPath = getRealPathFromUri(uri);   //임의로 만든 메소드 (절대경로를 가져오는 메소드)
-
-                        //이미지 경로 uri 확인해보기
-                        new AlertDialog.Builder(this).setMessage(uri.toString() + "\n" + imgPath).create().show();
-                    }
-                } else {
-                    Toast.makeText(this, "이미지 선택을 하지 않았습니다.", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case 335:
-                if (resultCode == RESULT_OK) {
-                    String imglog = data.getExtras().getString("이미지");
-                    Thread t = new Thread(new Runnable() {
-                        @Override
-                        public void run() {    // 오래 거릴 작업을 구현한다
-                            // TODO Auto-generated method stub
-                            try {
-                                // 걍 외우는게 좋다 -_-;
-
-                                img = "storage/emulated/0/camtest/" + imglog;
-
-                                bm = BitmapFactory.decodeFile(img);
-                                handler.post(new Runnable() {
-
-                                    @Override
-                                    public void run() {  // 화면에 그려줄 작업
-
-                                        iv_image.setImageBitmap(bm);
-                                    }
-                                });
-                                iv_image.setImageBitmap(bm); //비트맵 객체로 보여주기
-
-                            } catch (Exception e) {
-
-                            }
-
-                        }
-                    });
-
-                    t.start();
-
-                }
-                break;
-            /** 초기 이미지 받아오는 리절트 코드 확인절차 2020-11-25 새로운코드 작성으로 주석처리**/
-//                if(resultCode==RESULT_OK){
-//
-//                    //선택한 사진의 경로(Uri)객체 얻어오기
-//                    Uri uri= data.getData();
-//                    if(uri!=null){
-//                        Glide.with(Signup_information_input.this)
-//                        .load(uri)
-//                        .circleCrop()
-//                        .into(iv_image);
-//                    }
-//
-//                }else
-//                {
-//                    Toast.makeText(this, "이미지 선택을 하지 않았습니다.", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-        }
     }
 
     String getRealPathFromUri(Uri uri) {
