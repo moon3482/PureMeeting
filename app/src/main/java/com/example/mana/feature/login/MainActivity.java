@@ -145,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         });
+
+        setBackPressed();
 //        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
 //            if (!task.isSuccessful()) {
 //                Log.w("FirebaseSettingEx", "getInstanceId failed", task.getException());
@@ -370,10 +372,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        moveTaskToBack(true);
-        System.exit(0);
+    private void setBackPressed() {
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finishAffinity();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 }
