@@ -36,12 +36,15 @@ android {
     def naverClientIdRelease = localProperties.getProperty('naver.login.release.client.id', '')
     def naverClientSecretKeyDebug = localProperties.getProperty('naver.login.debug.client.secretKey', '')
     def naverClientSecretKeyRelease = localProperties.getProperty('naver.login.release.client.secretKey', '')
+    def googleClientIdDebug = localProperties.getProperty('google.login.debug.client.id', '')
+    def googleClientIdRelease = localProperties.getProperty('google.login.release.client.id', '')
 
     buildTypes {
         debug {
             buildConfigField 'String', 'KAKAO_TOKEN', "\"${kakaoTokenDebug}\""
             buildConfigField 'String', 'NAVER_CLIENT_ID', "\"${naverClientIdDebug}\""
             buildConfigField 'String', 'NAVER_CLIENT_SECRET_KEY', "\"${naverClientSecretKeyDebug}\""
+            buildConfigField 'String', 'GOOGLE_CLIENT_ID', "\"${googleClientIdDebug}\""
             manifestPlaceholders = [
                     kakaoLoginToken : kakaoTokenDebug,
                     analyticsEnabled: "false"
@@ -55,6 +58,7 @@ android {
             buildConfigField 'String', 'KAKAO_TOKEN', "\"${kakaoTokenRelease}\""
             buildConfigField 'String', 'NAVER_CLIENT_ID', "\"${naverClientIdRelease}\""
             buildConfigField 'String', 'NAVER_CLIENT_SECRET_KEY', "\"${naverClientSecretKeyRelease}\""
+            buildConfigField 'String', 'GOOGLE_CLIENT_ID', "\"${googleClientIdRelease}\""
             manifestPlaceholders = [
                     kakaoLoginToken : kakaoTokenRelease,
                     analyticsEnabled: "true"
@@ -80,9 +84,11 @@ dependencies {
     def androidxRecyclerSelectionViewVersion = "1.1.0"
     def androidxJunitVersion = "1.2.1"
     def androidxEspressoVersion = "3.6.1"
+    def androidxCredentialsVersion = "1.5.0"
     def googleFirebaseMessagingVersion = "24.1.1"
     def googleAndroidMaterialVersion = "1.12.0"
     def googlePlayServicesLocationVersion = "21.3.0"
+    def googleAndroidIdentityGoogleIdVersion = "1.1.1"
     def glideVersion = "4.12.0"
     def bootpayVersion = "4.9.0"
     def bootpayBioVersion = "4.4.21"
@@ -117,6 +123,9 @@ dependencies {
     implementation "com.navercorp.nid:oauth:${naverOauthVersion}"
     implementation "com.naver.maps:map-sdk:${naverMapVersion}"
     implementation "io.github.webrtc-sdk:android:${webrtcVersion}"
+    implementation "androidx.credentials:credentials:${androidxCredentialsVersion}"
+    implementation "androidx.credentials:credentials-play-services-auth:${androidxCredentialsVersion}"
+    implementation "com.google.android.libraries.identity.googleid:googleid:${googleAndroidIdentityGoogleIdVersion}"
     testImplementation "junit:junit:${junitVersion}"
     androidTestImplementation "androidx.test.ext:junit:${androidxJunitVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${androidxEspressoVersion}"

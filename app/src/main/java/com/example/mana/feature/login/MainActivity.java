@@ -1,29 +1,47 @@
 package com.example.mana.feature.login;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.credentials.Credential;
+import androidx.credentials.CredentialManager;
+import androidx.credentials.CredentialManagerCallback;
+import androidx.credentials.GetCredentialRequest;
+import androidx.credentials.GetCredentialResponse;
+import androidx.credentials.exceptions.GetCredentialException;
 
+import com.example.mana.BuildConfig;
 import com.example.mana.R;
+import com.example.mana.SignupTermsActivity;
 import com.example.mana.SocialLoginButton;
 import com.example.mana.logging.Tag;
-import com.example.mana.SignupTermsActivity;
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.navercorp.nid.NaverIdLoginSDK;
 import com.navercorp.nid.oauth.OAuthLoginCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.Executors;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -32,6 +50,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
     SocialLoginButton kakaoLogin;
     SocialLoginButton naverLogin;
+    SocialLoginButton googleLogin;
     Function2<? super OAuthToken, ? super Throwable, Unit> kakaoLoginCallback = (Function2<OAuthToken, Throwable, Unit>) (oAuthToken, throwable) -> {
         if (throwable != null) {
             Timber.tag(Tag.KAKAO_LOGIN).d("Login Failure : %s", throwable.getMessage());
@@ -48,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         kakaoLogin = findViewById(R.id.kakaoLoginButton);
         naverLogin = findViewById(R.id.naverLoginButton);
+        googleLogin = findViewById(R.id.googleLoginButton);
 
         kakaoLogin.setOnClickListener(view -> {
             boolean available = UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this);
@@ -86,6 +106,34 @@ public class MainActivity extends AppCompatActivity {
                 public void onError(int i, @NonNull String s) {
                     Timber.tag(Tag.NAVER_LOGIN).d("onError : %s", s);
                 }
+
+        googleLogin.setOnClickListener(view -> {
+            CredentialManager credentialManager = CredentialManager.create(this);
+            GetGoogleIdOption getGoogleIdOption = new GetGoogleIdOption.Builder()
+                    .setAutoSelectEnabled(true)
+                    .setFilterByAuthorizedAccounts(true)
+                    .setServerClientId(BuildConfig.GOOGLE_CLIENT_ID)
+                    .build();
+
+            GetCredentialRequest credentialRequest = new GetCredentialRequest.Builder()
+                    .addCredentialOption(getGoogleIdOption)
+                    .build();
+
+            CancellationSignal cancellationSignal = new CancellationSignal();
+            cancellationSignal.setOnCancelListener(() -> {
+                Timber.tag(Tag.GOOGLE_LOGIN).d("call cancellationSignal");
+            });
+            credentialManager.getCredentialAsync(this, credentialRequest, cancellationSignal, Executors.newSingleThreadExecutor(), new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
+                @Override
+                public void onResult(GetCredentialResponse getCredentialResponse) {
+                    printLoginInfo(getCredentialResponse);
+                    onLoginSuccess();
+                }
+
+                @Override
+                public void onError(@NonNull GetCredentialException e) {
+                    Timber.tag(Tag.GOOGLE_LOGIN).d("onError : %s", e.getMessage());
+                }
             });
         });
 //        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
@@ -107,6 +155,35 @@ public class MainActivity extends AppCompatActivity {
     private void onLoginSuccess(){
         Intent intent = new Intent(MainActivity.this, SignupTermsActivity.class);
         startActivity(intent);
+    }
+
+    private void printLoginInfo(GetCredentialResponse getCredentialResponse) {
+        Credential credential = getCredentialResponse.getCredential();
+        GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.getData());
+        String idToken = googleIdTokenCredential.getIdToken();
+        String[] segments = idToken.split("\\.");
+        byte[] payloadAsByteArray = Base64.decode(segments[1], Base64.NO_PADDING);
+        try {
+            JSONObject payloadInJson = new JSONObject(new String(payloadAsByteArray, UTF_8));
+            String googleId = (String) payloadInJson.get("sub");
+            String email = googleIdTokenCredential.getId();
+            String firstName = googleIdTokenCredential.getGivenName();
+            String lastName = googleIdTokenCredential.getFamilyName();
+            String displayName = googleIdTokenCredential.getDisplayName();
+            Uri picture = googleIdTokenCredential.getProfilePictureUri();
+            Timber.tag(Tag.GOOGLE_LOGIN).d("IDToken : %s", idToken);
+            Timber.tag(Tag.GOOGLE_LOGIN).d("Bundle : %s", getCredentialResponse.getCredential().getData().toString());
+            Timber.tag(Tag.GOOGLE_LOGIN).d("GoogleId : %s", googleId);
+            Timber.tag(Tag.GOOGLE_LOGIN).d("Email : %s", email);
+            Timber.tag(Tag.GOOGLE_LOGIN).d("FirstName : %s", firstName);
+            Timber.tag(Tag.GOOGLE_LOGIN).d("LastName : %s", lastName);
+            Timber.tag(Tag.GOOGLE_LOGIN).d("DisplayName : %s", displayName);
+            if (picture != null) {
+                Timber.tag(Tag.GOOGLE_LOGIN).d("ProfileImage : %s", picture.toString());
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 //    public class SessionCallback implements ISessionCallback {
