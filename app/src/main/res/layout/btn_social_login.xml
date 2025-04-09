@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="60dp"
-    >
+    android:paddingHorizontal="60dp">
+
     <ImageView
         android:id="@+id/socialLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3" />
+
     <TextView
         android:id="@+id/script"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 </LinearLayout>

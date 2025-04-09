@@ -62,6 +62,7 @@
                         android:layout_weight="1"
                         android:spinnerMode="dialog"
                         android:textColor="@color/appThemeColor" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -91,6 +92,7 @@
                         android:layout_weight="1"
                         android:spinnerMode="dialog"
                         android:textColor="@color/appThemeColor" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,6 +122,7 @@
                         android:layout_weight="1"
                         android:spinnerMode="dialog"
                         android:textColor="@color/appThemeColor" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -155,8 +158,8 @@
                         android:paddingLeft="10dp"
                         android:textColorHint="#79F17CA3" />
 
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,7 +187,9 @@
                         android:layout_weight="1"
                         android:spinnerMode="dialog"
                         android:textColor="@color/appThemeColor" />
+
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,8 +224,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
 
@@ -229,11 +234,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:ems="10"
                             android:backgroundTint="@color/appThemeColor"
+                            android:ems="10"
                             android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -272,8 +278,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
 
@@ -283,12 +289,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
                     </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -326,8 +331,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
 
@@ -337,12 +342,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -381,8 +386,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
 
@@ -392,12 +397,12 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:backgroundTint="@color/appThemeColor"
-                            android:hint="내용을 입력해주세요"
                             android:ems="10"
+                            android:hint="내용을 입력해주세요"
                             android:inputType="textPersonName"
                             android:textColorHint="#79F17CA3" />
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -413,15 +418,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1
-"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tvInsertMyInfoDetail_Drink"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-
                             android:background="@drawable/shape2"
                             android:gravity="center_vertical"
                             android:paddingLeft="10dp"
@@ -444,9 +447,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginTop="5dp">
-
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1">
 
                         <Spinner
                             android:id="@+id/spinner_InsertMyInfoDetail_Drink_day"
@@ -488,7 +490,6 @@
                             android:spinnerMode="dialog" />
                     </LinearLayout>
 
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -503,7 +504,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 
 </LinearLayout>

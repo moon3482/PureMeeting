@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -21,7 +20,6 @@
             android:gravity="right"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:id="@+id/profile_my"
                 android:layout_width="match_parent"
@@ -35,13 +33,14 @@
                     android:id="@+id/mychat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginHorizontal="7dp"
-
                     android:singleLine="false"
                     android:text="내 메시지내용"
                     android:textSize="18sp" />
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

@@ -54,8 +54,8 @@
                             android:id="@+id/ivCredit_10000"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-
                             app:srcCompat="@drawable/ic_coin_svgrepo_com" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -82,7 +82,9 @@
                             android:paddingRight="30dp"
                             android:text="100원"
                             android:textSize="20sp" />
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -141,6 +143,7 @@
                             android:paddingRight="30dp"
                             android:text="100원"
                             android:textSize="20sp" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -208,6 +211,7 @@
                             android:paddingRight="30dp"
                             android:text="100원"
                             android:textSize="20sp" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -282,6 +286,7 @@
                             android:paddingRight="30dp"
                             android:text="100원"
                             android:textSize="20sp" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -364,11 +369,15 @@
                             android:paddingRight="30dp"
                             android:text="100원"
                             android:textSize="20sp" />
+
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

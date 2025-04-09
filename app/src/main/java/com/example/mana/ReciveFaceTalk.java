@@ -70,8 +70,8 @@ public class ReciveFaceTalk extends AppCompatActivity {
         }
 
         tvfrom.setText(name + "님에게 온 페이스톡");
-        Glide.with(ReciveFaceTalk.this).load(R.raw.aaaaaa).into(ivcancel);
-        Glide.with(ReciveFaceTalk.this).load(R.raw.imageproxy).into(ivrecive);
+        Glide.with(ReciveFaceTalk.this).load(R.raw.call_reject).into(ivcancel);
+        Glide.with(ReciveFaceTalk.this).load(R.raw.call_accept).into(ivrecive);
         tvrecive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

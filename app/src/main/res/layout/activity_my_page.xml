@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
     tools:context=".mainPage.MainPage">
 
@@ -28,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:elevation="15dp"
             android:background="@drawable/chatitem"
+            android:elevation="15dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -79,18 +77,20 @@
                         android:gravity="center_vertical"
                         android:textSize="20dp" />
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/liLayMyinfomation"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:elevation="15dp"
-            android:background="@drawable/chatitem"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
+            android:background="@drawable/chatitem"
+            android:elevation="15dp"
             android:gravity="center_vertical">
 
             <ImageView
@@ -114,13 +114,12 @@
             android:id="@+id/liLayMyschedule"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:gravity="center_vertical"
-            android:elevation="15dp"
-            android:background="@drawable/chatitem"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            >
+            android:background="@drawable/chatitem"
+            android:elevation="15dp"
+            android:gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/ivMyschedule"
@@ -143,13 +142,13 @@
             android:id="@+id/liLayIdealType"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:elevation="15dp"
-            android:background="@drawable/chatitem"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/chatitem"
+            android:elevation="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivIdealTypeImage"
@@ -166,19 +165,20 @@
                 android:layout_weight="1"
                 android:text="이상형 설정"
                 android:textSize="25sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/liLayCredit"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:elevation="15dp"
-            android:background="@drawable/chatitem"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/chatitem"
+            android:elevation="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivCreditcardImage"
@@ -224,9 +224,10 @@
                     android:layout_weight="1"
                     android:text="로그아웃"
                     android:textSize="25sp" />
-            </LinearLayout>
-        </LinearLayout>
 
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

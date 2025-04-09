@@ -4,14 +4,12 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape"
     android:orientation="vertical"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1
-"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
@@ -41,8 +39,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:layout_weight="1">
 
 
         <Spinner
@@ -53,8 +51,8 @@
             android:layout_weight="1"
             android:background="@drawable/shape3"
             android:gravity="center"
-            android:spinnerMode="dialog"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:spinnerMode="dialog" />
 
         <Spinner
             android:id="@+id/spinner_MyInfo_Drink_Hit"
@@ -64,8 +62,8 @@
             android:layout_weight="1"
             android:background="@drawable/shape3"
             android:gravity="center"
-            android:spinnerMode="dialog"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:spinnerMode="dialog" />
 
         <Spinner
             android:id="@+id/spinner_MyInfo_Drink_kind"
@@ -75,8 +73,8 @@
             android:layout_weight="1"
             android:background="@drawable/shape3"
             android:gravity="center"
-            android:spinnerMode="dialog"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:spinnerMode="dialog" />
 
         <Spinner
             android:id="@+id/spinner_MyInfo_Drink_Bottle"
@@ -85,9 +83,10 @@
             android:layout_weight="1"
             android:background="@drawable/shape3"
             android:gravity="center"
-            android:spinnerMode="dialog"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:spinnerMode="dialog" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -102,9 +101,9 @@
             android:layout_marginRight="100dp"
             android:layout_weight="1"
             android:background="@drawable/shape4"
+            android:text="취소"
             android:textColor="@color/White"
-            android:textStyle="bold"
-            android:text="취소" />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/customDialogDrink_Ok"
@@ -115,9 +114,9 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/shape4"
+            android:text="확인"
             android:textColor="@color/White"
-            android:textStyle="bold"
-            android:text="확인" />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

@@ -58,7 +58,7 @@ public class SendFaceTalk extends AppCompatActivity {
 
         sendFCM("영상통화");
 
-        Glide.with(SendFaceTalk.this).load(R.raw.aaaaaa).into(ivCancel);
+        Glide.with(SendFaceTalk.this).load(R.raw.call_reject).into(ivCancel);
         tvCancel.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -53,11 +53,9 @@
             android:showOnLockScreen="true"
             android:taskAffinity="com.example.mana.ReciveFaceTalk" />
         <activity android:name=".SendFaceTalk" />
-        <activity android:name=".PlacePickInfo" />
         <activity android:name=".ZoneAdd" />
         <activity android:name=".NewSubscriptionBox" />
         <activity android:name=".mainPage.IdealProfileLoad" />
-        <activity android:name=".Pay_Activity" />
         <activity android:name=".ChargeCredit" />
         <activity android:name=".InsertMyinfoDetail" />
         <activity android:name=".MyIdealTypeSetting" />

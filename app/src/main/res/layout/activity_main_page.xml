@@ -65,16 +65,15 @@
                     android:id="@+id/tvMainPageOppositeSex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:padding="10dp"
                     android:background="@drawable/shape4"
-                    android:textColor="@color/White"
-                    android:textStyle="bold"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="오늘의 소개"
-                    />
+                    android:textColor="@color/White"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/MainPageRecy"
@@ -102,7 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:nestedScrollingEnabled="false"/>
+                    android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

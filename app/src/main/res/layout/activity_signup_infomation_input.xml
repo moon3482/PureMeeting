@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SignupInformationInput">
-
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/signup_information_ToolBar"
@@ -100,6 +97,7 @@
                             android:layout_weight="1"
                             android:text="인증" />
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,15 +174,15 @@
                     android:spinnerMode="dialog" />
 
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
 
+        </LinearLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/sign_Submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="확인" />
-
 
 </LinearLayout>

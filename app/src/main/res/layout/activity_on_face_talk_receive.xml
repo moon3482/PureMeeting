@@ -20,8 +20,7 @@
             android:id="@+id/LilRendererLocalReceive"
             android:layout_width="match_parent"
             android:layout_height="148dp"
-            android:layout_alignParentStart="true"
-            android:gravity="right"
+            android:gravity="end"
             android:orientation="vertical">
 
             <org.webrtc.SurfaceViewRenderer
@@ -29,7 +28,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginEnd="10dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,6 +46,7 @@
                 android:background="#6A000000"
                 android:gravity="center"
                 android:text="시간" />
+
         </LinearLayout>
 
     </FrameLayout>

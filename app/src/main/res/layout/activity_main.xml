@@ -9,78 +9,75 @@
     android:paddingVertical="50dp"
     tools:context=".feature.login.MainActivity">
 
-            <ImageView
-                android:id="@+id/appLogo"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:contentDescription="@string/app_main_logo_description"
-                android:padding="50dp"
-                android:src="@drawable/logo_mana" />
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:contentDescription="@string/app_main_logo_description"
+        android:padding="50dp"
+        android:src="@drawable/logo_mana" />
 
-            <TextView
-                android:id="@+id/appTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/google_login_font"
-                android:textSize="40sp" />
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/google_login_font"
+        android:textSize="40sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingHorizontal="50dp"
-                android:paddingVertical="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="20dp">
 
+        <com.example.mana.SocialLoginButton
+            android:id="@+id/kakaoLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/kakao_yellow"
+            android:contentDescription="@string/kakao_login_button_description"
+            android:elevation="2dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:loginText="카카오 로그인"
+            app:logoSrc="@drawable/kakao_logo"
+            app:radius="10dp"
+            app:textColor="@color/kakao_login_font" />
 
-                <com.example.mana.SocialLoginButton
-                    android:id="@+id/kakaoLoginButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/kakao_yellow"
-                    android:contentDescription="@string/kakao_login_button_description"
-                    android:elevation="2dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:loginText="카카오 로그인"
-                    app:logoSrc="@drawable/kakao_logo"
-                    app:radius="10dp"
-                    app:textColor="@color/kakao_login_font" />
+        <com.example.mana.SocialLoginButton
+            android:id="@+id/naverLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/naver_green"
+            android:contentDescription="@string/naver_login_button_description"
+            android:elevation="2dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:loginText="네이버 로그인"
+            app:logoSrc="@drawable/naver_logo"
+            app:radius="10dp"
+            app:textColor="@color/white" />
 
-                <com.example.mana.SocialLoginButton
-                    android:id="@+id/naverLoginButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/naver_green"
-                    android:contentDescription="@string/naver_login_button_description"
-                    android:elevation="2dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:loginText="네이버 로그인"
-                    app:logoSrc="@drawable/naver_logo"
-                    app:radius="10dp"
-                    app:textColor="@color/white" />
-
-                <com.example.mana.SocialLoginButton
-                    android:id="@+id/googleLoginButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white"
-                    android:contentDescription="@string/google_login_button_description"
-                    android:elevation="2dp"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:borderColor="@color/google_login_stroke"
-                    app:borderWidth="1dp"
-                    app:loginText="구글 로그인"
-                    app:logoPadding="12dp"
-                    app:logoSrc="@drawable/google_logo"
-                    app:radius="10dp"
-                    app:textColor="@color/google_login_font" />
-            </LinearLayout>
-
-
+        <com.example.mana.SocialLoginButton
+            android:id="@+id/googleLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:contentDescription="@string/google_login_button_description"
+            android:elevation="2dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:borderColor="@color/google_login_stroke"
+            app:borderWidth="1dp"
+            app:loginText="구글 로그인"
+            app:logoPadding="12dp"
+            app:logoSrc="@drawable/google_logo"
+            app:radius="10dp"
+            app:textColor="@color/google_login_font" />
+    </LinearLayout>
 
 </LinearLayout>

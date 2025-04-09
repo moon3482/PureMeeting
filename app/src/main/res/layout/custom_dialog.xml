@@ -3,15 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal"
-       >
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvMyInofCustomDialog"
@@ -69,9 +67,9 @@
                 android:layout_marginRight="100dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape4"
+                android:text="취소"
                 android:textColor="@color/White"
-                android:textStyle="bold"
-                android:text="취소" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/customDialog_Ok"
@@ -82,12 +80,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape4"
+                android:text="확인"
                 android:textColor="@color/White"
-                android:textStyle="bold"
-                android:text="확인" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
