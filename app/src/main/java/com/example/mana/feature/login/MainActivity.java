@@ -56,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
             Timber.tag(Tag.KAKAO_LOGIN).d("Login Failure : %s", throwable.getMessage());
         } else if (oAuthToken != null) {
             Timber.tag(Tag.KAKAO_LOGIN).d("Login Success : %s", oAuthToken);
+            UserApiClient.getInstance().me((user, throwable1) -> {
+                Timber.tag(Tag.KAKAO_LOGIN).d("Id : %s", user.getId());
+                Timber.tag(Tag.KAKAO_LOGIN).d("Account : %s", user.getKakaoAccount());
+                Timber.tag(Tag.KAKAO_LOGIN).d("Uuid : %s", user.getUuid());
+                Timber.tag(Tag.KAKAO_LOGIN).d("getHasSignedUp : %s", user.getHasSignedUp());
+                Timber.tag(Tag.KAKAO_LOGIN).d("ConnectedAt : %s", user.getConnectedAt());
+                Timber.tag(Tag.KAKAO_LOGIN).d("SynchedAt : %s", user.getSynchedAt());
+                return null;
+            });
             onLoginSuccess();
         }
         return null;
@@ -80,32 +89,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        naverLogin.setOnClickListener(view -> {
-            NaverIdLoginSDK.INSTANCE.authenticate(this, new OAuthLoginCallback() {
-                @Override
-                public void onSuccess() {
-                    Timber.tag(Tag.NAVER_LOGIN).d("onSuccess");
-                    Timber.tag(Tag.NAVER_LOGIN).d("AccessToken : %s", NaverIdLoginSDK.INSTANCE.getAccessToken());
-                    Timber.tag(Tag.NAVER_LOGIN).d("RefreshToken : %s", NaverIdLoginSDK.INSTANCE.getRefreshToken());
-                    Timber.tag(Tag.NAVER_LOGIN).d("ExpiresTokenAt : %s", NaverIdLoginSDK.INSTANCE.getExpiresAt());
-                    Timber.tag(Tag.NAVER_LOGIN).d("TokenType : %s", NaverIdLoginSDK.INSTANCE.getTokenType());
-                    Timber.tag(Tag.NAVER_LOGIN).d("State : %s", NaverIdLoginSDK.INSTANCE.getState());
-                    Timber.tag(Tag.NAVER_LOGIN).d("Version : %s", NaverIdLoginSDK.INSTANCE.getVersion());
-                    onLoginSuccess();
-                }
+        naverLogin.setOnClickListener(view -> NaverIdLoginSDK.INSTANCE.authenticate(this, new OAuthLoginCallback() {
+            @Override
+            public void onSuccess() {
+                Timber.tag(Tag.NAVER_LOGIN).d("onSuccess");
+                Timber.tag(Tag.NAVER_LOGIN).d("AccessToken : %s", NaverIdLoginSDK.INSTANCE.getAccessToken());
+                Timber.tag(Tag.NAVER_LOGIN).d("RefreshToken : %s", NaverIdLoginSDK.INSTANCE.getRefreshToken());
+                Timber.tag(Tag.NAVER_LOGIN).d("ExpiresTokenAt : %s", NaverIdLoginSDK.INSTANCE.getExpiresAt());
+                Timber.tag(Tag.NAVER_LOGIN).d("TokenType : %s", NaverIdLoginSDK.INSTANCE.getTokenType());
+                Timber.tag(Tag.NAVER_LOGIN).d("State : %s", NaverIdLoginSDK.INSTANCE.getState());
+                Timber.tag(Tag.NAVER_LOGIN).d("Version : %s", NaverIdLoginSDK.INSTANCE.getVersion());
+                onLoginSuccess();
+            }
 
-                @Override
-                public void onFailure(int i, @NonNull String s) {
-                    Timber.tag(Tag.NAVER_LOGIN).d("onFailure : %s", s);
-                    Timber.tag(Tag.NAVER_LOGIN).d("Code : %s", NaverIdLoginSDK.INSTANCE.getLastErrorCode().getCode());
-                    Timber.tag(Tag.NAVER_LOGIN).d("Description : %s", NaverIdLoginSDK.INSTANCE.getLastErrorCode().getDescription());
-                    Timber.tag(Tag.NAVER_LOGIN).d("ErrorDescription : %s", NaverIdLoginSDK.INSTANCE.getLastErrorDescription());
-                }
+            @Override
+            public void onFailure(int i, @NonNull String s) {
+                Timber.tag(Tag.NAVER_LOGIN).d("onFailure : %s", s);
+                Timber.tag(Tag.NAVER_LOGIN).d("Code : %s", NaverIdLoginSDK.INSTANCE.getLastErrorCode().getCode());
+                Timber.tag(Tag.NAVER_LOGIN).d("Description : %s", NaverIdLoginSDK.INSTANCE.getLastErrorCode().getDescription());
+                Timber.tag(Tag.NAVER_LOGIN).d("ErrorDescription : %s", NaverIdLoginSDK.INSTANCE.getLastErrorDescription());
+            }
 
-                @Override
-                public void onError(int i, @NonNull String s) {
-                    Timber.tag(Tag.NAVER_LOGIN).d("onError : %s", s);
-                }
+            @Override
+            public void onError(int i, @NonNull String s) {
+                Timber.tag(Tag.NAVER_LOGIN).d("onError : %s", s);
+            }
+        }));
 
         googleLogin.setOnClickListener(view -> {
             CredentialManager credentialManager = CredentialManager.create(this);
