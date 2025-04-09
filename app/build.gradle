@@ -82,7 +82,9 @@ dependencies {
     def kakaoUserVersion = "2.21.1"
     def timberVersion = "5.0.1"
     def naverOauthVersion = "5.10.0"
+    def naverMapVersion = "3.21.0"
     def junitVersion = "4.13.2"
+    def webrtcVersion = "125.6422.07"
 
     implementation "androidx.core:core-ktx:${androidxCoreKtxVersion}"
     implementation "androidx.appcompat:appcompat:${androidxAppCompatVersion}"
@@ -106,6 +108,8 @@ dependencies {
     implementation "com.kakao.sdk:v2-user:${kakaoUserVersion}"
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation "com.navercorp.nid:oauth:${naverOauthVersion}"
+    implementation "com.naver.maps:map-sdk:${naverMapVersion}"
+    implementation "io.github.webrtc-sdk:android:${webrtcVersion}"
     testImplementation "junit:junit:${junitVersion}"
     androidTestImplementation "androidx.test.ext:junit:${androidxJunitVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${androidxEspressoVersion}"
