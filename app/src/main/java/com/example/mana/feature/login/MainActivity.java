@@ -1,16 +1,11 @@
 package com.example.mana.feature.login;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mana.R;
 import com.example.mana.SocialLoginButton;
 import com.example.mana.logging.Tag;
+import com.example.mana.SignupTermsActivity;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
+import com.navercorp.nid.NaverIdLoginSDK;
+import com.navercorp.nid.oauth.OAuthLoginCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -32,7 +30,6 @@ import kotlin.jvm.functions.Function2;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-    Activity activity;
     SocialLoginButton kakaoLogin;
     SocialLoginButton naverLogin;
     Function2<? super OAuthToken, ? super Throwable, Unit> kakaoLoginCallback = (Function2<OAuthToken, Throwable, Unit>) (oAuthToken, throwable) -> {
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Timber.tag(Tag.KAKAO_LOGIN).d("Login Failure : %s", throwable.getMessage());
         } else if (oAuthToken != null) {
             Timber.tag(Tag.KAKAO_LOGIN).d("Login Success : %s", oAuthToken);
+            onLoginSuccess();
         }
         return null;
     };
@@ -48,18 +46,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        activity = this;
         kakaoLogin = findViewById(R.id.kakaoLoginButton);
         naverLogin = findViewById(R.id.naverLoginButton);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int permissionResult = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-            if (permissionResult == PackageManager.PERMISSION_DENIED) {
-                String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permissions, 11);
-
-            }
-        }
 
         kakaoLogin.setOnClickListener(view -> {
             boolean available = UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this);
@@ -73,6 +61,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
         naverLogin.setOnClickListener(view -> {
+            NaverIdLoginSDK.INSTANCE.authenticate(this, new OAuthLoginCallback() {
+                @Override
+                public void onSuccess() {
+                    Timber.tag(Tag.NAVER_LOGIN).d("onSuccess");
+                    Timber.tag(Tag.NAVER_LOGIN).d("AccessToken : %s", NaverIdLoginSDK.INSTANCE.getAccessToken());
+                    Timber.tag(Tag.NAVER_LOGIN).d("RefreshToken : %s", NaverIdLoginSDK.INSTANCE.getRefreshToken());
+                    Timber.tag(Tag.NAVER_LOGIN).d("ExpiresTokenAt : %s", NaverIdLoginSDK.INSTANCE.getExpiresAt());
+                    Timber.tag(Tag.NAVER_LOGIN).d("TokenType : %s", NaverIdLoginSDK.INSTANCE.getTokenType());
+                    Timber.tag(Tag.NAVER_LOGIN).d("State : %s", NaverIdLoginSDK.INSTANCE.getState());
+                    Timber.tag(Tag.NAVER_LOGIN).d("Version : %s", NaverIdLoginSDK.INSTANCE.getVersion());
+                    onLoginSuccess();
+                }
+
+                @Override
+                public void onFailure(int i, @NonNull String s) {
+                    Timber.tag(Tag.NAVER_LOGIN).d("onFailure : %s", s);
+                    Timber.tag(Tag.NAVER_LOGIN).d("Code : %s", NaverIdLoginSDK.INSTANCE.getLastErrorCode().getCode());
+                    Timber.tag(Tag.NAVER_LOGIN).d("Description : %s", NaverIdLoginSDK.INSTANCE.getLastErrorCode().getDescription());
+                    Timber.tag(Tag.NAVER_LOGIN).d("ErrorDescription : %s", NaverIdLoginSDK.INSTANCE.getLastErrorDescription());
+                }
+
+                @Override
+                public void onError(int i, @NonNull String s) {
+                    Timber.tag(Tag.NAVER_LOGIN).d("onError : %s", s);
+                }
+            });
         });
 //        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
 //            if (!task.isSuccessful()) {
@@ -88,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
 //            editor.putString("token", token);
 //            editor.commit();
 //        });
+    }
+
+    private void onLoginSuccess(){
+        Intent intent = new Intent(MainActivity.this, SignupTermsActivity.class);
+        startActivity(intent);
     }
 
 //    public class SessionCallback implements ISessionCallback {
@@ -222,21 +241,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 11:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "외부 메모리 읽기/쓰기 사용 가능", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(this, "외부 메모리 읽기/쓰기 제한", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
-
     public static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -264,8 +268,6 @@ public class MainActivity extends AppCompatActivity {
 
 //    private class insertshar extends AsyncTask<String, Void, Bitmap> {
 //        Bitmap bit;
-//
-//
 //        @Override
 //        protected Bitmap doInBackground(String... strings) {
 //            String url = strings[0];
@@ -287,7 +289,5 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
         moveTaskToBack(true);
         System.exit(0);
-
-
     }
 }

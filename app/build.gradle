@@ -5,17 +5,6 @@ plugins {
     id 'kotlin-kapt'
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') {
-        localProperties.load(it)
-    }
-}
-
-def kakaoTokenDebug = localProperties.getProperty('kakao.login.debug.token', '')
-def kakaoTokenRelease = localProperties.getProperty('kakao.login.release.token', '')
-
 android {
     compileSdk 35
 
@@ -31,13 +20,28 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-
     }
+
+    def localProperties = new Properties()
+    def localPropertiesFile = rootProject.file('local.properties')
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.withReader('UTF-8') {
+            localProperties.load(it)
+        }
+    }
+
+    def kakaoTokenDebug = localProperties.getProperty('kakao.login.debug.token', '')
+    def kakaoTokenRelease = localProperties.getProperty('kakao.login.release.token', '')
+    def naverClientIdDebug = localProperties.getProperty('naver.login.debug.client.id', '')
+    def naverClientIdRelease = localProperties.getProperty('naver.login.release.client.id', '')
+    def naverClientSecretKeyDebug = localProperties.getProperty('naver.login.debug.client.secretKey', '')
+    def naverClientSecretKeyRelease = localProperties.getProperty('naver.login.release.client.secretKey', '')
 
     buildTypes {
         debug {
             buildConfigField 'String', 'KAKAO_TOKEN', "\"${kakaoTokenDebug}\""
+            buildConfigField 'String', 'NAVER_CLIENT_ID', "\"${naverClientIdDebug}\""
+            buildConfigField 'String', 'NAVER_CLIENT_SECRET_KEY', "\"${naverClientSecretKeyDebug}\""
             manifestPlaceholders = [
                     kakaoLoginToken : kakaoTokenDebug,
                     analyticsEnabled: "false"
@@ -49,6 +53,8 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'KAKAO_TOKEN', "\"${kakaoTokenRelease}\""
+            buildConfigField 'String', 'NAVER_CLIENT_ID', "\"${naverClientIdRelease}\""
+            buildConfigField 'String', 'NAVER_CLIENT_SECRET_KEY', "\"${naverClientSecretKeyRelease}\""
             manifestPlaceholders = [
                     kakaoLoginToken : kakaoTokenRelease,
                     analyticsEnabled: "true"

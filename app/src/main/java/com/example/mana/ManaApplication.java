@@ -3,6 +3,7 @@ package com.example.mana;
 import android.app.Application;
 
 import com.kakao.sdk.common.KakaoSdk;
+import com.navercorp.nid.NaverIdLoginSDK;
 
 import timber.log.Timber;
 
@@ -12,6 +13,7 @@ public class ManaApplication extends Application {
         super.onCreate();
         Timber.plant(new Timber.DebugTree());
         KakaoSdk.init(ManaApplication.this, BuildConfig.KAKAO_TOKEN);
+        NaverIdLoginSDK.INSTANCE.initialize(ManaApplication.this, BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET_KEY, "PureMeet");
     }
 
 //    public class KakaoSDKAdapter extends KakaoAdapter {
