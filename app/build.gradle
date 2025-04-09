@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 def localProperties = new Properties()
@@ -57,9 +59,13 @@ android {
         dataBinding true
         buildConfig true
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 }
 
 dependencies {
+    def androidxCoreKtxVersion = "1.15.0"
     def androidxCameraxVersion = "1.4.2"
     def androidxAppCompatVersion = "1.7.0"
     def androidxConstraintLayoutVersion = "2.2.1"
@@ -78,6 +84,7 @@ dependencies {
     def naverOauthVersion = "5.10.0"
     def junitVersion = "4.13.2"
 
+    implementation "androidx.core:core-ktx:${androidxCoreKtxVersion}"
     implementation "androidx.appcompat:appcompat:${androidxAppCompatVersion}"
     implementation "androidx.constraintlayout:constraintlayout:${androidxConstraintLayoutVersion}"
     implementation "androidx.recyclerview:recyclerview:${androidxRecyclerViewVersion}"
