@@ -5,4 +5,5 @@
     <string name="naver_login_button_description">Naver Login Button</string>
     <string name="google_login_button_description">Google Login Button</string>
     <string name="camera_shutter_image_button_description">Camera Shutter Image Button</string>
+    <string name="profile_image">View Profile Image and if touch move to Capture ProfileImage Screen</string>
 </resources>

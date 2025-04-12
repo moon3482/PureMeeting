@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PureMeet</string>
+
+    <string name="enter_member_info">회원정보</string>
+    <string name="birthdate">생일</string>
+    <string name="choose_birthdate">생일 선택</string>
+    <string name="confirm">확인</string>
+    <string name="gender">성별</string>
+    <string name="check_please">확인해 주세요</string>
 </resources>
